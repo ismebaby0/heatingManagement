@@ -1,5 +1,19 @@
 package com.neusoft.ht.fee.mapper;
 
-public interface HouseTypeMapper {
+import java.util.List;
 
+import com.neusoft.ht.fee.model.HouseType;
+
+/*
+ *	 户型表
+ */
+public interface HouseTypeMapper {
+	//添加户型表
+	public void addHouseType(HouseType ht);
+	//删除户型表
+	public void deleteHouseType(HouseType ht);
+	//修改户型表
+	public void updateHouseType(HouseType ht);
+	//查询全部户型表
+	public List<HouseType>selectAllHouseType();
 }
