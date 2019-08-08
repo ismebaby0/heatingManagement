@@ -1,4 +1,4 @@
-package com.neusoft.ht.model;
+package com.neusoft.ht.login.model;
 
 import java.util.Arrays;
 
