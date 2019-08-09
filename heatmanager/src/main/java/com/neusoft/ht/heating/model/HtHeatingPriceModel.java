@@ -12,7 +12,7 @@ import java.util.Arrays;
 public class HtHeatingPriceModel implements Serializable {
 	// 供热年份
 	private String heatingYear;
-	// 居民价格
+	// 居民价格  
 	private BigDecimal homePrice;
 	// 公建价格
 	private BigDecimal publicHousePrice;
