@@ -36,12 +36,12 @@ public class ComplainTypeServiceImpl implements IComplainTypeService {
 	}
 
 	@Override
-	public ComplainType selectByNo(Integer typeNo) throws Exception {
+	public ComplainType getByNo(Integer typeNo) throws Exception {
 		return complainType.selectByPrimaryKey(typeNo);
 	}
 
 	@Override
-	public List<ComplainType> selectByAll() throws Exception {
+	public List<ComplainType> getByAll() throws Exception {
 		return complainType.selectByAll();
 	}
 

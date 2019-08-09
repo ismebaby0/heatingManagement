@@ -16,9 +16,9 @@ public interface IComplainTypeService {
 
 	void insertSelective(ComplainType record) throws Exception;
 
-	ComplainType selectByNo(Integer typeNo) throws Exception;
+	ComplainType getByNo(Integer typeNo) throws Exception;
 
-	List<ComplainType> selectByAll() throws Exception;
+	List<ComplainType> getByAll() throws Exception;
 
 	void updateByNoSelective(ComplainType record) throws Exception;
 
