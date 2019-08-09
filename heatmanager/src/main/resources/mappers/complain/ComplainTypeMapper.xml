@@ -5,6 +5,7 @@
     <id column="TYPENO" jdbcType="INTEGER" property="typeNo" />
     <result column="TYPENAME" jdbcType="VARCHAR" property="typeName" />
   </resultMap>
+  <cache/>
   <sql id="Base_Column_List">
     TYPENO, TYPENAME
   </sql>
