@@ -25,7 +25,6 @@ public class ComplainTypeController {
 	public ComplainType getComplainType(Integer no) throws Exception {
 		return complainTypeService.getByNo(no);
 	}
-
 	@RequestMapping("/list")
 	public List<ComplainType> getAllComplainType() throws Exception {
 		return complainTypeService.getByAll();

@@ -2,11 +2,14 @@ package com.neusoft.ht.fee.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import com.neusoft.ht.fee.model.HouseType;
 
 /*
  *	 户型表
  */
+@Mapper
 public interface HouseTypeMapper {
 	//添加户型表
 	public void addHouseType(HouseType ht);
