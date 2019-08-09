@@ -14,7 +14,7 @@ import com.neusoft.ht.fee.service.IHouseTypeService;
 
 /**
  *@Filefile	:HouseTypeController.java
- *@author 	:Administrator
+ *@author 	:劳泽昌
  *@Date		:2019年8月9日
  *
  *
@@ -42,11 +42,14 @@ public class HouseTypeController {
 	
 	@RequestMapping("/update")
 	public void updateHouseType(HouseType ht) throws Exception {
-		service.updateHouseType(ht);
-	}
+		if(ht.getTypeName().trim().length() > 0)
+			service.updateHouseType(ht);
+		}
 
 	@RequestMapping("/add")
 	public void addHouseType(HouseType ht) throws Exception {
-		service.addHouseType(ht);
+		if(ht.getTypeName().trim().length() > 0) {
+			service.addHouseType(ht);
+		}
 	}
 }
