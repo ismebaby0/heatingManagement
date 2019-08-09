@@ -1,11 +1,11 @@
-package com.neusoft.ht.heating.mapper;
+package com.neusoft.ht.fee.mapper;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
 import com.neusoft.ht.complain.model.ComplainType;
-import com.neusoft.ht.heating.model.HtHeatingPriceModel;
+import com.neusoft.ht.fee.model.HtHeatingPriceModel;
 
 /**
  * 

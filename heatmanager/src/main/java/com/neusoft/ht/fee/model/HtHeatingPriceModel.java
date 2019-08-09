@@ -1,4 +1,4 @@
-package com.neusoft.ht.heating.model;
+package com.neusoft.ht.fee.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
