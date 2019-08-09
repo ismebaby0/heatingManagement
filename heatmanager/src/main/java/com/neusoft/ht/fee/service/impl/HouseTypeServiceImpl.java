@@ -28,5 +28,25 @@ public class HouseTypeServiceImpl implements IHouseTypeService{
 	public List<HouseType> selectAllHouseType() {
 		return mapper.selectAllHouseType();
 	}
+	@Override
+	public void addHouseType(HouseType ht) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void deleteHouseType(HouseType ht) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void updateHouseType(HouseType ht) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public HouseType selectByNo(int typeNo) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
