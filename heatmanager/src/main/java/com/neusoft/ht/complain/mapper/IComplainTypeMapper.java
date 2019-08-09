@@ -25,4 +25,6 @@ public interface IComplainTypeMapper {
 	int updateByPrimaryKeySelective(ComplainType record);
 
 	int updateByPrimaryKey(ComplainType record);
+	
+	
 }

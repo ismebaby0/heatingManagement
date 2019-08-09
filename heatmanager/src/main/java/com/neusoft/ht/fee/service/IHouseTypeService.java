@@ -20,7 +20,7 @@ public interface IHouseTypeService {
 	
 	public void addHouseType(HouseType ht) throws Exception;
 	
-	public void deleteHouseType(HouseType ht) throws Exception;
+	public void deleteHouseType(int ht) throws Exception;
 	
 	public void updateHouseType(HouseType ht) throws Exception;
 	

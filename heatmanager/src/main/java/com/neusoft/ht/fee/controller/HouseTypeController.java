@@ -19,14 +19,34 @@ import com.neusoft.ht.fee.service.IHouseTypeService;
  *
  *
  */
-@RequestMapping("/getAll")
+@RequestMapping("/HouseType")
 @RestController
 public class HouseTypeController {
 	@Autowired
 	IHouseTypeService service = null;
-	@RequestMapping("/all")
+	
+	@RequestMapping("/getall")
 	public List<HouseType> getAll() throws Exception{
 		return service.selectAllHouseType();
 	}
+	
+	@RequestMapping("/getbyno")
+	public HouseType getByNo(int typeNo) throws Exception {
+		return service.selectByNo(typeNo);
+	}
+	
+	@RequestMapping("/deletebyno")
+	public void deleteByNo(int typeNo) throws Exception {
+		service.deleteHouseType(typeNo);
+	}
+	
+	@RequestMapping("/update")
+	public void updateHouseType(HouseType ht) throws Exception {
+		service.updateHouseType(ht);
+	}
 
+	@RequestMapping("/add")
+	public void addHouseType(HouseType ht) throws Exception {
+		service.addHouseType(ht);
+	}
 }
