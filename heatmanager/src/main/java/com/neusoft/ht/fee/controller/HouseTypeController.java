@@ -25,7 +25,7 @@ public class HouseTypeController {
 	@Autowired
 	IHouseTypeService service = null;
 	@RequestMapping("/all")
-	public List<HouseType> getAll(){
+	public List<HouseType> getAll() throws Exception{
 		return service.selectAllHouseType();
 	}
 
