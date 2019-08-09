@@ -2,12 +2,15 @@ package com.neusoft.ht.complain.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import com.neusoft.ht.complain.model.ComplainType;
 
 /* 
  * 投诉类型 ComplainTypeMapper 
  *   作者: 方俊坤
  */
+@Mapper
 public interface IComplainTypeMapper {
 	int deleteByPrimaryKey(Integer typeNo);
 
