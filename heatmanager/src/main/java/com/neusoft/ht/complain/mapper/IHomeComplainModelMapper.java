@@ -1,21 +1,24 @@
 package com.neusoft.ht.complain.mapper;
 
+import java.util.List;
+
 import com.neusoft.ht.complain.model.HomeComplainModel;
 
 /**
- * 居民投诉信息Mapper
- *  作者: 方俊坤
+ * 居民投诉信息Mapper 作者: 方俊坤
  */
 public interface IHomeComplainModelMapper {
-    int deleteByPrimaryKey(Integer complainNo);
+	int deleteByPrimaryKey(Integer complainNo);
 
-    int insert(HomeComplainModel record);
+	int insert(HomeComplainModel record);
 
-    int insertSelective(HomeComplainModel record);
+	int insertSelective(HomeComplainModel record);
 
-    HomeComplainModel selectByPrimaryKey(Integer complainNo);
+	HomeComplainModel selectByPrimaryKey(Integer complainNo);
 
-    int updateByPrimaryKeySelective(HomeComplainModel record);
+	List<HomeComplainModel> selectByAll();
 
-    int updateByPrimaryKey(HomeComplainModel record);
+	int updateByPrimaryKeySelective(HomeComplainModel record);
+
+	int updateByPrimaryKey(HomeComplainModel record);
 }

@@ -40,6 +40,12 @@
     from HT_Homecomplain
     where ComplainNo = #{complainNo,jdbcType=INTEGER}
   </select>
+  
+  <select id="selectByAll" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from HT_Homecomplain
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from HT_Homecomplain
     where ComplainNo = #{complainNo,jdbcType=INTEGER}
