@@ -2,11 +2,14 @@ package com.neusoft.ht.complain.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import com.neusoft.ht.complain.model.HomeComplainModel;
 
 /**
  * 居民投诉信息Mapper 作者: 方俊坤
  */
+@Mapper
 public interface IHomeComplainModelMapper {
 	int deleteByPrimaryKey(Integer complainNo);
 
