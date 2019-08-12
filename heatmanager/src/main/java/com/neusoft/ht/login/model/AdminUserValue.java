@@ -3,7 +3,10 @@ package com.neusoft.ht.login.model;
 import org.apache.ibatis.type.Alias;
 
 import lombok.Data;
-
+/*
+ *   用户信息 model 
+ *   作者: 马佳国
+ */
 @Data
 @Alias("User")
 public class AdminUserValue {
