@@ -18,7 +18,7 @@ import com.neusoft.ht.fee.model.Neighbourhood;
  */
 
 @Mapper
-public interface INeighbourhood {
+public interface INeighbourhoodMapper {
 	// 增加
 	public void insert(Neighbourhood neighbourgood) throws Exception;
 	// 删除

@@ -2,18 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.neusoft.ht.fee.model.Neighbourhood">
+<mapper namespace="com.neusoft.ht.fee.mapper.INeighbourhoodMapper">
 	<resultMap id="selectNeibourhood" type="com.neusoft.ht.fee.model.Neighbourhood" >
   		<id property="hoodNo" column="hoodno" />
   		<result property = "hoodName" column = "hoodName"></result>
-  		<result property = "typeName" column = "typeName" />
+  		<result property = "address" column = "Address" />
     </resultMap>
-	<select id="selectAllHouseType" resultMap="selectHouseType">
-  		select * from HT_HOUSETYPE
-	</select>
-	<select id = "selectByNo" resultMap = "selectHouseType">
- 		select*from HT_HOUSETYPE where typeNo = #{typeNo}
-	</select>
 	
 	<!-- 
 		// 增加
@@ -38,7 +32,7 @@
 	 </update>
 	 <select id="selectByPrimarykey" resultMap="selectNeibourhood">
 	 	select * from HT_Neighbourhood where hoodNo = #{hoodNo}
-	 </select>
+	 </select>	
 	 <select id = "selectByAll" resultMap="selectNeibourhood">
 	 	select*from HT_Neighbourhood
 	 </select>

@@ -34,9 +34,7 @@
   select * from HT_UserInfo where UUSERID=#{uuserid}
  </select>
  
- <select id="selectWithFunctionById" resultMap="">
  
- </select>
  
 
 </mapper>
