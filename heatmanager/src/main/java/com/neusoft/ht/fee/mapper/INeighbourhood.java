@@ -7,7 +7,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.neusoft.ht.fee.model.HtHeatingPriceModel;
 import com.neusoft.ht.fee.model.Neighbourhood;
 
 /**
@@ -27,7 +26,7 @@ public interface INeighbourhood {
 	// 修改
 	public void updateByPrimaryKey(Neighbourhood neighbourgood)  throws Exception;
 	// 查看一条记录
-	public HtHeatingPriceModel selectByPrimaryKey(int hoodNo)  throws Exception;
+	public Neighbourhood selectByPrimaryKey(int hoodNo)  throws Exception;
 	//查看所有记录
-	public List<HtHeatingPriceModel> selectByAll() throws Exception;
+	public List<Neighbourhood> selectByAll() throws Exception;
 }
