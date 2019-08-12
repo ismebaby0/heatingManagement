@@ -9,7 +9,7 @@ public class Home {
 	
 	private int homeNo;
 	private String heatingCode;
-	private int houseTypeNo;
+	private HouseType houseTypeNo;
 	private int hoodNo;
 	private String homeName;
 	private String buildingCode;
@@ -36,10 +36,10 @@ public class Home {
 	public void setHeatingCode(String heatingCode) {
 		this.heatingCode = heatingCode;
 	}
-	public int getHouseTypeNo() {
+	public HouseType getHouseTypeNo() {
 		return houseTypeNo;
 	}
-	public void setHouseTypeNo(int houseTypeNo) {
+	public void setHouseTypeNo(HouseType houseTypeNo) {
 		this.houseTypeNo = houseTypeNo;
 	}
 	public int getHoodNo() {
