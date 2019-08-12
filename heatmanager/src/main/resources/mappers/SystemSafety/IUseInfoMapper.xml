@@ -12,7 +12,10 @@
   </resultMap>
   
  <!-- 关联功能属性的结果映射 -->
- 
+   <resultMap id="UserInfoResultMapWithFunction" type="UserInfo" extends="UserResultMap">
+    <collection property="functions" resultMap="com.neusoft.ht.SystemSafety.mapper.IFunctionMapper.FunctionResultMap"></collection>
+  </resultMap>
+  
  
  <insert id="create">
    insert into HT_UserInfo values (#{uuserid},#{sex},#{age},#{photo},#{photoFileName},#{photoContentType},#{mobile},#{photoContentType})
@@ -34,7 +37,10 @@
   select * from HT_UserInfo where UUSERID=#{uuserid}
  </select>
  
- <select id="selectWithFunctionById" resultMap="">
+ <select id="selectWithFunction" resultMap="UserInfoResultMapWithFunction">
+ 
+    select a.*, c.* from HT_UserInfo a  left outer join   HT_FunctionUser b on a.UUSERID=b.UUserID
+   left outer join HT_Function c on b.FunNo=c.FUNNO 
  
  </select>
  

@@ -3,7 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.neusoft.ht.fee.model.Neighbourhood">
-	<resultMap id="selectNeibourhood" type="com.neusoft.ht.fee.model.Neighbourhood" >
+	<!-- <resultMap id="selectNeibourhood" type="com.neusoft.ht.fee.model.Neighbourhood" >
   		<id property="hoodNo" column="hoodno" />
   		<result property = "hoodName" column = "hoodName"></result>
   		<result property = "typeName" column = "typeName" />
@@ -15,7 +15,7 @@
  		select*from HT_HOUSETYPE where typeNo = #{typeNo}
 	</select>
 	
-	<!-- 
+	
 		// 增加
 	public void insert(Neighbourhood neighbourgood) throws Exception;
 	// 删除
@@ -26,7 +26,7 @@
 	public Neighbourhood selectByPrimaryKey(int hoodNo)  throws Exception;
 	//查看所有记录
 	public List<Neighbourhood> selectByAll() throws Exception;
-	 -->
+	
 	 <insert id = "insert">
 	 	insert into HT_HOUSETYPE values(#{hoodNo},#{hoodName},#{Address})
 	 </insert>
@@ -41,7 +41,7 @@
 	 </select>
 	 <select id = "selectByAll" resultMap="selectNeibourhood">
 	 	select*from HT_Neighbourhood
-	 </select>
+	 </select> -->
 
 </mapper>
 

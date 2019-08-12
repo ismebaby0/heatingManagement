@@ -5,15 +5,15 @@
 <mapper namespace="com.neusoft.ht.SystemSafety.mapper.IFunctionMapper">
 
  <!-- 没有关联属性的结果映射 -->
-  <resultMap id="UserResultMap" type="Function" >
-  	<id property="funNo" column="UUSERID" />
-  	<result property="funName" column="UPASSWORD" />
-   <result property="funUrl" column="UNAME" />
-    <result property="levelNo" column="UNAME" />
+  <resultMap id="FunctionResultMap" type="Function" >
+  	<id property="funNo" column="FUNNO" />
+  	<result property="funName" column="FUNNAME" />
+   <result property="funUrl" column="FUNURL" />
+    <result property="levelNo" column="LevelNo" />
   </resultMap>
   
  <insert id="create">
-   insert into HT_Function values (#{FUNNO},#{FUNNAME},#{FUNURL},#{LevelNo})
+   insert into HT_Function values (#{funNo},#{funName},#{funUrl},#{levelNo})
  </insert>
  
   <update id="update">
@@ -24,11 +24,11 @@
  
   </delete>
    
- <select id="selectWithAll" resultMap="UserResultMap">
+ <select id="selectWithAll" resultMap="FunctionResultMap">
 
  </select>
  
-  <select id="selectById" resultMap="UserResultMap">
+  <select id="selectById" resultMap="FunctionResultMap">
 
  </select>
  

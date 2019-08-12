@@ -1,4 +1,4 @@
-package com.neusoft.ht.testUser;
+package com.neusoft.ht.login.controller;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import com.neusoft.ht.login.Service.IUserBusiness;
 import com.neusoft.ht.login.model.AdminUserValue;
 @RestController
 @RequestMapping("/user")
-public class UserTest {
+public class UserController {
    @Autowired
 	private IUserBusiness user=null;
 	@RequestMapping("/list")

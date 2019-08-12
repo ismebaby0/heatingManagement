@@ -23,5 +23,5 @@ public interface IuseInfoMapper {
  
  public UserInfo selectListById() throws Exception;
  
- public UserInfo selectWithFunctionById() throws Exception;
+ public List<UserInfo> selectWithFunction() throws Exception;
 }
