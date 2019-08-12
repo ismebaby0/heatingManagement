@@ -1,5 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.neusoft.ht.fee.mapper.IHtHeatingPriceMapper">
+<mapper
+	namespace="com.neusoft.ht.fee.mapper.IHtHeatingPriceMapper">
+	
+		<resultMap type="com.neusoft.ht.fee.model.HtHeatingPriceModel" id="selectMap">
+		<id property="heatingYear" column="HeatingYear"/>
+		<result property="homePrice" column="HomePrice"/>
+		<result property="publicHousePrice" column="PublicHousePrice"/>
+		<result property="heatingdays" column="Heatingdays"/>
+		<result property="heatingMemo" column="HeatingMemo"/>
+		<result property="priceFileName" column="PriceFileName"/>
+		<result property="priceFileContentType" column="PriceFileContentType"/>
+		</resultMap>
+		<!-- public List<HtHeatingPriceModel> selectByAll(); -->
+		<select id="selectByAll" resultMap="selectMap">
+			select HeatingYear,HomePrice,PublicHousePrice,Heatingdays,
+				HeatingMemo,PriceFileName,PriceFileContentType from HT_HeadtingPrice
+		</select>
+		
+		<!-- public HtHeatingPriceModel selectByPrimaryKey(String heatingYear); -->
+		<select id="selectByPrimaryKey"
+			resultType="com.neusoft.ht.fee.model.HtHeatingPriceModel">
+			select HeatingYear,HomePrice,PublicHousePrice,Heatingdays,
+				HeatingMemo,PriceFile,PriceFileName,PriceFileContentType from HT_HeadtingPrice
+			where HeatingYear = #{heatingYear}
+		</select>
+
+		<!-- public void insert(HtHeatingPriceModel record); -->
+		<insert id="insert">
+			insert into
+			HT_HeadtingPrice(HeatingYear,HomePrice,PublicHousePrice,Heatingdays,
+			HeatingMemo,PriceFile,PriceFileName,PriceFileContentType)
+			values(#{heatingYear},#{homePrice},#{publicHousePrice},#{heatingdays},
+			#{heatingMemo},null,#{priceFile},#{priceFileName},#{priceFileContentType})
+		</insert>
+
+		<!-- public void deleteByPrimaryKey(String heatingYear); -->
+		<delete id="deleteByPrimaryKey">
+			delete from HT_HeadtingPrice where HeatingYear=#{heatingYear}
+		</delete>
+
+
+		<!-- public void updateByPrimaryKey(HtHeatingPriceModel record); -->
+		<update id="updateByPrimaryKey">
+			update HT_HeadtingPrice
+			set
+			HomePrice=#{homePrice},PublicHousePrice=#{publicHousePrice},Heatingdays=#{Heatingdays},
+			HeatingMemo=#{HeatingMemo},<!-- PriceFile=#{PriceFile}, -->PriceFileName=#{PriceFileName},
+			PriceFileContentType=#{PriceFileContentType}
+			where HeatingYear=#{heatingYear}
+		</update>
+
 
 </mapper>

@@ -25,8 +25,8 @@ public class HtHeatingPriceModel implements Serializable {
 	// 文件名
 	private String priceFileName;
 	// 文件类型
-	
 	private String priceFileContentType;
+	
 	public HtHeatingPriceModel() {
 		super();
 	}
