@@ -8,7 +8,10 @@ import org.springframework.stereotype.Service;
 import com.neusoft.ht.login.Service.IUserBusiness;
 import com.neusoft.ht.login.dao.IUserDao;
 import com.neusoft.ht.login.model.AdminUserValue;
-
+/*
+ *   用户登陆 业务层
+ *   作者: 马佳国
+ */
 @Service("UserBusiness")
 public class IUserBusinessImpl implements IUserBusiness {
 
