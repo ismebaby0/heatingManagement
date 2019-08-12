@@ -8,7 +8,12 @@ package com.neusoft.ht.fee.model;
  * @date:2019年812日 下午15:17:27
  */
 import java.util.Date;
-
+/**
+ * 
+ * @Description
+ * @author:刘培嘉
+ * @date:2019年8月12日 下午15:17:29
+ */
 public class HomeFee {
 	private Integer feeNo;
 	private Integer homeNo;
