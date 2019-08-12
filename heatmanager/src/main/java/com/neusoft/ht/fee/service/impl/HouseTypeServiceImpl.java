@@ -8,7 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.neusoft.ht.fee.mapper.HouseTypeMapper;
+import com.neusoft.ht.fee.mapper.IHouseTypeMapper;
 import com.neusoft.ht.fee.model.HouseType;
 import com.neusoft.ht.fee.service.IHouseTypeService;
 
@@ -23,7 +23,7 @@ import com.neusoft.ht.fee.service.IHouseTypeService;
 @Service
 public class HouseTypeServiceImpl implements IHouseTypeService{
 	@Autowired
-	private HouseTypeMapper mapper= null;
+	private IHouseTypeMapper mapper= null;
 	@Override
 	public List<HouseType> selectAllHouseType() {
 		return mapper.selectAllHouseType();

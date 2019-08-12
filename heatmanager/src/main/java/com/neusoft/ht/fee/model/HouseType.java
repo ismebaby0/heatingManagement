@@ -1,5 +1,8 @@
 package com.neusoft.ht.fee.model;
 
+import lombok.Data;
+
+@Data
 public class HouseType {
 	private int typeNo = 0;
 	private String typeName = null;
@@ -18,23 +21,9 @@ public class HouseType {
 	}
 
 
-	public int getTypeNo() {
-		return typeNo;
-	}
-
-
-	public void setTypeNo(int typeNo) {
-		this.typeNo = typeNo;
-	}
-
-
-	public String getTypeName() {
-		return typeName;
-	}
-
-
-	public void setTypeName(String typeName) {
-		this.typeName = typeName;
+	@Override
+	public String toString() {
+		return "HouseType [typeNo=" + typeNo + ", typeName=" + typeName + "]";
 	}
 	
 	
