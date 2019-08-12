@@ -10,7 +10,7 @@ import com.neusoft.ht.fee.model.HouseType;
  *	 户型表
  */
 @Mapper
-public interface HouseTypeMapper {
+public interface IHouseTypeMapper {
 	//添加户型表
 	public void addHouseType(HouseType ht) ;
 	//删除户型表
