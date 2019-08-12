@@ -1,6 +1,9 @@
 package com.neusoft.ht.login.dao;
 
-
+/*
+ *   用户信息 mapper
+ *   作者: 马佳国
+ */
 import com.neusoft.ht.login.model.AdminUserValue;
 
 import java.util.List;
