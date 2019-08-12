@@ -5,29 +5,37 @@
 <mapper namespace="com.neusoft.ht.SystemSafety.mapper.IuseInfoMapper">
 
  <!-- 没有关联属性的结果映射 -->
-  <resultMap id="UserResultMap" type="User" >
+  <resultMap id="UserResultMap" type="UserInfo" >
   	<id property="uuserid" column="UUSERID" />
   	<result property="upassword" column="UPASSWORD" />
    <result property="uname" column="UNAME" />
   </resultMap>
+  
+ <!-- 关联功能属性的结果映射 -->
+ 
+ 
  <insert id="create">
    insert into HT_UserInfo values (#{uuserid},#{sex},#{age},#{photo},#{photoFileName},#{photoContentType},#{mobile},#{photoContentType})
  </insert>
  
   <update id="update">
-   update HT_User set UserPassword=#{upassword},UserName=#{uname} where UUSERID=#{uuserid}
+   update HT_UserInfo set Sex=#{sex},AGE=#{age},PHOTO=#{photo},PHOTOFileName=#{photoFileName},PhotoContentType=#{photoContentType},Tel=#{tel},Mobile=#{mobile} where UUSERID=#{uuserid}
   </update>
   
   <delete id="delete">
-   delete from HT_User where UUSERID=#{uuserid}
+   delete from HT_UserInfo where UUSERID=#{uuserid}
   </delete>
    
- <select id="selectWithAll" resultMap="UserResultMap">
-  select * from HT_User
+ <select id="selectListWithAll" resultMap="UserResultMap">
+  select * from HT_UserInfo
  </select>
  
-  <select id="selectById" resultMap="UserResultMap">
-  select * from HT_User where UUSERID=#{uuserid}
+  <select id="selectListById" resultMap="UserResultMap">
+  select * from HT_UserInfo where UUSERID=#{uuserid}
+ </select>
+ 
+ <select id="selectWithFunctionById" resultMap="">
+ 
  </select>
  
 
