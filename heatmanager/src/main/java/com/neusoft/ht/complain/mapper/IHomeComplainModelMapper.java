@@ -2,6 +2,10 @@ package com.neusoft.ht.complain.mapper;
 
 import com.neusoft.ht.complain.model.HomeComplainModel;
 
+/**
+ * 居民投诉信息Mapper
+ *  作者: 方俊坤
+ */
 public interface IHomeComplainModelMapper {
     int deleteByPrimaryKey(Integer complainNo);
 
