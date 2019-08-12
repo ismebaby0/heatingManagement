@@ -3,6 +3,7 @@ package com.neusoft.ht.complain.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.neusoft.ht.complain.mapper.IHomeComplainModelMapper;
 import com.neusoft.ht.complain.model.HomeComplainModel;
@@ -12,6 +13,7 @@ import com.neusoft.ht.complain.service.IHomeComplainModelService;
  * 居民投诉信息业务接口实现
  *  作者: 方俊坤
  */
+@Service
 public class HomeComplainModelServie implements IHomeComplainModelService {
 
 	@Autowired
