@@ -39,6 +39,9 @@
 	 <select id="selectByPrimarykey" resultMap="selectNeibourhood">
 	 	select * from HT_Neighbourhood where hoodNo = #{hoodNo}
 	 </select>
+	 <select id = "selectByAll" resultMap="selectNeibourhood">
+	 	select*from HT_Neighbourhood
+	 </select>
 
 </mapper>
 
