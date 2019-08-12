@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.neusoft.ht.fee.mapper.HouseTypeMapper">
+	<resultMap id="selectHouseType" type="com.neusoft.ht.fee.model.HouseType" >
+  		<id property="typeNo" column="typeno" />
+  		<result property="typeName" column="typeName" />
+    </resultMap>
+	<select id="selectAllHouseType" resultMap="selectHouseType">
+  		select * from HT_HOUSETYPE
+	</select>
+	<select id = "selectByNo" resultMap = "selectHouseType">
+ 		select*from HT_HOUSETYPE where typeNo = #{typeNo}
+	</select>
+	
+	<!-- 
+	public void addHouseType(HouseType ht) ;
+	//删除户型表
+	public void deleteHouseType(HouseType ht);
+	//修改户型表
+	public void updateHouseType(HouseType ht);
+	//查询全部户型表
+	public List<HouseType>selectAllHouseType();
+	//根据查询
+	public HouseType selectByNo(int typeNo);
+	 -->
+	 <insert id = "addHouseType">
+	 	insert into HT_HOUSETYPE values(#{typeNo},#{typeName})
+	 </insert>
+	 <delete id = "deleteHouseType">
+	 	delete from HT_HOUSETYPE where typeNo = #{typeNo}
+	 </delete>
+	 <update id = "updateHouseType">
+	 	update HT_HOUSETYPE set typeNo = #{typeNo},typeName = #{typeName}
+	 </update>
+
+</mapper>
+
