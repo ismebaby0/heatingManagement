@@ -1,5 +1,8 @@
 package com.neusoft.ht.fee.model;
 
+import lombok.Data;
+
+@Data
 public class Neighbourhood {
 	private int hoodNo = 0;
 	private String hoodName = null;
@@ -20,34 +23,7 @@ public class Neighbourhood {
 	}
 	
 
-	public int getHoodNo() {
-		return hoodNo;
-	}
-
-
-	public void setHoodNo(int hoodNo) {
-		this.hoodNo = hoodNo;
-	}
-
-
-	public String getHoodName() {
-		return hoodName;
-	}
-
-
-	public void setHoodName(String hoodName) {
-		this.hoodName = hoodName;
-	}
-
-
-	public String getAddress() {
-		return address;
-	}
-
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
+	
 
 
 	@Override
