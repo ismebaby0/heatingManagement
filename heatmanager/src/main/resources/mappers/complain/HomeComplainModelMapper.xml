@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.neusoft.ht.complain.mapper.IHomeComplainModelMapper" >
+  <resultMap id="BaseResultMap" type="com.neusoft.ht.complain.model.HomeComplainModel" >
+    <id column="ComplainNo" property="complainNo" jdbcType="INTEGER" />
+    <result column="ComplainTitle" property="complainTitle" jdbcType="VARCHAR" />
+    <result column="ComplainContent" property="complainContent" jdbcType="VARCHAR" />
+    <result column="RequestContent" property="requestContent" jdbcType="VARCHAR" />
+    <result column="ComplainDate" property="complainDate" jdbcType="DATE" />
+    <result column="ContactPerson" property="contactPerson" jdbcType="VARCHAR" />
+    <result column="Tel" property="tel" jdbcType="VARCHAR" />
+    <result column="Mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="Mail" property="mail" jdbcType="VARCHAR" />
+    <result column="QQ" property="qq" jdbcType="VARCHAR" />
+    <result column="ServiceStartDate" property="serviceStartDate" jdbcType="DATE" />
+    <result column="ServiceEndDate" property="serviceEndDate" jdbcType="DATE" />
+    <result column="ServiceContent" property="serviceContent" jdbcType="VARCHAR" />
+    <result column="ServicePerson" property="servicePerson" jdbcType="VARCHAR" />
+    <result column="FeedBackDate" property="feedBackDate" jdbcType="DATE" />
+    <result column="HomeComment" property="homeComment" jdbcType="VARCHAR" />
+    <result column="AssuranceDate" property="assuranceDate" jdbcType="DATE" />
+    <result column="AssuranceFee" property="assuranceFee" jdbcType="DECIMAL" />
+    <result column="AssurancePayDate" property="assurancePayDate" jdbcType="DATE" />
+    <result column="ComplainStatus" property="complainStatus" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="BaseResultMapWithComplainType" type="com.neusoft.ht.complain.model.HomeComplainModel" >
+      <!-- association column="HomeNo" property="home" jdbcType="INTEGER" /> -->
+    <association property="complainType" resultMap="com.neusoft.ht.complain.mapper.IComplainTypeMapper.BaseResultMap" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ComplainNo, ComplainTitle, ComplainContent, RequestContent, ComplainDate, 
+    ContactPerson, Tel, Mobile, Mail, QQ, ServiceStartDate, ServiceEndDate, ServiceContent, 
+    ServicePerson, FeedBackDate, HomeComment, AssuranceDate, AssuranceFee, AssurancePayDate, 
+    ComplainStatus
+  </sql>
+  <!-- HomeNo, TYPENO,  -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from HT_Homecomplain
+    where ComplainNo = #{complainNo,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from HT_Homecomplain
+    where ComplainNo = #{complainNo,jdbcType=INTEGER}
+  </delete>
+  <!-- HomeNo, TYPENO,  #{home,jdbcType=INTEGER}, #{complainType,jdbcType=INTEGER},  -->
+  <insert id="insert" parameterType="com.neusoft.ht.complain.model.HomeComplainModel" >
+    insert into HT_Homecomplain (ComplainNo, 
+      ComplainTitle, ComplainContent, RequestContent, 
+      ComplainDate, ContactPerson, Tel, 
+      Mobile, Mail, QQ, ServiceStartDate, 
+      ServiceEndDate, ServiceContent, ServicePerson, 
+      FeedBackDate, HomeComment, AssuranceDate, 
+      AssuranceFee, AssurancePayDate, ComplainStatus
+      )
+    values (#{complainNo,jdbcType=INTEGER}, 
+      #{complainTitle,jdbcType=VARCHAR}, #{complainContent,jdbcType=VARCHAR}, #{requestContent,jdbcType=VARCHAR}, 
+      #{complainDate,jdbcType=DATE}, #{contactPerson,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{mail,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{serviceStartDate,jdbcType=DATE}, 
+      #{serviceEndDate,jdbcType=DATE}, #{serviceContent,jdbcType=VARCHAR}, #{servicePerson,jdbcType=VARCHAR}, 
+      #{feedBackDate,jdbcType=DATE}, #{homeComment,jdbcType=VARCHAR}, #{assuranceDate,jdbcType=DATE}, 
+      #{assuranceFee,jdbcType=DECIMAL}, #{assurancePayDate,jdbcType=DATE}, #{complainStatus,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.neusoft.ht.complain.model.HomeComplainModel" >
+    insert into HT_Homecomplain
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="complainNo != null" >
+        ComplainNo,
+      </if>
+      <!--if test="home != null" >
+        HomeNo,
+      </if>
+      <if test="complainType != null" >
+        TYPENO,
+      </if-->
+      <if test="complainTitle != null" >
+        ComplainTitle,
+      </if>
+      <if test="complainContent != null" >
+        ComplainContent,
+      </if>
+      <if test="requestContent != null" >
+        RequestContent,
+      </if>
+      <if test="complainDate != null" >
+        ComplainDate,
+      </if>
+      <if test="contactPerson != null" >
+        ContactPerson,
+      </if>
+      <if test="tel != null" >
+        Tel,
+      </if>
+      <if test="mobile != null" >
+        Mobile,
+      </if>
+      <if test="mail != null" >
+        Mail,
+      </if>
+      <if test="qq != null" >
+        QQ,
+      </if>
+      <if test="serviceStartDate != null" >
+        ServiceStartDate,
+      </if>
+      <if test="serviceEndDate != null" >
+        ServiceEndDate,
+      </if>
+      <if test="serviceContent != null" >
+        ServiceContent,
+      </if>
+      <if test="servicePerson != null" >
+        ServicePerson,
+      </if>
+      <if test="feedBackDate != null" >
+        FeedBackDate,
+      </if>
+      <if test="homeComment != null" >
+        HomeComment,
+      </if>
+      <if test="assuranceDate != null" >
+        AssuranceDate,
+      </if>
+      <if test="assuranceFee != null" >
+        AssuranceFee,
+      </if>
+      <if test="assurancePayDate != null" >
+        AssurancePayDate,
+      </if>
+      <if test="complainStatus != null" >
+        ComplainStatus,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="complainNo != null" >
+        #{complainNo,jdbcType=INTEGER},
+      </if>
+      <!-- <if test="home != null" >
+        #{home,jdbcType=INTEGER},
+      </if>
+      <if test="complainType != null" >
+        #{complainType,jdbcType=INTEGER},
+      </if> -->
+      <if test="complainTitle != null" >
+        #{complainTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="complainContent != null" >
+        #{complainContent,jdbcType=VARCHAR},
+      </if>
+      <if test="requestContent != null" >
+        #{requestContent,jdbcType=VARCHAR},
+      </if>
+      <if test="complainDate != null" >
+        #{complainDate,jdbcType=DATE},
+      </if>
+      <if test="contactPerson != null" >
+        #{contactPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null" >
+        #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceStartDate != null" >
+        #{serviceStartDate,jdbcType=DATE},
+      </if>
+      <if test="serviceEndDate != null" >
+        #{serviceEndDate,jdbcType=DATE},
+      </if>
+      <if test="serviceContent != null" >
+        #{serviceContent,jdbcType=VARCHAR},
+      </if>
+      <if test="servicePerson != null" >
+        #{servicePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="feedBackDate != null" >
+        #{feedBackDate,jdbcType=DATE},
+      </if>
+      <if test="homeComment != null" >
+        #{homeComment,jdbcType=VARCHAR},
+      </if>
+      <if test="assuranceDate != null" >
+        #{assuranceDate,jdbcType=DATE},
+      </if>
+      <if test="assuranceFee != null" >
+        #{assuranceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="assurancePayDate != null" >
+        #{assurancePayDate,jdbcType=DATE},
+      </if>
+      <if test="complainStatus != null" >
+        #{complainStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.ht.complain.model.HomeComplainModel" >
+    update HT_Homecomplain
+    <set >
+      <!-- <if test="home != null" >
+        HomeNo = #{home,jdbcType=INTEGER},
+      </if>
+      <if test="complainType != null" >
+        TYPENO = #{complainType,jdbcType=INTEGER},
+      </if> -->
+      <if test="complainTitle != null" >
+        ComplainTitle = #{complainTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="complainContent != null" >
+        ComplainContent = #{complainContent,jdbcType=VARCHAR},
+      </if>
+      <if test="requestContent != null" >
+        RequestContent = #{requestContent,jdbcType=VARCHAR},
+      </if>
+      <if test="complainDate != null" >
+        ComplainDate = #{complainDate,jdbcType=DATE},
+      </if>
+      <if test="contactPerson != null" >
+        ContactPerson = #{contactPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        Tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        Mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null" >
+        Mail = #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        QQ = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceStartDate != null" >
+        ServiceStartDate = #{serviceStartDate,jdbcType=DATE},
+      </if>
+      <if test="serviceEndDate != null" >
+        ServiceEndDate = #{serviceEndDate,jdbcType=DATE},
+      </if>
+      <if test="serviceContent != null" >
+        ServiceContent = #{serviceContent,jdbcType=VARCHAR},
+      </if>
+      <if test="servicePerson != null" >
+        ServicePerson = #{servicePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="feedBackDate != null" >
+        FeedBackDate = #{feedBackDate,jdbcType=DATE},
+      </if>
+      <if test="homeComment != null" >
+        HomeComment = #{homeComment,jdbcType=VARCHAR},
+      </if>
+      <if test="assuranceDate != null" >
+        AssuranceDate = #{assuranceDate,jdbcType=DATE},
+      </if>
+      <if test="assuranceFee != null" >
+        AssuranceFee = #{assuranceFee,jdbcType=DECIMAL},
+      </if>
+      <if test="assurancePayDate != null" >
+        AssurancePayDate = #{assurancePayDate,jdbcType=DATE},
+      </if>
+      <if test="complainStatus != null" >
+        ComplainStatus = #{complainStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ComplainNo = #{complainNo,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.neusoft.ht.complain.model.HomeComplainModel" >
+    update HT_Homecomplain
+    set <!-- HomeNo = #{home,jdbcType=INTEGER},
+      TYPENO = #{complainType,jdbcType=INTEGER}, -->
+      ComplainTitle = #{complainTitle,jdbcType=VARCHAR},
+      ComplainContent = #{complainContent,jdbcType=VARCHAR},
+      RequestContent = #{requestContent,jdbcType=VARCHAR},
+      ComplainDate = #{complainDate,jdbcType=DATE},
+      ContactPerson = #{contactPerson,jdbcType=VARCHAR},
+      Tel = #{tel,jdbcType=VARCHAR},
+      Mobile = #{mobile,jdbcType=VARCHAR},
+      Mail = #{mail,jdbcType=VARCHAR},
+      QQ = #{qq,jdbcType=VARCHAR},
+      ServiceStartDate = #{serviceStartDate,jdbcType=DATE},
+      ServiceEndDate = #{serviceEndDate,jdbcType=DATE},
+      ServiceContent = #{serviceContent,jdbcType=VARCHAR},
+      ServicePerson = #{servicePerson,jdbcType=VARCHAR},
+      FeedBackDate = #{feedBackDate,jdbcType=DATE},
+      HomeComment = #{homeComment,jdbcType=VARCHAR},
+      AssuranceDate = #{assuranceDate,jdbcType=DATE},
+      AssuranceFee = #{assuranceFee,jdbcType=DECIMAL},
+      AssurancePayDate = #{assurancePayDate,jdbcType=DATE},
+      ComplainStatus = #{complainStatus,jdbcType=VARCHAR}
+    where ComplainNo = #{complainNo,jdbcType=INTEGER}
+  </update>
+</mapper>
