@@ -38,6 +38,48 @@ $(function(){
 		pager: "#EmployeeGridPager"
 		
 	});
+	
+	//点击增加链接处理
+	$("button#add").off().on("click",function(event){
+		$("div#DepartmentDialogArea").load("fee/HouseType/add.html",function(){
+			$("div#DepartmentDialogArea").dialog({
+				title:"添加房子类型",
+				width:600
+			});
+			$("form#addForm").ajaxForm(function(result){
+				if(result.status=="ok"){
+					alert(result.message);
+				}
+			})
+			
+			//点击取消
+			$("input[value='取消']").on("click",function(event){
+				$("div#DepartmentDialogArea").dialog("close");
+				$("div#DepartmentDialogArea").dialog("destroy");
+				$("div#DepartmentDialogArea").html("");
+			});
+		});
+	});
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	//更新jQGrid的列表显示
 //	function reloadEmployeeList()
 //	{

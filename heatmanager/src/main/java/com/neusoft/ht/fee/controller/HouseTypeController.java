@@ -29,36 +29,49 @@ public class HouseTypeController {
 	IHouseTypeService service = null;
 	
 	@RequestMapping("/getall")
-	public List<HouseType> getAll() throws Exception{
-		return service.selectAllHouseType();
+	public ResultMessage<HouseType> getAll() throws Exception{
+		ResultMessage<HouseType> result = new ResultMessage<>();
+		result.setList(service.selectAllHouseType());
+		return result;
 	}
 	
 	@RequestMapping("/getbyno")
-	public HouseType getByNo(int typeNo) throws Exception {
-		return service.selectByNo(typeNo);
+	public ResultMessage<HouseType> getByNo(int typeNo) throws Exception {
+		ResultMessage<HouseType> result = new ResultMessage<>();
+		result.setModel(service.selectByNo(typeNo));
+		return result;
 	}
 	
 	@RequestMapping("/deletebyno")
-	public void deleteByNo(int typeNo) throws Exception {
+	public ResultMessage<HouseType> deleteByNo(int typeNo) throws Exception {
 		service.deleteHouseType(typeNo);
+		return new ResultMessage<>("ok","删除成功");
 	}
 	
 	@RequestMapping("/update")
-	public void updateHouseType(HouseType ht) throws Exception {
-		if(ht.getTypeName().trim().length() > 0)
+	public ResultMessage<HouseType> updateHouseType(HouseType ht) throws Exception {
+		if(ht.getTypeName().trim().length() > 0) {
 			service.updateHouseType(ht);
+			return new ResultMessage<>("ok","修改成功");
+		}else {
+			return new ResultMessage<>("faild", "失败");
 		}
+	}
 
 	@RequestMapping("/add")
-	public void addHouseType(HouseType ht) throws Exception {
+	public ResultMessage<HouseType> addHouseType(HouseType ht) throws Exception {
+		System.out.println(ht);
 		if(ht.getTypeName().trim().length() > 0) {
 			service.addHouseType(ht);
+			return new ResultMessage<>("ok","添加成功");
+		}else {
+			return new ResultMessage<>("faild", "失败");
 		}
 	}
 	
 	@RequestMapping("/getall/page")
 	public ResultMessage<HouseType> getAllWithPage(@RequestParam(required = false,defaultValue ="3") int rows,@RequestParam(required = false,defaultValue = "1") int page) throws Exception{
-		ResultMessage<HouseType> result = new ResultMessage<>();
+		ResultMessage<HouseType> result = new ResultMessage<>("ok","添加成功");
 		result.setList(service.selectAllWithPage(rows, page));
 		result.setCount(service.getCountAll());
 		result.setPage(page);
