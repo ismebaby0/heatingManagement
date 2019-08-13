@@ -25,7 +25,7 @@ public class HouseTypeServiceImpl implements IHouseTypeService{
 	@Autowired
 	private IHouseTypeMapper mapper= null;
 	@Override
-	public List<HouseType> selectAllHouseType() {
+	public List<HouseType> selectAllHouseType() throws Exception {
 		return mapper.selectAllHouseType();
 	}
 	@Override
@@ -44,6 +44,32 @@ public class HouseTypeServiceImpl implements IHouseTypeService{
 	@Override
 	public HouseType selectByNo(int typeNo) throws Exception {
 		return mapper.selectByNo(typeNo);
+	}
+	
+	//分页查寻
+	@Override
+	public List<HouseType> selectAllWithPage(int row,int page) throws Exception {
+		return mapper.selectAllWithPage(row*(page-1),page*row);
+	}
+	
+	//
+	@Override
+	public int getCountPage(int rows) throws Exception {
+		int pageCount=0;
+		int count=this.getCountAll();
+		if(count%rows==0) {
+			pageCount=count/rows;
+		}
+		else {
+			pageCount=count/rows+1;
+		}
+		return pageCount;
+	}
+	
+	//查询全部户型个数
+	@Override
+	public int getCountAll() throws Exception {
+		return mapper.getCountByAll();
 	}
 
 }
