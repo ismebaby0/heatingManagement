@@ -17,8 +17,8 @@ public interface IUserMapper {
   public void delete(String uuserid) throws Exception;
   public List<AdminUserValue> selectWithAll() throws Exception;
   public AdminUserValue selectById(String uuserid) throws Exception;
-  //取得所有用户的信息
-  public List<AdminUserValue> getListAllWithPages(@Param("start") int start,@Param("rows") int rows) throws Exception;
+  //取得所有用户的信息带分页
+  public List<AdminUserValue> getListAllWithPages(@Param("uuserid") String id,@Param("uname") String name,@Param("start") int start,@Param("rows") int rows) throws Exception;
   
   //取得所有数据的个数
   

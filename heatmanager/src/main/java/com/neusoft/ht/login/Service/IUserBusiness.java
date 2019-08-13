@@ -19,7 +19,7 @@ public interface IUserBusiness {
  public AdminUserValue getById(String id) throws Exception;
  
  //取得列表带分页
- public List<AdminUserValue> getListAllWithPages(int rows,int pages)throws Exception;
+ public List<AdminUserValue> getListAllWithPages(String id,String name,int rows,int pages)throws Exception;
  //取得数据个数
  public int getTotalCount() throws Exception;
  //取得页数

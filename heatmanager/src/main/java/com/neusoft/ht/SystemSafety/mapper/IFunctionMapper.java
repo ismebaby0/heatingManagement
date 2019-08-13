@@ -2,6 +2,7 @@ package com.neusoft.ht.SystemSafety.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.boot.autoconfigure.cache.CacheProperties.Infinispan;
 
 import com.neusoft.ht.SystemSafety.model.Function;
@@ -19,4 +20,11 @@ public interface IFunctionMapper {
 	public void delete(int funno) throws Exception;
 	
 	public List<Function>  selectListWithAll() throws Exception;
+	
+	//分页查询
+	public List<Function> selectListWithPages(@Param("start") int start,@Param("rows") int rows) throws Exception;
+	//取得数据数
+	
+	public int getTotalCount() throws Exception;
+	
 }

@@ -22,11 +22,11 @@ public class UserController {
 	}
 	//取得分页列表
 	@RequestMapping("list/page")
-	public ResultMessage<AdminUserValue> getListWithPage(@RequestParam(required = false,defaultValue ="10") int rows,@RequestParam(required = false,defaultValue = "1") int page)throws Exception{
+	public ResultMessage<AdminUserValue> getListWithPage(@RequestParam(required = false,defaultValue ="") String id,@RequestParam(required = false,defaultValue ="") String name,@RequestParam(required = false,defaultValue ="10") int rows,@RequestParam(required = false,defaultValue = "1") int page)throws Exception{
 		ResultMessage<AdminUserValue> result=new ResultMessage<AdminUserValue>("OK","取得部门列表分页模式成功");
 		result.setCount(user.getTotalCount());
 		result.setPageCount(user.getPageCount(rows));
-		result.setList(user.getListAllWithPages(rows, page));
+		result.setList(user.getListAllWithPages(id,name,rows, page));
 		result.setPage(page);
 		result.setRows(rows);
 		
