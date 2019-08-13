@@ -37,14 +37,12 @@
   select * from HT_UserInfo where UUSERID=#{uuserid}
  </select>
  
-<<<<<<< HEAD
+
  <select id="selectWithFunction" resultMap="UserInfoResultMapWithFunction">
  
     select a.*, c.* from HT_UserInfo a  left outer join   HT_FunctionUser b on a.UUSERID=b.UUserID
    left outer join HT_Function c on b.FunNo=c.FUNNO 
-=======
->>>>>>> branch 'master' of https://github.com/ismebaby0/heatingmanagement.git
- 
+</select>
  
 
 </mapper>
