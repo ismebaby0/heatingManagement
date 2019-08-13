@@ -37,7 +37,12 @@
 	 
 	 <!-- 计算户型表的数据条数 -->
 	 <select id="getCountByAll" resultType = "int">
-	 	selcet IFNULL(count(typeNo),0)
+	 	select IFNULL(count(typeNo),0) from HT_HOUSETYPE
+	 </select>
+	 
+	 <!-- 分页查询 -->
+	 <select id="selectAllWithPage" resultMap = "selectHouseType">
+	 	select * from HT_HOUSETYPE limit #{start},#{end}
 	 </select>
 
 </mapper>

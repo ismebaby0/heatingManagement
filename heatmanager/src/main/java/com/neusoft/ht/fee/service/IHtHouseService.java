@@ -21,4 +21,6 @@ public interface IHtHouseService {
 	public void deleteHouseModel(int houseNo) throws Exception;
 	//修改一条
 	public void updateHouseModel(HtHouseModel record) throws Exception;
+	
+	
 }
