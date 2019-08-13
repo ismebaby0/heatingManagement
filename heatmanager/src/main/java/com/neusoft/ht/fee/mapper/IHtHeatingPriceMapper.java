@@ -17,13 +17,17 @@ import com.neusoft.ht.fee.model.HtHeatingPriceModel;
 public interface IHtHeatingPriceMapper {
 	// 增加
 	public void insert(HtHeatingPriceModel record);
+
 	// 删除
 	public void deleteByPrimaryKey(String heatingYear);
+
 	// 修改
 	public void updateByPrimaryKey(HtHeatingPriceModel record);
+
 	// 查看一条记录
 	public HtHeatingPriceModel selectByPrimaryKey(String heatingYear);
-	//查看所有记录
+
+	// 查看所有记录
 	public List<HtHeatingPriceModel> selectByAll();
 
 }

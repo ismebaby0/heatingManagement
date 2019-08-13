@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.neusoft.ht.fee.mapper.IHouseFeePayRecordMapper">
+
+	<!-- public void insert(HouseFeePayRecord record); -->
+	<insert id="insert">
+		insert into
+		HT_PublicHouseFeePayRecord(RecordNo,FeeNo,PaymentTypeNo,PayAmount,PayDate,
+		PayPerson,CheckCode,InvoiceCode,PayDesc,RecordStatus)
+		values(#{recordNo},#{houseFee.feeNo},#{paymentType.typeno},#{payAmount},#{payDate},#{payPerson},
+		#{checkCode},#{invoiceCode},#{payDesc},#{recordStatus})
+	</insert>
+
+	<!-- public void deleteByPrimaryKey(int recordNo); -->
+	<delete id="deleteByPrimaryKey">
+		delete from HT_PublicHouseFeePayRecord where
+		RecordNo=#{recordNo}
+	</delete>
+
+	<!-- public void updateByPrimaryKey(HouseFeePayRecord record); -->
+	<update id="updateByPrimaryKey">
+		update HT_PublicHouseFeePayRecord
+		set
+		FeeNo=#{houseFee.feeNo},PaymentTypeNo=#{paymentType.typeno},PayAmount=#{payAmount},
+		PayDate=#{payDate},PayPerson=#{payPerson},CheckCode=#{checkCode},
+		InvoiceCode=#{invoiceCode},PayDesc=#{payDesc},RecordStatus=#{recordStatus})
+		where RecordNo=#{recordNo}
+	</update>
+
+	<resultMap type="com.neusoft.ht.fee.model.HouseFeePayRecord"
+		id="selectMap">
+		<id property="recordNo" column="RecordNo" />
+		<result property="houseFee.feeNo" column="FeeNo" />
+		<result property="paymentType.typeno" column="PaymentTypeNo" />
+		<result property="payAmount" column="PayAmount" />
+		<result property="payDate" column="PayDate" />
+		<result property="payPerson" column="PayPerson" />
+		<result property="checkCode" column="CheckCode" />
+		<result property="invoiceCode" column="InvoiceCode" />
+		<result property="payDesc" column="PayDesc" />
+		<result property="recordStatus" column="RecordStatus" />
+	</resultMap>
+
+	<!-- public HouseFeePayRecord selectByPrimaryKey(int recordNo); -->
+	<select id="selectByPrimaryKey" resultMap="selectMap">
+		select
+		RecordNo,FeeNo,PaymentTypeNo,PayAmount,PayDate,
+		PayPerson,CheckCode,InvoiceCode,PayDesc,RecordStatus from
+		HT_PublicHouseFeePayRecord
+		where RecordNo = #{recordNo}
+	</select>
+	<!-- public List<HouseFeePayRecord> selectByAll(); -->
+	<select id="selectByAll" resultMap="selectMap">
+		select
+		RecordNo,FeeNo,PaymentTypeNo,PayAmount,PayDate,
+		PayPerson,CheckCode,InvoiceCode,PayDesc,RecordStatus from
+		HT_PublicHouseFeePayRecord
+	</select>
+
+</mapper>
