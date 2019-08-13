@@ -34,9 +34,31 @@
  select * from HT_User limit #{start},#{rows}
  </select>
 
- <select id="getTotalCount" resultMap="UserResultMap">
- select count(1) from HT_User
+ <select id="getTotalCount" resultType="int">
+ select IFNULL(count(1),0) from HT_User
  </select>
  
+<!-- 根据条件检索记录 -->
+ <select id="selectListByCondition" resultMap="UserResultMap">
+ select * from HT_User
+  <where>
+     <if test="departmentNo!=0">
+      and a.DEPTNO=#{departmentNo}
+     </if>
+     <if test="roleNo!=0">
+     and a.EMPID in (select EMPID from oa_employeeRole where RNO=#{RoleNo})
+     </if>
+     <if test="sex!=null and sex!=''">
+     and a.EMPSEX=#{sex}
+     </if>
+     <if test="startJoinDate!=null">
+     and a.JOINDATE  &gt;=#{startJoinDate}
+     </if>
+     <if test="endJoinDate!=null">
+     and a.JOINDATE &lt;=#{endJoinDate}
+     </if>
+  </where>
+    limit #{start},#{rows}
+  </select>
 </mapper>
 
