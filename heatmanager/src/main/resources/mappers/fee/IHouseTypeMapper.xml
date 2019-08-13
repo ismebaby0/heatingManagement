@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.neusoft.ht.fee.mapper.HouseTypeMapper">
+<mapper namespace="com.neusoft.ht.fee.mapper.IHouseTypeMapper">
 	<resultMap id="selectHouseType" type="com.neusoft.ht.fee.model.HouseType" >
   		<id property="typeNo" column="typeno" />
   		<result property="typeName" column="typeName" />
@@ -34,6 +34,11 @@
 	 <update id = "updateHouseType">
 	 	update HT_HOUSETYPE set typeNo = #{typeNo},typeName = #{typeName}
 	 </update>
+	 
+	 <!-- 计算户型表的数据条数 -->
+	 <select id="getCountByAll" resultType = "int">
+	 	selcet IFNULL(count(typeNo),0)
+	 </select>
 
 </mapper>
 
