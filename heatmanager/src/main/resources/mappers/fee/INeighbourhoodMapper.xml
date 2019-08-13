@@ -1,31 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<<<<<<< HEAD
-<mapper namespace="com.neusoft.ht.fee.model.Neighbourhood">
-	<!-- <resultMap id="selectNeibourhood" type="com.neusoft.ht.fee.model.Neighbourhood" >
-=======
 <mapper namespace="com.neusoft.ht.fee.mapper.INeighbourhoodMapper">
 	<resultMap id="selectNeibourhood" type="com.neusoft.ht.fee.model.Neighbourhood" >
->>>>>>> branch 'master' of https://github.com/ismebaby0/heatingmanagement.git
   		<id property="hoodNo" column="hoodno" />
   		<result property = "hoodName" column = "hoodName"></result>
   		<result property = "address" column = "Address" />
     </resultMap>
-	
-	
-		// 增加
-	public void insert(Neighbourhood neighbourgood) throws Exception;
-	// 删除
-	public void deleteByPrimaryKey(int hoodNo)  throws Exception;
-	// 修改
-	public void updateByPrimaryKey(Neighbourhood neighbourgood)  throws Exception;
-	// 查看一条记录
-	public Neighbourhood selectByPrimaryKey(int hoodNo)  throws Exception;
-	//查看所有记录
-	public List<Neighbourhood> selectByAll() throws Exception;
-	
+
 	 <insert id = "insert">
 	 	insert into HT_HOUSETYPE values(#{hoodNo},#{hoodName},#{Address})
 	 </insert>
@@ -40,7 +22,7 @@
 	 </select>	
 	 <select id = "selectByAll" resultMap="selectNeibourhood">
 	 	select*from HT_Neighbourhood
-	 </select> -->
+	 </select> 
 
 </mapper>
 
