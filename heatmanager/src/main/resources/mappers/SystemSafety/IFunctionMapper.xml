@@ -12,26 +12,33 @@
     <result property="levelNo" column="LevelNo" />
   </resultMap>
   
- <insert id="create">
-   insert into HT_Function values (#{funNo},#{funName},#{funUrl},#{levelNo})
- </insert>
+<insert id="create"  keyProperty="funNo"   keyColumn="FUNNO" useGeneratedKeys="true" flushCache="true" >
+   insert into  SYSTEMFUNCTION (LevelNo,FUNNAME,FUNURL) values (#{levelNo},#{funName},#{funUrl})
+  </insert>
  
   <update id="update">
-
+  
   </update>
   
   <delete id="delete">
- 
+  delete from HT_Function where FUNNO=#{funNo}
   </delete>
    
  <select id="selectWithAll" resultMap="FunctionResultMap">
-
+ 
  </select>
  
   <select id="selectById" resultMap="FunctionResultMap">
 
  </select>
  
+  <select id="selectListWithPages" resultMap="FunctionResultMap">
+   select * from HT_Function limit #{start},#{rows}
+ </select>
+ 
+  <select id="getTotalCount" resultType="int">
+ select IFNULL(count(1),0) from HT_Function
+ </select>
 
 </mapper>
 

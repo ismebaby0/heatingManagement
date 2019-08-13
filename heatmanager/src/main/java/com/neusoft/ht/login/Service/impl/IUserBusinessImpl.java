@@ -63,9 +63,9 @@ public class IUserBusinessImpl implements IUserBusiness {
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<AdminUserValue> getListAllWithPages(int rows, int pages) throws Exception {
+	public List<AdminUserValue> getListAllWithPages(String id,String name,int rows, int pages) throws Exception {
 		// TODO Auto-generated method stub
-		return userDao.getListAllWithPages(rows*(pages-1), rows);
+		return userDao.getListAllWithPages(id,name,rows*(pages-1), rows);
 	}
 
 
