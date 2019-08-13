@@ -21,7 +21,7 @@
 	 	select * from HT_Neighbourhood where hoodNo = #{hoodNo}
 	 </select>	
 	 <select id = "selectByAll" resultMap="selectNeibourhood">
-	 	select*from HT_Neighbourhood
+	 	select * from HT_Neighbourhood
 	 </select> 
 
 </mapper>

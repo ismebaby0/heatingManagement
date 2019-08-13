@@ -4,9 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.neusoft.ht.login.Service.IUserBusiness;
-import com.neusoft.ht.login.dao.IUserDao;
+import com.neusoft.ht.login.mapper.IUserMapper;
 import com.neusoft.ht.login.model.AdminUserValue;
 /*
  *   用户登陆 业务层
@@ -16,7 +17,7 @@ import com.neusoft.ht.login.model.AdminUserValue;
 public class IUserBusinessImpl implements IUserBusiness {
 
 	@Autowired
-	private IUserDao userDao=null;
+	private IUserMapper userDao=null;
 	@Override
 	public void create(AdminUserValue user) throws Exception {
 		// TODO Auto-generated method stub
@@ -52,9 +53,45 @@ public class IUserBusinessImpl implements IUserBusiness {
 
 
 	@Override
+	@Transactional(readOnly = true)
 	public AdminUserValue getById(String id) throws Exception {
 		// TODO Auto-generated method stub
 		return userDao.selectById(id);
+	}
+
+
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<AdminUserValue> getListAllWithPages(int rows, int pages) throws Exception {
+		// TODO Auto-generated method stub
+		return userDao.getListAllWithPages(rows*(pages-1), rows);
+	}
+
+
+
+	@Override
+	@Transactional(readOnly = true)
+	public int getTotalCount() throws Exception {
+		// TODO Auto-generated method stub
+		return userDao.getTotalCount();
+	}
+
+
+
+	@Override
+	@Transactional(readOnly = true)
+	public int getPageCount(int rows) throws Exception {
+		// TODO Auto-generated method stub
+		int pageCount=0;
+		int count=userDao.getTotalCount();
+		if(count%rows==0) {
+			pageCount=count/rows;
+		}
+		else {
+			pageCount=(count/rows)+1;
+		}
+		return pageCount;
 	}
 
 
