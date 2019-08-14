@@ -37,7 +37,7 @@
       and UUSERID=#{uuserid}
      </if>
      <if test="uname!=null and uname!='' ">
-     and UNAME=#{uname}
+     and UName=#{uname}
      </if>
   </where>
     limit #{start},#{rows}

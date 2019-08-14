@@ -50,7 +50,7 @@ $(function(){
 	$("a#EmployeeSearchButton").on("click",function(){
 		uuserid=$("input#uuserid").val();
 		uname=$("input#uname").val();
-//		alert(uname)
+		alert(uname)
 		reloadEmployeeList();
 	});
 	
