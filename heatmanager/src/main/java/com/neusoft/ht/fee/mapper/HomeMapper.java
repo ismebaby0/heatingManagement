@@ -60,10 +60,10 @@ public interface HomeMapper {
 			+ ",homeName=#{homeName},buildingCode=#{buildingCode}"
 			+ ",departmentCode=#{departmentCode},floorCode =#{floorCode},houseCode=#{houseCode}"
 			+ ",homeArea=#{homeArea},direction=#{direction},tel=#{tel},mobile=#{mobile},mail=#{mail},qq=#{qq},heatingStatus=#{heatingStatus},heatingArea=#{heatingArea} WHERE homeNo =#{homeNo}")
-	public void update(Home home);
+	void update(Home home);
 	
 	@Delete("DELETE FROM HT_HOME WHERE homeNo =#{homeNo}")
-	public void delete(Home one);
+	void delete(Home one);
 
 	@Select("SELECT * FROM HT_HOME WHERE homeNo = #{homeNo}")
 	
