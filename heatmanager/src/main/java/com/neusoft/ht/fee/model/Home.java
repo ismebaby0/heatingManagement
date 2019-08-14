@@ -1,11 +1,14 @@
 package com.neusoft.ht.fee.model;
+
+import java.io.Serializable;
+
 /**
  * 
  * @Description
  * @author:刘培嘉
  * @date:2019年8月9日 下午15:17:20
  */
-public class Home {
+public class Home  implements Serializable {
 	
 	private int homeNo;
 	private String heatingCode;
@@ -126,14 +129,7 @@ public class Home {
 	public void setHeatingArea(String heatingArea) {
 		this.heatingArea = heatingArea;
 	}
-	@Override
-	public String toString() {
-		return "Home [homeNo=" + homeNo + ", heatingCode=" + heatingCode + ", houseTypeNo=" + houseTypeNo + ", hoodNo="
-				+ hoodNo + ", homeName=" + homeName + ", buildingCode=" + buildingCode + ", departmentCode="
-				+ departmentCode + ", floorCode=" + floorCode + ", houseCode=" + houseCode + ", homeArea=" + homeArea
-				+ ", direction=" + direction + ", tel=" + tel + ", mobile=" + mobile + ", mail=" + mail + ", qq=" + qq
-				+ ", heatingStatus=" + heatingStatus + ", heatingArea=" + heatingArea + "]";
-	}
+
 	
 
 

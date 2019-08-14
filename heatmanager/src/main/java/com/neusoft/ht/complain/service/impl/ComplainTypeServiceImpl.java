@@ -35,11 +35,13 @@ public class ComplainTypeServiceImpl implements IComplainTypeService {
 		complainType.insertSelective(record);
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public ComplainType getByNo(Integer typeNo) throws Exception {
 		return complainType.selectByPrimaryKey(typeNo);
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public List<ComplainType> getByAll() throws Exception {
 		return complainType.selectByAll();
