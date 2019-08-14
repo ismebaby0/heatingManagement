@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.neusoft.ht.complain.mapper.IHomeComplainModelMapper;
 import com.neusoft.ht.complain.model.HomeComplainModel;
@@ -14,6 +15,7 @@ import com.neusoft.ht.complain.service.IHomeComplainModelService;
  *  作者: 方俊坤
  */
 @Service
+@Transactional(rollbackFor = { Exception.class, Error.class })
 public class HomeComplainModelServie implements IHomeComplainModelService {
 
 	@Autowired
@@ -33,11 +35,13 @@ public class HomeComplainModelServie implements IHomeComplainModelService {
 		hcmm.insertSelective(record);
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public HomeComplainModel getByNo(Integer complainNo) throws Exception {
 		return hcmm.selectByPrimaryKey(complainNo);
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public List<HomeComplainModel> getByAll() throws Exception {
 		return hcmm.selectByAll();
