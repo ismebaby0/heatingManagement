@@ -89,8 +89,8 @@ $(function(){
 				  },
 				  messages:{
 					id: {
-					      required: "账号为空",
-//					      remote:"账号已经存在"
+					      required: "账号为空"
+				      
 					    },
 					name:{
 					    	required:"用户名为空"
