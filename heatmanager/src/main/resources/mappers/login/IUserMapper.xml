@@ -33,10 +33,10 @@
  <select id="getListAllWithPages" resultMap="UserResultMap">
   select * from HT_User
   <where>
-     <if test="uuserid!=0">
+     <if test="uuserid!='' and uname!=null">
       and UUSERID=#{uuserid}
      </if>
-     <if test="uname!=0">
+     <if test="uname!=null and uname!='' ">
      and UNAME=#{uname}
      </if>
   </where>

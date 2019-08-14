@@ -20,4 +20,9 @@ public List<UserInfo> getListWithFunction() throws Exception{
 	
 	return userinfo.getListWithFunction();
 }
+
+@RequestMapping("/add")
+public void addList() throws Exception{
+	
+}
 }
