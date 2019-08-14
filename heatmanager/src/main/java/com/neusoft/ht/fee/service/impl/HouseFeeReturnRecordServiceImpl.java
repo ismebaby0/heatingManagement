@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.neusoft.ht.fee.mapper.HouseFeeReturnRecordMapper;
+import com.neusoft.ht.fee.mapper.IHouseFeeReturnRecordMapper;
 import com.neusoft.ht.fee.model.HouseFeeReturnRecord;
 import com.neusoft.ht.fee.service.IHouseFeeReturnRecordService;
 
@@ -19,7 +19,7 @@ import com.neusoft.ht.fee.service.IHouseFeeReturnRecordService;
 public class HouseFeeReturnRecordServiceImpl implements IHouseFeeReturnRecordService {
 
 	@Autowired
-	HouseFeeReturnRecordMapper hfrr_mapper;
+	IHouseFeeReturnRecordMapper hfrr_mapper;
 
 	@Override
 	public HouseFeeReturnRecord selectByNo(int recordNo) throws Exception {

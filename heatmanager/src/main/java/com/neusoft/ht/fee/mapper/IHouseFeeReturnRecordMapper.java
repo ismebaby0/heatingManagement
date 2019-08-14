@@ -5,8 +5,15 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.neusoft.ht.fee.model.HouseFeeReturnRecord;
+
+/**
+ * 
+ * @Description
+ * @author:林康荣
+ * @date:2019年8月14日 上午8:42:24
+ */
 @Mapper
-public interface HouseFeeReturnRecordMapper {
+public interface IHouseFeeReturnRecordMapper {
 	// 增加
 	public void insert(HouseFeeReturnRecord record);
 
