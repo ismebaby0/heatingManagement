@@ -53,7 +53,7 @@ $(function(){
 			})
 			
 			//点击取消
-			$("input[value='取消']").on("click",function(event){
+			$("input[value='取消']").off().on("click",function(event){
 				$("div#DepartmentDialogArea").dialog("close");
 				$("div#DepartmentDialogArea").dialog("destroy");
 				$("div#DepartmentDialogArea").html("");
