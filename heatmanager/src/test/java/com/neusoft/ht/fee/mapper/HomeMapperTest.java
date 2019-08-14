@@ -27,7 +27,6 @@ public class HomeMapperTest {
 	
 	
 	@Test
-
 	public void selectHome() {
 		System.out.println("begin");
 		
@@ -47,7 +46,20 @@ public class HomeMapperTest {
 		home2.setHomeName("肥牛");
 		home.insert(home2);
 	}
+	@Test
+	@Ignore
+	public void update() {
+		Home one = home.getOne(2);
+		one.setHomeName("change");
+		home.update(one);
+		
 	
+	}
 	
-
+	@Test
+	@Ignore
+	public void delete() {
+		Home one  = home.getOne(2);
+		home.delete(one);
+	}
 }

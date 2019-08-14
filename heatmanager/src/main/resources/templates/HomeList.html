@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>HT</title>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>homeNo</th>
+                <th>heatingCode</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="home : ${homes}">
+                <td th:text="${home.homeNo}"></td>
+                <td th:text="${home.homeName}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

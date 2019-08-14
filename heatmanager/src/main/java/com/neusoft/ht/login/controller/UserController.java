@@ -17,7 +17,7 @@ public class UserController {
    @Autowired
 	private IUserBusiness user=null;
 	@RequestMapping("/list")
-	public List<AdminUserValue> getList() throws Exception{
+	List<AdminUserValue> getList() throws Exception{
 		return user.getListByAll();
 	}
 	//取得分页列表
