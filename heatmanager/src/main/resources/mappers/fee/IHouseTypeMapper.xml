@@ -26,7 +26,7 @@
 	public HouseType selectByNo(int typeNo);
 	 -->
 	 <insert id = "addHouseType">
-	 	insert into HT_HOUSETYPE values(#{typeNo},#{typeName})
+	 	insert into HT_HOUSETYPE (typeName) values (#{typeName})
 	 </insert>
 	 <delete id = "deleteHouseType">
 	 	delete from HT_HOUSETYPE where typeNo = #{typeNo}
