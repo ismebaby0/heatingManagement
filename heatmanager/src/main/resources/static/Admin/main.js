@@ -54,5 +54,87 @@ $(function(){
 		reloadEmployeeList();
 	});
 	
+	//===========================增加员工处理================================================
+	$("a#EmployeeAddLink").off().on("click",function(){
+		$("div#EmployeeDialog").load("Admin/add.html",function(){
+			//取得部门列表，并填充部门下拉框
+			
+			//取得角色列表，生成角色选择下拉框
+			
+			//验证员工提交数据
+			$("form#EmployeeAddForm").validate({
+				  rules: {
+				    id: {
+				      required: true,
+//				      remote: host+"employee/checkidexist"
+				      
+				    },
+				    password:{
+				    	required: true
+				    },
+				    age:{
+				    	number: true,
+				    	min:18,
+				    	max:60,
+				    	range: [18, 60]
+				    },
+				    name:{
+				    	required:true
+				    },
+				    mobile:{
+				    	required:true,
+				    	mobile:true
+				    	
+				    }
+				  },
+				  messages:{
+					id: {
+					      required: "账号为空",
+//					      remote:"账号已经存在"
+					    },
+					name:{
+					    	required:"用户名为空"
+					},
+					age:{
+						number: "年龄必须是数值",
+				    	range:"年龄需要在18和60之间"
+					}
+				 }
+			});
+			//拦截增加提交表单
+			$("form#EmployeeAddForm").ajaxForm(function(result){
+				if(result.status=="OK"){
+					reloadEmployeeList();//更新员工列表
+				}
+				//alert(result.message);
+				//BootstrapDialog.alert(result.message);
+				BootstrapDialog.show({
+		            title: '部门操作信息',
+		            message:result.message
+		        });
+				$("div#DepartmentDialogArea" ).dialog( "close" );
+				$("div#DepartmentDialogArea" ).dialog( "destroy" );
+				$("div#DepartmentDialogArea").html("");
+				
+			});
+			
+			
+			$("div#EmployeeDialog").dialog({
+				title:"员工增加",
+				width:950
+			});
+			//点击取消按钮，管理弹出窗口
+			$("input[value='取消']").off().on("click",function(){
+				$("div#EmployeeDialog").dialog("close");
+				$("div#EmployeeDialog").dialog("destroy")
+				$("div#EmployeeDialog").html("");
+			});
+			
+			
+		});
+		
+	});
+	
+	
 	
 });
