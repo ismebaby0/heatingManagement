@@ -3,6 +3,7 @@ package com.neusoft.ht.fee.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.neusoft.ht.fee.model.HtHouseModel;
 
@@ -24,4 +25,9 @@ public interface IHtHouseMapper {
 	public HtHouseModel selectByPrimaryKey(int houseNo);
 	//查看所有记录
 	public List<HtHouseModel> selectByAll();
+	
+	//查询公建的个数
+	public int getCountByAll() throws Exception;
+	//分页查询
+	public List<HtHouseModel> selectAllWithPage(@Param("start") int star,@Param("end") int end) throws Exception;
 }

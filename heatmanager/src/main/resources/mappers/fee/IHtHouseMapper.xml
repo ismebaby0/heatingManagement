@@ -63,5 +63,21 @@
 			Building,HouseArea,Address,POSTCODE,ContactName,Tel,Mobile,Mail,QQ,
 			HeatingStatus,HeatingArea  from HT_publichouse
 		</select>
-
+		
+		
+		
+		<!-- 查询公建的个数 -->
+		<!-- public int getCountByAll() throws Exception; -->
+		<select id="getCountByAll" resultType = "int">
+		 	select IFNULL(count(HOUSENO),0) from HT_publichouse
+		</select>
+		
+		
+		<!-- 分页查询 -->
+		<!-- public List<HtHouseModel> selectAllWithPage(@Param("start") int star,@Param("end") int end) throws Exception; -->
+		<select id="selectAllWithPage" resultMap = "selectMap">
+		 	select * from HT_publichouse limit #{start},#{end}
+		</select>
+		
+		
 </mapper>
