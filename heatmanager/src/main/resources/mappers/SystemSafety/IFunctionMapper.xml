@@ -25,15 +25,24 @@
   </delete>
    
  <select id="selectWithAll" resultMap="FunctionResultMap">
- 
+  select * from HT_Function
  </select>
  
   <select id="selectById" resultMap="FunctionResultMap">
-
+    
  </select>
  
   <select id="selectListWithPages" resultMap="FunctionResultMap">
-   select * from HT_Function limit #{start},#{rows}
+  	select * from HT_Function
+ 	<where>
+ 	<if test="funName !=null and funName!=''">
+ 	and FUNNAME=#{funName}
+ 	</if>
+ 	<if test="levelNo !=0 and LevelNo !='' ">
+ 	and LevelNo=#{levelNo}
+ 	</if>
+ 	</where>
+ 	    limit #{start},#{rows}
  </select>
  
   <select id="getTotalCount" resultType="int">
