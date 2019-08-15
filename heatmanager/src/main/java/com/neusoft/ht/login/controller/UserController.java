@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.neusoft.ht.SystemSafety.model.UserInfo;
 import com.neusoft.ht.login.Service.IUserBusiness;
@@ -33,5 +34,14 @@ public class UserController {
 		return result;
 		
 	}
-
+	@RequestMapping("/add")
+	public ResultMessage<AdminUserValue> add(AdminUserValue iuser, MultipartFile userPhoto) throws Exception {
+		if(userPhoto!=null && (!userPhoto.isEmpty())) {
+			iuser.getIuser().setPhotoFileName(userPhoto.getOriginalFilename());
+			iuser.getIuser().setPhotoContentType(userPhoto.getContentType());
+			iuser.getIuser().setPhoto(userPhoto.getBytes());
+			user.create(iuser);
+		}
+		return new ResultMessage<AdminUserValue>("OK","增加员工成功");
+	}
 }

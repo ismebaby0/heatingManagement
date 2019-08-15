@@ -19,9 +19,9 @@ $(function(){
 		url: 'user/list/page',
 		datatype: "json",
 		colModel: [
-			{ label: '用户账号', name: 'uuserid', width: 75 },
+			{ label: '用户账号', name: 'iuser.uuserid', width: 75 },
 			{ label: '用户密码', name: 'upassword', width: 90 },
-			{ label: '角色名', name: 'uname', width: 100 }                 
+			{ label: '用户名', name: 'uname', width: 100 }                 
 		],
 		styleUI : 'Bootstrap',
 		viewrecords: true, 
