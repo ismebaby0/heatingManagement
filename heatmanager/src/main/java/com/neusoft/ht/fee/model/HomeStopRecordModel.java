@@ -35,7 +35,7 @@ public class HomeStopRecordModel {
 	public String toString() {
 		return "HomeStopRecordModel [recordNo=" + recordNo + ", feeNo=" + feeNo + ", stopArea=" + stopArea
 				+ ", stopDate=" + stopDate + ", stopReason=" + stopReason + ", stopPerson=" + stopPerson + ", stopDesc="
-				+ stopDesc + ", stopStatus=" + stopStatus + "]";
+				+ stopDesc + ", stopStatus=" + stopStatus + "]"; 
 	}
 	
 	
