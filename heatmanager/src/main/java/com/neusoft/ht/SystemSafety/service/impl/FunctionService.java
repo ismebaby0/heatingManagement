@@ -2,12 +2,17 @@ package com.neusoft.ht.SystemSafety.service.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.neusoft.ht.SystemSafety.mapper.IFunctionMapper;
 import com.neusoft.ht.SystemSafety.model.Function;
 import com.neusoft.ht.SystemSafety.service.IFunctionService;
 
+@Service("function")
 public class FunctionService implements IFunctionService{
-
+    
+	@Autowired
 	private IFunctionMapper fun=null;
 	@Override
 	public void create(Function func) throws Exception {
@@ -41,9 +46,9 @@ public class FunctionService implements IFunctionService{
 	}
 
 	@Override
-	public List<Function> getListAllWithPages(int rows, int pages) throws Exception {
+	public List<Function> getListAllWithPages(String funName,int levelNo,int rows, int pages) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return fun.selectListWithPages(funName, levelNo, rows*(pages-1), rows);
 	}
 
 	@Override

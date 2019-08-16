@@ -32,7 +32,7 @@
 	 	delete from HT_HOUSETYPE where typeNo = #{typeNo}
 	 </delete>
 	 <update id = "updateHouseType">
-	 	update HT_HOUSETYPE set typeNo = #{typeNo},typeName = #{typeName}
+	 	update HT_HOUSETYPE set typeName = #{typeName} where typeNo = #{typeNo}
 	 </update>
 	 
 	 <!-- 计算户型表的数据条数 -->

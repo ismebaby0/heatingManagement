@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.neusoft.ht.fee.mapper.IHomeMapper">
+
+	<!-- 不添加外键关联查询 -->
+	<resultMap type="com.neusoft.ht.fee.model.HomeModel" id="resultOfHome">
+		<id property="" column=""/>
+		<result property="homeNo" column="homeNo" />
+		<result property="heatingCode" column="heatingCode" />
+		
+		<result property="homeName" column="homeName" />
+		<result property="buildingCode" column="buildingCode" />
+		<result property="departmentCode" column="departmentCode" />
+		<result property="floorCode" column="floorCode" />
+		<result property="houseCode" column="houseCode" />
+		<result property="homeArea" column="homeArea" />
+		<result property="direction" column="direction" />
+		<result property="tel" column="tel" />
+		<result property="mobile" column="mobile" />
+		<result property="mail" column="mail" />
+		<result property="qq" column="qq" />
+		<result property="heatingStatus" column="heatingStatus" />
+		<result property="heatingArea" column="heatingArea" />
+	</resultMap>
+	<!-- 有外键的关联查询 -->
+	<resultMap type="com.neusoft.ht.fee.model.HomeModel" id="resultOfHomeWithRelation" extends="resultOfHome">
+		<association property="hoodNo" resultMap="com.neusoft.ht.fee.mapper.INeighbourhoodMapper.selectNeibourhood"></association>
+		<association property="houseTypeNo" resultMap="com.neusoft.ht.fee.mapper.IHouseTypeMapper.selectHouseType"></association>
+	</resultMap>
+	<insert id="insert">
+		insert into Ht_Home values(#{homeNo},#{heatingCode},#{houseTypeNo.typeNo},#{hoodNo.hoodNo},#{homeName},#{buildingCode},#{departmentCode},
+		#{floorCode},#{houseCode},#{homeArea},#{direction},#{tel},#{mobile},#{mail},#{qq},#{heatingStatus},#{heatingArea})
+	</insert>
+	<delete id="deleteByPrimaryKey">
+		delete from Ht_Home where home = #{homeNo}
+	</delete>
+	<update id="updateByPrimaryKey">
+		update Ht_Home set homeNo=#{homeNo},heatingCode=#{heatingCode},houseTypeNo=#{houseTypeNo.typeNo},hoodNo=#{hoodNo.hoodNo},homeName=#{homeName},
+		buildingCode=#{buildingCode},departmentCode=#{departmentCode},
+		floorCode=#{floorCode},houseCode=#{houseCode},homeArea=#{homeArea},direction=#{direction},tel=#{tel},mobile=#{mobile},
+		mail=#{mail},qq=#{qq},heatingStatus=#{heatingStatus},heatingArea=#{heatingArea}
+	</update>
+	<select id="selectByPrimaryKey" resultMap = "resultOfHome">
+		select * from Ht_HOME where homeNo = #{homeNo}
+	</select>
+	<select id="selectByAll" resultMap = "resultOfHomeWithRelation">
+		select *from HT_HOME home left join HT_Neighbourhood hood on home.hoodNo = hood.hoodNo left join HT_HOUSETYPE house on home.housetypeno = house.typeNo
+	</select>
+
+</mapper>

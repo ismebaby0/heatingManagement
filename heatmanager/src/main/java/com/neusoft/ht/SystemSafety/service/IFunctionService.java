@@ -17,7 +17,7 @@ public interface IFunctionService {
 	 public Function getById(int id) throws Exception;
 	 
 	 //取得列表带分页
-	 public List<Function> getListAllWithPages(int rows,int pages)throws Exception;
+	 public List<Function> getListAllWithPages(String funName,int levelNo,int rows,int pages)throws Exception;
 	 //取得数据个数
 	 public int getTotalCount() throws Exception;
 	 //取得页数
