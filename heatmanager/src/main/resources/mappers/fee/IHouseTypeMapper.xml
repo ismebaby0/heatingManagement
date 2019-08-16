@@ -25,14 +25,14 @@
 	//根据查询
 	public HouseType selectByNo(int typeNo);
 	 -->
-	 <insert id = "addHouseType">
+	 <insert id = "addHouseType" flushCache="true">
 	 	insert into HT_HOUSETYPE (typeName) values (#{typeName})
 	 </insert>
 	 <delete id = "deleteHouseType">
 	 	delete from HT_HOUSETYPE where typeNo = #{typeNo}
 	 </delete>
 	 <update id = "updateHouseType">
-	 	update HT_HOUSETYPE set typeNo = #{typeNo},typeName = #{typeName}
+	 	update HT_HOUSETYPE set typeName = #{typeName} where typeNo = #{typeNo}
 	 </update>
 	 
 	 <!-- 计算户型表的数据条数 -->
@@ -41,7 +41,7 @@
 	 </select>
 	 
 	 <!-- 分页查询 -->
-	 <select id="selectAllWithPage" resultMap = "selectHouseType">
+	 <select id="selectAllWithPage" resultMap = "selectHouseType" >
 	 	select * from HT_HOUSETYPE limit #{start},#{end}
 	 </select>
 

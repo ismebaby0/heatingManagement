@@ -1,6 +1,6 @@
 package com.neusoft.ht.complain.model;
 
-import com.neusoft.ht.fee.model.Home;
+import com.neusoft.ht.fee.model.HomeModel;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -16,7 +16,7 @@ public class HomeComplainModel implements Serializable{
 
 	private Integer complainNo;
 
-    private Home home;
+    private HomeModel home;
 
     private ComplainType complainType;
 
@@ -66,11 +66,11 @@ public class HomeComplainModel implements Serializable{
         this.complainNo = complainNo;
     }
 
-    public Home getHome() {
+    public HomeModel getHome() {
         return home;
     }
 
-    public void setHome(Home home) {
+    public void setHome(HomeModel home) {
         this.home = home;
     }
 
