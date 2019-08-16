@@ -1,18 +1,16 @@
 /**
- * 用户前端主管理JS 模块：login 业务对象:所有用户 作者:马佳国
+ * 住宅投诉管理前端主管理JS 模块：complain 业务对象:所有住宅投诉
+ *  作者:方俊坤
  * 
  */
 
 $(function(){
-	var uuserid=null;
-	var upassword=null;
-	var uname=null;
 	// 设置系统页面标题
-	$("span#mainpagetille").html("投诉管理");
+	$("span#mainpagetille").html("住宅投诉管理");
 	// 设置日期的格式和选择
 	
-	// 显示员工列表
-	$("table#ComplainTypeGrid").jqGrid({
+	// 显示住宅投诉列表
+	$("table#homeComplainTypeGrid").jqGrid({
 		url: '/homecomplain/list',
 		datatype: "json",
 		colModel: [
@@ -51,34 +49,34 @@ $(function(){
 		      total: "pageCount", 
 		      records: "count", 
 		      repeatitems: true, 
-		      id: "typeNo"},
-		pager: "#ComplainTypePager"
+		      id: "complainNo"},
+		pager: "#homeComplainTypePager"
 		
 	});
 	
 	// 点击增加链接处理
-	$("button#add").off().on("click",function(event){
+	$("button#homeComplainAdd").off().on("click",function(event){
 		event.preventDefault();
-		$("div#ComplainTypeDialogArea").load("complain/ComplainType/add.html",function(){
-			$("div#ComplainTypeDialogArea").dialog({
-				title:"类型名称",
+		$("div#homeComplainTypeDialogArea").load("complain/homecomplain/add.html",function(){
+			$("div#homeComplainTypeDialogArea").dialog({
+				title:"住宅投诉记录添加",
 				width:600
 			});
 			$("form#addForm").ajaxForm(function(result){
-				$("div#ComplainTypeDialogArea").dialog("close");
-				$("div#ComplainTypeDialogArea").dialog("destroy");
-				$("div#ComplainTypeDialogArea").html("");
+				$("div#homeComplainTypeDialogArea").dialog("close");
+				$("div#homeComplainTypeDialogArea").dialog("destroy");
+				$("div#homeComplainTypeDialogArea").html("");
 				if(result.status==="OK"){
 					alert(result.message);
-					$("table#ComplainTypeGrid").trigger("reloadGrid");
+					$("table#homeComplainTypeGrid").trigger("reloadGrid");
 				}
 			})
 			
 			// 点击取消
 			$("input[value='取消']").on("click",function(event){
-				$("div#ComplainTypeDialogArea").dialog("close");
-				$("div#ComplainTypeDialogArea").dialog("destroy");
-				$("div#ComplainTypeDialogArea").html("");
+				$("div#homeComplainTypeDialogArea").dialog("close");
+				$("div#homeComplainTypeDialogArea").dialog("destroy");
+				$("div#homeComplainTypeDialogArea").html("");
 			});
 		});
 	});
