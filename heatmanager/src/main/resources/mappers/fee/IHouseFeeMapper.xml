@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.neusoft.ht.fee.mapper.IHouseFeeMapper">
+	<!-- 增加 -->
+	<!-- public void insert(HouseFeeModel record); -->
+	<insert id="insert">
+		insert into
+		HT_PublicHouseFee(FeeNo,HouseNo,HeatingYear,HeatArea,AgreeFee,
+		ActualFee,DebtFee,FeeDesc,FeeStatus,heatingdays)
+		values(#{feeNo},#{htHouse.houseNo},#{heatingPrice.heatingYear},#{heatArea},#{agreeFee},#{actualFee},
+		#{debtFee},#{feeDesc},#{feeStatus},#{heatingDays})
+	</insert>
+
+	<!-- 删除 -->
+	<!-- public void deleteByPrimaryKey(int recordNo); -->
+	<delete id="deleteByPrimaryKey">
+		delete from HT_PublicHouseFee where
+		FeeNo=#{feeNo}
+	</delete>
+
+	<!-- 修改 -->
+	<!-- public void updateByPrimaryKey(HouseFeeModel record); -->
+	<update id="updateByPrimaryKey">
+		update HT_PublicHouseFee
+		set
+		HouseNo=#{htHouse.houseNo},HeatingYear=#{heatingPrice.heatingYear},
+		HeatArea=#{heatArea},AgreeFee=#{agreeFee},ActualFee=#{actualFee},
+		DebtFee=#{debtFee},FeeDesc=#{feeDesc},FeeStatus=#{feeStatus}),heatingdays=#{heatingDays}
+		where FeeNo=#{feeNo}
+	</update>
+
+	<resultMap type="com.neusoft.ht.fee.model.HouseFeeModel"
+		id="selectMap">
+		<id property="feeNo" column="FeeNo" />
+		<result property="htHouse.houseNo" column="HouseNo" />
+		<result property="heatingPrice.heatingYear"
+			column="HeatingYear" />
+		<result property="heatArea" column="HeatArea" />
+		<result property="agreeFee" column="AgreeFee" />
+		<result property="actualFee" column="ActualFee" />
+		<result property="debtFee" column="DebtFee" />
+		<result property="feeDesc" column="FeeDesc" />
+		<result property="feeStatus" column="FeeStatus" />
+		<result property="heatingDays" column="heatingdays" />
+	</resultMap>
+
+	<!-- 查看一条记录 -->
+	<!-- public HouseFeeModel selectByPrimaryKey(int recordNo); -->
+	<select id="selectByPrimaryKey" resultMap="selectMap">
+		select
+		HouseNo,HeatingYear,HeatArea,AgreeFee,
+		ActualFee,DebtFee,FeeDesc,FeeStatus,heatingdays from
+		HT_PublicHouseFee
+		where FeeNo = #{feeNo}
+	</select>
+
+	<!-- 查看所有记录 -->
+	<!-- public List<HouseFeeModel> selectByAll(); -->
+	<select id="selectByAll" resultMap="selectMap">
+		select
+		FeeNo,HouseNo,HeatingYear,HeatArea,AgreeFee,
+		ActualFee,DebtFee,FeeDesc,FeeStatus,heatingdays from
+		HT_PublicHouseFee
+	</select>
+	<!-- 查询户型表的个数 -->
+	<!-- public int getCountByAll() throws Exception; -->
+	<select id="getCountByAll" resultType="int">
+		select IFNULL(count(FeeNo),0) from HT_PublicHouseFee
+	</select>
+	<!-- 分页查询 -->
+	<!-- public List<HouseType> selectAllWithPage(@Param("start") int star,@Param("end") 
+		int end) throws Exception; -->
+	<select id="selectAllWithPage" resultMap="selectMap">
+		select * from HT_PublicHouseFee limit #{start},#{end}
+	</select>
+
+</mapper>

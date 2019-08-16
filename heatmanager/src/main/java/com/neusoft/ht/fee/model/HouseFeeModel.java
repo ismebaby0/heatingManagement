@@ -2,7 +2,6 @@ package com.neusoft.ht.fee.model;
 
 import java.math.BigDecimal;
 
-import com.neusoft.ht.fee.service.impl.HeatingPriceServiceImpl;
 
 import lombok.Data;
 
@@ -15,8 +14,8 @@ public class HouseFeeModel {
 	 * @date:2019年8月12日 
 	 */
 	
-	private int  feeNo;
-	private HouseType houseType;
+	private int feeNo;
+	private HtHouseModel htHouse;
 	private HtHeatingPriceModel heatingPrice;
 	private BigDecimal heatArea;
 	private BigDecimal agreeFee;
@@ -25,12 +24,18 @@ public class HouseFeeModel {
 	private String feeDesc;
 	private String feeStatus;
 	private String heatingDays;
-	public HouseFeeModel(int feeNo, HouseType houseType, HtHeatingPriceModel heatingPrice, BigDecimal heatArea,
+	
+	public HouseFeeModel() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	public HouseFeeModel(int feeNo, HtHouseModel htHouse, HtHeatingPriceModel heatingPrice, BigDecimal heatArea,
 			BigDecimal agreeFee, BigDecimal actualFee, BigDecimal debtFee, String feeDesc, String feeStatus,
 			String heatingDays) {
 		super();
 		this.feeNo = feeNo;
-		this.houseType = houseType;
+		this.htHouse = htHouse;
 		this.heatingPrice = heatingPrice;
 		this.heatArea = heatArea;
 		this.agreeFee = agreeFee;
@@ -40,13 +45,10 @@ public class HouseFeeModel {
 		this.feeStatus = feeStatus;
 		this.heatingDays = heatingDays;
 	}
-	public HouseFeeModel() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+
 	@Override
 	public String toString() {
-		return "HouseFeeModel [feeNo=" + feeNo + ", houseType=" + houseType + ", heatingPrice=" + heatingPrice
+		return "HouseFeeModel [feeNo=" + feeNo + ", htHouse=" + htHouse + ", heatingPrice=" + heatingPrice
 				+ ", heatArea=" + heatArea + ", agreeFee=" + agreeFee + ", actualFee=" + actualFee + ", debtFee="
 				+ debtFee + ", feeDesc=" + feeDesc + ", feeStatus=" + feeStatus + ", heatingDays=" + heatingDays + "]";
 	}
