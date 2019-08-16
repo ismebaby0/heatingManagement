@@ -1,0 +1,45 @@
+	<script type="text/javascript" src="Function/main.js"></script>
+<!-- Main row -->
+	<div class="main-content" >
+		<div class="row small-spacing" >
+			<div class="col-xs-12">
+				<div class="box-content" style="background-color: white">
+				<div class="col-md-6"> <h3 class="box-title">功能管理</h3></div>
+				
+					<div style="text-align:right;margin-bottom:10px">
+						<a type="button" id="EmployeeAddLink" class="btn btn-primary">添加</a>
+						<a type="button" class="btn btn-success">删除</a>
+						<a type="button" class="btn btn-danger">修改</a>
+					</div>
+					<div>
+						<form class="form-inline" role="form" style="text-align:right;margin-bottom:5px" >
+				 			<div class="form-group">
+				    			<label  for="name">姓名</label>
+				   				<input type="text" id="uname" class="form-control">
+				  			</div>
+				  			<div class="form-group">
+				    			<label  for="name">账号</label>
+								<input type="text" id="uuserid" class="form-control">
+				  			</div>
+				 			<div class="form-group">
+				 				<a href="#" class="btn btn-default" id="EmployeeSearchButton">检索</a>
+				  			</div>
+						</form>
+					</div>
+				
+					<!-- /.box-header -->
+				 <div >
+				 <!-- /.box-body -->
+     		 <div class="box-body">
+        		<table id="EmployeeGrid"></table>
+    			<div id="EmployeeGridPager" style="text-align:right"></div>
+       
+      		</div>
+					</div>
+				</div>
+			<div id="EmployeeDialog"></div>
+			</div>
+			</div>
+				<!-- /.box-content -->
+			<!-- /.col-xs-12 -->
+		</div>
