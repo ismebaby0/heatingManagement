@@ -42,16 +42,20 @@
 			jdbcType="VARCHAR" />
 	</resultMap>
 	<resultMap id="BaseResultMapWithComplainType"
-		type="com.neusoft.ht.complain.model.HomeComplainModel">
-		<association property="home"  resultMap="com.neusoft.ht.fee.mapper.IHomeMapper.resultOfHome"/>
+		type="com.neusoft.ht.complain.model.HomeComplainModel"
+		extends="BaseResultMap">
+		<association property="home"
+			resultMap="com.neusoft.ht.fee.mapper.IHomeMapper.resultOfHome" />
 		<association property="complainType"
 			resultMap="com.neusoft.ht.complain.mapper.IComplainTypeMapper.BaseResultMap" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		ComplainNo, ComplainTitle, ComplainContent, RequestContent, ComplainDate,
+		ComplainNo, ComplainTitle, ComplainContent, RequestContent,
+		ComplainDate,
 		ContactPerson, Tel, Mobile, Mail, QQ, ServiceStartDate,
 		ServiceEndDate, ServiceContent,
-		ServicePerson, FeedBackDate, HomeComment, AssuranceDate, AssuranceFee,
+		ServicePerson, FeedBackDate,
+		HomeComment, AssuranceDate, AssuranceFee,
 		AssurancePayDate,
 		ComplainStatus
 	</sql>
@@ -64,47 +68,69 @@
 		where ComplainNo = #{complainNo,jdbcType=INTEGER}
 	</select>
 
-	<select id="selectByAll" resultMap="BaseResultMapWithComplainType">
+	<select id="selectByAll"
+		resultMap="BaseResultMapWithComplainType">
 		select Homecomplain.*,Home.*,ComplainType.*
-		from HT_Homecomplain Homecomplain
-	     left join HT_complainType ComplainType  on ComplainType.TYPENO = Homecomplain.TYPENO
-	     left join HT_HOME Home  on Home.HomeNo = Homecomplain.HomeNo 
+		from
+		HT_Homecomplain Homecomplain
+		left join HT_complainType ComplainType on
+		ComplainType.TYPENO =
+		Homecomplain.TYPENO
+		left join HT_HOME Home on
+		Home.HomeNo = Homecomplain.HomeNo
 	</select>
-	<select id="selectListAllWithPages" resultMap="BaseResultMapWithComplainType">
+	<select id="selectListAllWithPages"
+		resultMap="BaseResultMapWithComplainType">
 		select Homecomplain.*,Home.*,ComplainType.*
-		from HT_Homecomplain Homecomplain
-	     left join HT_complainType ComplainType  on ComplainType.TYPENO = Homecomplain.TYPENO
-	     left join HT_HOME Home  on Home.HomeNo = Homecomplain.HomeNo 
+		from
+		HT_Homecomplain Homecomplain
+		left join HT_complainType ComplainType on
+		ComplainType.TYPENO =
+		Homecomplain.TYPENO
+		left join HT_HOME Home on
+		Home.HomeNo = Homecomplain.HomeNo
 		limit #{start},#{rows}
 	</select>
 	<select id="selectTotalCount" resultType="int">
-		select IFNULL(count(1),0) from HT_complainType
+		select
+		IFNULL(count(1),0) from HT_complainType
 	</select>
 	<delete id="deleteByPrimaryKey"
 		parameterType="java.lang.Integer">
 		delete from HT_Homecomplain
-		where ComplainNo = #{complainNo,jdbcType=INTEGER}
+		where ComplainNo =
+		#{complainNo,jdbcType=INTEGER}
 	</delete>
-	<!-- HomeNo, TYPENO, #{home,jdbcType=INTEGER}, #{complainType,jdbcType=INTEGER}, -->
+	<!-- HomeNo, TYPENO, -->
 	<insert id="insert"
 		parameterType="com.neusoft.ht.complain.model.HomeComplainModel">
 		insert into HT_Homecomplain (ComplainNo,
+		HOMENO,TYPENO
 		ComplainTitle, ComplainContent, RequestContent,
-		ComplainDate, ContactPerson, Tel,
+		ComplainDate,
+		ContactPerson, Tel,
 		Mobile, Mail, QQ, ServiceStartDate,
-		ServiceEndDate, ServiceContent, ServicePerson,
-		FeedBackDate, HomeComment, AssuranceDate,
+		ServiceEndDate,
+		ServiceContent, ServicePerson,
+		FeedBackDate, HomeComment,
+		AssuranceDate,
 		AssuranceFee, AssurancePayDate, ComplainStatus
 		)
-		values (#{complainNo,jdbcType=INTEGER},
-		#{complainTitle,jdbcType=VARCHAR}, #{complainContent,jdbcType=VARCHAR},
+		values
+		(#{complainNo,jdbcType=INTEGER},
+		#{home.homeNo,jdbcType=INTEGER},
+		#{complainType.typeNo,jdbcType=INTEGER},
+		#{complainTitle,jdbcType=VARCHAR},
+		#{complainContent,jdbcType=VARCHAR},
 		#{requestContent,jdbcType=VARCHAR},
-		#{complainDate,jdbcType=DATE}, #{contactPerson,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR},
+		#{complainDate,jdbcType=DATE},
+		#{contactPerson,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR},
 		#{mobile,jdbcType=VARCHAR}, #{mail,jdbcType=VARCHAR},
 		#{qq,jdbcType=VARCHAR}, #{serviceStartDate,jdbcType=DATE},
 		#{serviceEndDate,jdbcType=DATE}, #{serviceContent,jdbcType=VARCHAR},
 		#{servicePerson,jdbcType=VARCHAR},
-		#{feedBackDate,jdbcType=DATE}, #{homeComment,jdbcType=VARCHAR}, #{assuranceDate,jdbcType=DATE},
+		#{feedBackDate,jdbcType=DATE},
+		#{homeComment,jdbcType=VARCHAR}, #{assuranceDate,jdbcType=DATE},
 		#{assuranceFee,jdbcType=DECIMAL}, #{assurancePayDate,jdbcType=DATE},
 		#{complainStatus,jdbcType=VARCHAR}
 		)
@@ -116,8 +142,12 @@
 			<if test="complainNo != null">
 				ComplainNo,
 			</if>
-			<!--if test="home != null" > HomeNo, </if> <if test="complainType != null" 
-				> TYPENO, </if -->
+			<if test="home != null">
+				HomeNo,
+			</if>
+			<if test="complainType != null">
+				TYPENO,
+			</if>
 			<if test="complainTitle != null">
 				ComplainTitle,
 			</if>
@@ -180,8 +210,12 @@
 			<if test="complainNo != null">
 				#{complainNo,jdbcType=INTEGER},
 			</if>
-			<!-- <if test="home != null" > #{home,jdbcType=INTEGER}, </if> <if test="complainType 
-				!= null" > #{complainType,jdbcType=INTEGER}, </if> -->
+			<if test="home != null">
+				#{home.homeNo,jdbcType=INTEGER},
+			</if>
+			<if test="complainType != null">
+				#{complainType.typeNo,jdbcType=INTEGER},
+			</if>
 			<if test="complainTitle != null">
 				#{complainTitle,jdbcType=VARCHAR},
 			</if>
@@ -245,9 +279,11 @@
 		parameterType="com.neusoft.ht.complain.model.HomeComplainModel">
 		update HT_Homecomplain
 		<set>
-			<!-- <if test="home != null" > HomeNo = #{home,jdbcType=INTEGER}, </if> 
-				<if test="complainType != null" > TYPENO = #{complainType,jdbcType=INTEGER}, 
-				</if> -->
+			<if test="home != null"> HomeNo = #{home.homeNo,jdbcType=INTEGER},
+			</if>
+			<if test="complainType != null"> TYPENO =
+				#{complainType.typeNo,jdbcType=INTEGER},
+			</if>
 			<if test="complainTitle != null">
 				ComplainTitle = #{complainTitle,jdbcType=VARCHAR},
 			</if>
@@ -311,26 +347,44 @@
 	<update id="updateByPrimaryKey"
 		parameterType="com.neusoft.ht.complain.model.HomeComplainModel">
 		update HT_Homecomplain
-		set <!-- HomeNo = #{home,jdbcType=INTEGER}, TYPENO = #{complainType,jdbcType=INTEGER}, -->
-		ComplainTitle = #{complainTitle,jdbcType=VARCHAR},
-		ComplainContent = #{complainContent,jdbcType=VARCHAR},
-		RequestContent = #{requestContent,jdbcType=VARCHAR},
-		ComplainDate = #{complainDate,jdbcType=DATE},
-		ContactPerson = #{contactPerson,jdbcType=VARCHAR},
+		set HomeNo =
+		#{home.homeNo,jdbcType=INTEGER},
+		TYPENO= #{complainType.typeNo,jdbcType=INTEGER},
+		ComplainTitle =
+		#{complainTitle,jdbcType=VARCHAR},
+		ComplainContent =
+		#{complainContent,jdbcType=VARCHAR},
+		RequestContent =
+		#{requestContent,jdbcType=VARCHAR},
+		ComplainDate =
+		#{complainDate,jdbcType=DATE},
+		ContactPerson =
+		#{contactPerson,jdbcType=VARCHAR},
 		Tel = #{tel,jdbcType=VARCHAR},
 		Mobile = #{mobile,jdbcType=VARCHAR},
 		Mail = #{mail,jdbcType=VARCHAR},
 		QQ = #{qq,jdbcType=VARCHAR},
-		ServiceStartDate = #{serviceStartDate,jdbcType=DATE},
-		ServiceEndDate = #{serviceEndDate,jdbcType=DATE},
-		ServiceContent = #{serviceContent,jdbcType=VARCHAR},
-		ServicePerson = #{servicePerson,jdbcType=VARCHAR},
-		FeedBackDate = #{feedBackDate,jdbcType=DATE},
-		HomeComment = #{homeComment,jdbcType=VARCHAR},
-		AssuranceDate = #{assuranceDate,jdbcType=DATE},
-		AssuranceFee = #{assuranceFee,jdbcType=DECIMAL},
-		AssurancePayDate = #{assurancePayDate,jdbcType=DATE},
-		ComplainStatus = #{complainStatus,jdbcType=VARCHAR}
-		where ComplainNo = #{complainNo,jdbcType=INTEGER}
+		ServiceStartDate =
+		#{serviceStartDate,jdbcType=DATE},
+		ServiceEndDate =
+		#{serviceEndDate,jdbcType=DATE},
+		ServiceContent =
+		#{serviceContent,jdbcType=VARCHAR},
+		ServicePerson =
+		#{servicePerson,jdbcType=VARCHAR},
+		FeedBackDate =
+		#{feedBackDate,jdbcType=DATE},
+		HomeComment =
+		#{homeComment,jdbcType=VARCHAR},
+		AssuranceDate =
+		#{assuranceDate,jdbcType=DATE},
+		AssuranceFee =
+		#{assuranceFee,jdbcType=DECIMAL},
+		AssurancePayDate =
+		#{assurancePayDate,jdbcType=DATE},
+		ComplainStatus =
+		#{complainStatus,jdbcType=VARCHAR}
+		where ComplainNo =
+		#{complainNo,jdbcType=INTEGER}
 	</update>
 </mapper>
