@@ -38,8 +38,9 @@ $(function(){
 	
 	// 点击增加链接处理
 	$("button#add").off().on("click",function(event){
-		event.preventDefault();
-		$("div#ComplainTypeDialogArea").load("complain/ComplainType/add.html",function(){
+//		if($("div#homeComplainTypeDialogArea").text()!=="")
+//			return;
+		$("div#ComplainTypeDialogArea").off().load("complain/ComplainType/add.html",function(){
 			$("div#ComplainTypeDialogArea").dialog({
 				title:"类型名称",
 				width:600

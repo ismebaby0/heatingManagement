@@ -6,9 +6,10 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 /**
- * 居民投诉信息Model
- *  作者: 方俊坤
+ * 居民投诉信息Model 作者: 方俊坤
  */
 public class HomeComplainModel implements Serializable {
 
@@ -26,6 +27,7 @@ public class HomeComplainModel implements Serializable {
 
 	private String requestContent;
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date complainDate;
 
 	private String contactPerson;
@@ -38,22 +40,27 @@ public class HomeComplainModel implements Serializable {
 
 	private String qq;
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date serviceStartDate;
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date serviceEndDate;
 
 	private String serviceContent;
 
 	private String servicePerson;
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date feedBackDate;
 
 	private String homeComment;
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date assuranceDate;
 
 	private BigDecimal assuranceFee = new BigDecimal(0);
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date assurancePayDate;
 
 	private String complainStatus = "未处理";

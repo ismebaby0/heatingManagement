@@ -32,7 +32,7 @@
 			HT_HeadtingPrice(HeatingYear,HomePrice,PublicHousePrice,Heatingdays,
 			HeatingMemo,PriceFile,PriceFileName,PriceFileContentType)
 			values(#{heatingYear},#{homePrice},#{publicHousePrice},#{heatingdays},
-			#{heatingMemo},null,#{priceFile},#{priceFileName},#{priceFileContentType})
+			#{heatingMemo},null,#{priceFileName},#{priceFileContentType})
 		</insert>
 
 		<!-- public void deleteByPrimaryKey(String heatingYear); -->
