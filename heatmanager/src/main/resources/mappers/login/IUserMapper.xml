@@ -39,7 +39,7 @@
   select * from HT_User
   <where>
      <if test="uuserid!='' and uuserid!=null">
-      and UUSERID=#{iuser.uuserid}
+      and UUSERID=#{uuserid}
      </if>
      <if test="uname!=null and uname!='' ">
      and UName=#{uname}

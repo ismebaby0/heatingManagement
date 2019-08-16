@@ -42,7 +42,7 @@ $(function(){
 //	更新jQGrid的列表显示
 	function reloadEmployeeList()
 	{
-		$("table#EmployeeGrid").jqGrid('setGridParam',{postData:{"iuser.uuserid":uuserid,uname:uname}}).trigger("reloadGrid");
+		$("table#EmployeeGrid").jqGrid('setGridParam',{postData:{id:uuserid,name:uname}}).trigger("reloadGrid");
 		
 	}
 	
@@ -50,7 +50,6 @@ $(function(){
 	$("a#EmployeeSearchButton").on("click",function(){
 		uuserid=$("input#uuserid").val();
 		uname=$("input#uname").val();
-		alert(uname)
 		reloadEmployeeList();
 	});
 	
