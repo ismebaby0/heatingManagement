@@ -7,7 +7,7 @@
  */
 
 $(function(){
-	var uuserid="lzc";
+	var uuserid="";
 	var upassword=null;
 	var uname=null;
 	//设置系统页面标题
@@ -35,14 +35,14 @@ $(function(){
 		      total: "pageCount", 
 		      records: "count", 
 		      repeatitems: true, 
-		      id: "id"},
+		      id: "iuser.uuserid"},
 		pager: "#EmployeeGridPager"
 		
 	});
 //	更新jQGrid的列表显示
 	function reloadEmployeeList()
 	{
-		$("table#EmployeeGrid").jqGrid('setGridParam',{postData:{id:uuserid,name:uname}}).trigger("reloadGrid");
+		$("table#EmployeeGrid").jqGrid('setGridParam',{postData:{"iuser.uuserid":uuserid,uname:uname}}).trigger("reloadGrid");
 		
 	}
 	
@@ -64,38 +64,38 @@ $(function(){
 			//验证员工提交数据
 			$("form#EmployeeAddForm").validate({
 				  rules: {
-				    id: {
+					  "iuser.uuserid":{
 				      required: true,
 //				      remote: host+"employee/checkidexist"
 				      
 				    },
-				    password:{
+				    upassword:{
 				    	required: true
 				    },
-				    age:{
+				    "iuser.age":{
 				    	number: true,
 				    	min:18,
 				    	max:60,
 				    	range: [18, 60]
 				    },
-				    name:{
+				    uname:{
 				    	required:true
 				    },
-				    mobile:{
+				    "iuser.mobile":{
 				    	required:true,
 				    	mobile:true
 				    	
 				    }
 				  },
 				  messages:{
-					id: {
+					  "iuser.uuserid": {
 					      required: "账号为空"
 				      
 					    },
-					name:{
+					    uname:{
 					    	required:"用户名为空"
 					},
-					age:{
+					"iuser.age":{
 						number: "年龄必须是数值",
 				    	range:"年龄需要在18和60之间"
 					}
@@ -112,9 +112,9 @@ $(function(){
 		            title: '部门操作信息',
 		            message:result.message
 		        });
-				$("div#DepartmentDialogArea" ).dialog( "close" );
-				$("div#DepartmentDialogArea" ).dialog( "destroy" );
-				$("div#DepartmentDialogArea").html("");
+				$("div#EmployeeDialog").dialog("close");
+				$("div#EmployeeDialog").dialog("destroy")
+				$("div#EmployeeDialog").html("");
 				
 			});
 			

@@ -14,11 +14,13 @@ import com.neusoft.ht.login.model.AdminUserValue;
  *   作者: 马佳国
  */
 @Service("UserBusiness")
+@Transactional
 public class IUserBusinessImpl implements IUserBusiness {
 
 	@Autowired
 	private IUserMapper userDao=null;
 	@Override
+	
 	public void create(AdminUserValue user) throws Exception {
 		// TODO Auto-generated method stub
 		userDao.create(user);
