@@ -20,8 +20,15 @@ public interface IComplainTypeService {
 
 	List<ComplainType> getByAll() throws Exception;
 
+	// 取得列表带分页
+	List<ComplainType> getListAllWithPages(int rows, int pages) throws Exception;
+	//取得数据个数
+	int getTotalCount() throws Exception;
+
 	void updateByNoSelective(ComplainType record) throws Exception;
 
 	void updateByNo(ComplainType record) throws Exception;
+
+	int getPageCount(int rows) throws Exception;
 
 }

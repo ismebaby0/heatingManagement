@@ -57,4 +57,31 @@ public class ComplainTypeServiceImpl implements IComplainTypeService {
 		complainType.updateByPrimaryKey(record);
 	}
 
+	@Transactional(readOnly = true)
+	@Override
+	public List<ComplainType> getListAllWithPages(int rows, int pages) throws Exception {
+		return complainType.selectListAllWithPages(rows * (pages - 1), rows);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public int getTotalCount() throws Exception {
+		return complainType.selectTotalCount();
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public int getPageCount(int rows) throws Exception {
+		int pageCount=0;
+		int count=complainType.selectTotalCount();
+		if(count%rows==0) {
+			pageCount=count/rows;
+		}
+		else {
+			pageCount=(count/rows)+1;
+		}
+		return pageCount;
+	}
+
+
 }
