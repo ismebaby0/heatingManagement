@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.neusoft.ht.SystemSafety.mapper.IuseInfoMapper;
 import com.neusoft.ht.login.Service.IUserBusiness;
 import com.neusoft.ht.login.mapper.IUserMapper;
 import com.neusoft.ht.login.model.AdminUserValue;
@@ -19,6 +20,8 @@ public class IUserBusinessImpl implements IUserBusiness {
 
 	@Autowired
 	private IUserMapper userDao=null;
+	@Autowired
+	private IuseInfoMapper userinfo=null;
 	@Override
 	
 	public void create(AdminUserValue user) throws Exception {
@@ -34,6 +37,7 @@ public class IUserBusinessImpl implements IUserBusiness {
 	public void delete(String id) throws Exception {
 		// TODO Auto-generated method stub
 		userDao.delete(id);
+		userinfo.delete(id);
 
 	}
 

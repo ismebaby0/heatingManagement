@@ -25,3 +25,4 @@ public interface IUserMapper {
   public void createUserInfo(AdminUserValue user) throws Exception;
   public int getTotalCount() throws Exception;
 }
+
