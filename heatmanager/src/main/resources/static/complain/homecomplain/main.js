@@ -56,8 +56,20 @@ $(function(){
 	
 	// 点击增加链接处理
 	$("button#homeComplainAdd").off().on("click",function(event){
-		event.preventDefault();
-		$("div#homeComplainTypeDialogArea").load("complain/homecomplain/add.html",function(){
+//		if($("div#homeComplainTypeDialogArea").text()!=="")
+//			return;
+		$("div#homeComplainTypeDialogArea").off().load("complain/homecomplain/add.html",function(){
+			$.getJSON("home/getAllHome",function(data){
+				var datalisthtml="";
+				data.list.forEach(e=>datalisthtml +="<option value='"+e.homeNo+"'>"+e.homeName+"</option>"); 
+				$("datalist#homeNoList").append(datalisthtml);
+			});
+
+			$.getJSON("complaintype/list",function(data){
+				var datalisthtml="";
+				data.list.forEach(e=>datalisthtml +="<option value='"+e.typeNo+"'>"+e.typeName+"</option>"); 
+				$("datalist#typeNoList").append(datalisthtml);
+			});
 			$("div#homeComplainTypeDialogArea").dialog({
 				title:"住宅投诉记录添加",
 				width:600
