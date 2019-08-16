@@ -22,6 +22,7 @@ public class IUserBusinessImpl implements IUserBusiness {
 	public void create(AdminUserValue user) throws Exception {
 		// TODO Auto-generated method stub
 		userDao.create(user);
+		userDao.createUserInfo(user);
 
 	}
 

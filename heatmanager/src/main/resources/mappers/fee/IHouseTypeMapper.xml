@@ -25,7 +25,7 @@
 	//根据查询
 	public HouseType selectByNo(int typeNo);
 	 -->
-	 <insert id = "addHouseType">
+	 <insert id = "addHouseType" flushCache="true">
 	 	insert into HT_HOUSETYPE (typeName) values (#{typeName})
 	 </insert>
 	 <delete id = "deleteHouseType">
@@ -41,7 +41,7 @@
 	 </select>
 	 
 	 <!-- 分页查询 -->
-	 <select id="selectAllWithPage" resultMap = "selectHouseType">
+	 <select id="selectAllWithPage" resultMap = "selectHouseType" >
 	 	select * from HT_HOUSETYPE limit #{start},#{end}
 	 </select>
 

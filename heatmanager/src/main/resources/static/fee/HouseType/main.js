@@ -47,9 +47,14 @@ $(function(){
 				width:500
 			});
 			$("form#AddForm").ajaxForm(function(result){
+				$("div#DepartmentDialogArea").dialog("close");
+				$("div#DepartmentDialogArea").dialog("destroy");
+				$("div#DepartmentDialogArea").html("");
 				if(result.status=="ok"){
 					alert(result.message);
+					$("table#EmployeeGrid").trigger("reloadGrid");
 				}
+				
 			})
 			
 			//点击取消

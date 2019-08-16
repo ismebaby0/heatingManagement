@@ -1,5 +1,6 @@
 package com.neusoft.ht.login.mapper;
 
+import com.neusoft.ht.SystemSafety.model.UserInfo;
 /*
  *   用户信息 mapper
  *   作者: 马佳国
@@ -21,6 +22,6 @@ public interface IUserMapper {
   public List<AdminUserValue> getListAllWithPages(@Param("uuserid") String id,@Param("uname") String name,@Param("start") int start,@Param("rows") int rows) throws Exception;
   
   //取得所有数据的个数
-  
+  public void createUserInfo(AdminUserValue user) throws Exception;
   public int getTotalCount() throws Exception;
 }

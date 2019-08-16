@@ -12,8 +12,12 @@
   </resultMap>
  <insert id="create">
    insert into HT_User values (#{iuser.uuserid},#{upassword},#{uname});
+ </insert>
+ 
+ <insert id="createUserInfo">
    insert into HT_UserInfo values (#{iuser.uuserid},#{iuser.sex},#{iuser.age},#{iuser.photo},#{iuser.photoFileName},#{iuser.photoContentType},#{iuser.mobile},#{iuser.photoContentType})
  </insert>
+ 
  
   <update id="update">
    update HT_User set UserPassword=#{upassword},UserName=#{uname} where UUSERID=#{iuser.uuserid}
