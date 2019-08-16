@@ -15,7 +15,7 @@
  </insert>
  
  <insert id="createUserInfo">
-   insert into HT_UserInfo values (#{iuser.uuserid},#{iuser.sex},#{iuser.age},#{iuser.photo},#{iuser.photoFileName},#{iuser.photoContentType},#{iuser.mobile},#{iuser.photoContentType})
+   insert into HT_UserInfo values (#{iuser.uuserid},#{iuser.sex},#{iuser.age},#{iuser.photo},#{iuser.photoFileName},#{iuser.photoContentType},#{iuser.tel},#{iuser.mobile})
  </insert>
  
  
