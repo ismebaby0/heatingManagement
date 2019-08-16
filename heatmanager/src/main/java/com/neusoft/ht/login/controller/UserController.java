@@ -3,6 +3,10 @@ package com.neusoft.ht.login.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +22,7 @@ import com.neusoft.ht.message.ResultMessage;
 public class UserController {
    @Autowired
 	private IUserBusiness user=null;
+   @Autowired
     private IUserInfoService user1=null;
 	@RequestMapping("/list")
 	List<AdminUserValue> getList() throws Exception{
@@ -48,5 +53,22 @@ public class UserController {
 		}
 		return new ResultMessage<AdminUserValue>("OK","增加员工成功");
 	}
+	
+	
+	
+	  @RequestMapping("/image") 
+	  public ResponseEntity<byte[]> getImage() throws Exception{ 
+      UserInfo um=user1.getListWithId("799");
+      System.out.println(um);
+      byte[] bytes=um.getPhoto();
+	  System.out.println("开始下载"); 
+	  String contentType=um.getPhotoContentType();
+	  MultiValueMap<String, String> mult=new LinkedMultiValueMap<String, String>();
+	  mult.add("Content-Type", contentType);
+	  ResponseEntity<byte[]> resultEntity=new ResponseEntity<byte[]>(bytes,mult,HttpStatus.ACCEPTED);
+	  return resultEntity;
+	  }
+	 
+	 
 	
 }
