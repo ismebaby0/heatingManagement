@@ -3,8 +3,10 @@ package com.neusoft.ht.fee.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.neusoft.ht.complain.model.ComplainType;
+import com.neusoft.ht.fee.model.HouseType;
 import com.neusoft.ht.fee.model.HtHeatingPriceModel;
 
 /**
@@ -30,4 +32,8 @@ public interface IHtHeatingPriceMapper {
 	// 查看所有记录
 	public List<HtHeatingPriceModel> selectByAll();
 
+	//查询户型表的个数
+	public int getCountByAll() throws Exception;
+	//分页查询
+	public List<HtHeatingPriceModel> selectAllWithPage(@Param("start") int star,@Param("end") int end) throws Exception;
 }

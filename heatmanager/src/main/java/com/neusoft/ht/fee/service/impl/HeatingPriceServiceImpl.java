@@ -13,7 +13,7 @@ import com.neusoft.ht.fee.service.IHeatingPriceService;
 public class HeatingPriceServiceImpl implements IHeatingPriceService {
 	@Autowired
 	private IHtHeatingPriceMapper hhp_mapper;
-	
+
 	@Override
 	public HtHeatingPriceModel selectByHeatingYear(String heatingYear) throws Exception {
 		return hhp_mapper.selectByPrimaryKey(heatingYear);
@@ -37,6 +37,31 @@ public class HeatingPriceServiceImpl implements IHeatingPriceService {
 	@Override
 	public void updateHeatingPrice(HtHeatingPriceModel record) throws Exception {
 		hhp_mapper.updateByPrimaryKey(record);
+	}
+
+	//查询全部户型个数
+	@Override
+	public int getCountAll() throws Exception {
+		return hhp_mapper.getCountByAll();
+	}
+
+	@Override
+	public int getCountPage(int rows) throws Exception {
+		int pageCount=0;
+		int count=this.getCountAll();
+		if(count%rows==0) {
+			pageCount=count/rows;
+		}
+		else {
+			pageCount=count/rows+1;
+		}
+		return pageCount;
+	}
+
+	// 分页查寻
+	@Override
+	public List<HtHeatingPriceModel> selectAllWithPage(int row, int page) throws Exception {
+		return hhp_mapper.selectAllWithPage(row*(page-1),page*row);
 	}
 
 }

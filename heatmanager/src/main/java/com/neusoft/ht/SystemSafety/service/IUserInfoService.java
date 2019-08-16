@@ -17,5 +17,5 @@ public interface IUserInfoService {
 	 
 	 public List<UserInfo> getListWithFunction() throws Exception;
 	 
-	 public UserInfo getListWithId() throws Exception;
+	 public UserInfo getListWithId(String id) throws Exception;
 }
