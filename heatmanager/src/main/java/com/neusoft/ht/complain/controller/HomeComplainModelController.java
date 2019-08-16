@@ -61,7 +61,7 @@ public class HomeComplainModelController {
 	@RequestMapping("/add")
 	public ResultMessage<HomeComplainModel> add(HomeComplainModel record) throws Exception {
 		HomeComplainModelService.insert(record);
-		ResultMessage<HomeComplainModel> result = new ResultMessage<>("OK", "删除成功");
+		ResultMessage<HomeComplainModel> result = new ResultMessage<>("OK", "添加成功");
 		return result;
 	}
 
@@ -69,7 +69,7 @@ public class HomeComplainModelController {
 	@RequestMapping("/modify")
 	public ResultMessage<HomeComplainModel> modify(HomeComplainModel record) throws Exception {
 		HomeComplainModelService.updateByNo(record);
-		ResultMessage<HomeComplainModel> result = new ResultMessage<>("OK", "删除成功");
+		ResultMessage<HomeComplainModel> result = new ResultMessage<>("OK", "修改成功");
 		return result;
 	}
 
