@@ -2,6 +2,7 @@ package com.neusoft.ht.complain.service;
 
 import java.util.List;
 
+import com.neusoft.ht.complain.model.ComplainType;
 import com.neusoft.ht.complain.model.HomeComplainModel;
 
 /*
@@ -19,6 +20,14 @@ public interface IHomeComplainModelService {
 	HomeComplainModel getByNo(Integer complainNo) throws Exception;
 
 	List<HomeComplainModel> getByAll() throws Exception;
+
+	// 取得列表带分页
+	List<HomeComplainModel> getListAllWithPages(int rows, int pages) throws Exception;
+
+	// 取得数据个数
+	int getTotalCount() throws Exception;
+
+	int getPageCount(int rows) throws Exception;
 
 	void updateByNoSelective(HomeComplainModel record) throws Exception;
 

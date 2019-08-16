@@ -31,7 +31,7 @@
 		<resultMap type="com.neusoft.ht.fee.model.HtHouseModel" id="selectMap">
 		<id property="houseNo" column="HOUSENO"/>
 		<result property="neighbourhood.hoodNo" column="HoodNo"/>
-		<result property="neighbourhood.hoodNo" column="HeatingECODE"/>
+		<result property="heatingCode" column="HeatingECODE"/>
 		<result property="name" column="HouseName"/>
 		<result property="houseCode" column="HOUSECODE"/>
 		<result property="building" column="Building"/>

@@ -20,28 +20,29 @@ $(function(){
 		url: '/house/getAll/page',
 		datatype: "json",
 		colModel: [
-			{ label: '公建序号', name: 'houseNo', width: 75 },
-			{ label: '小区编号', name: 'neighbourhood.hoodNo', width: 90 },
-			{ label: '供热编码', name: 'heatingCode', width: 90 },
-			{ label: '公建名称', name: 'name', width: 90 },
-			{ label: '公建编号', name: 'houseCode', width: 90 },
-			{ label: '建筑面积', name: 'building', width: 90 },
-			{ label: '地址', name: 'area', width: 90 },
-			{ label: '邮编', name: 'address', width: 90 },
-			{ label: '联系人姓名', name: 'postcode', width: 90 },
-			{ label: '电话', name: 'contactName', width: 90 },
-			{ label: '手机', name: 'tel', width: 90 },
-			{ label: 'Mail', name: 'mail', width: 90 },
-			{ label: 'QQ', name: 'qq', width: 90 },
-			{ label: '供热状态', name: 'heatingStatus', width: 90 },
-			{ label: '实际供热面积', name: 'heatingArea', width: 90 },
+			{ label: '公建序号', name: 'houseNo', width: 55 },
+			{ label: '小区编号', name: 'neighbourhood.hoodNo', width:55 },
+			{ label: '供热编码', name: 'heatingCode', width: 55 },
+			{ label: '公建名称', name: 'name', width: 55 },
+			{ label: '公建编号', name: 'houseCode', width: 55 },
+			{ label: '楼号', name: 'building', width: 30 },
+			{ label: '建筑面积', name: 'area', width: 55 },
+			{ label: '地址', name: 'address', width: 90 },
+			{ label: '邮编', name: 'postcode', width: 55 },
+			{ label: '联系人姓名', name: 'contactName', width: 70 },
+			{ label: '电话', name: 'tel', width: 55 },
+			{ label: '手机', name: 'mobile', width: 90 },
+			{ label: 'Mail', name: 'mail', width: 100 },
+			{ label: 'QQ', name: 'qq', width: 60 },
+			{ label: '供热状态', name: 'heatingStatus', width: 50 },
+			{ label: '实际供热面积', name: 'heatingArea', width: 80 },
 			],
 		styleUI : 'Bootstrap',
 		viewrecords: true, 
 		autowidth: true,
 		height: 400,
 		rowNum: 10,
-		rowList:[10,20,30],
+		rowList:[2,20,30],
 		jsonReader : { 
 		      root: "list", 
 		      page: "page", 
@@ -60,9 +61,13 @@ $(function(){
 				title:"添加公共建筑",
 				width:600
 			});
-			$("form#addForm").ajaxForm(function(result){
+			$("form#AddForm").ajaxForm(function(result){
+				$("div#DepartmentDialogArea").dialog("close");
+				$("div#DepartmentDialogArea").dialog("destroy");
+				$("div#DepartmentDialogArea").html("");
 				if(result.status=="ok"){
 					alert(result.message);
+					$("table#EmployeeGrid").trigger("reloadGrid");
 				}
 			})
 			

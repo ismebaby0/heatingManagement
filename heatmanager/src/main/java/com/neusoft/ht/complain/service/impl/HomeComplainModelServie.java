@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.neusoft.ht.complain.mapper.IHomeComplainModelMapper;
+import com.neusoft.ht.complain.model.ComplainType;
 import com.neusoft.ht.complain.model.HomeComplainModel;
 import com.neusoft.ht.complain.service.IHomeComplainModelService;
 
@@ -19,42 +20,68 @@ import com.neusoft.ht.complain.service.IHomeComplainModelService;
 public class HomeComplainModelServie implements IHomeComplainModelService {
 
 	@Autowired
-	private IHomeComplainModelMapper hcmm;
+	private IHomeComplainModelMapper homeComplainModelMapper;
 	@Override
 	public void delete(Integer complainNo) throws Exception {
-		hcmm.deleteByPrimaryKey(complainNo);
+		homeComplainModelMapper.deleteByPrimaryKey(complainNo);
 	}
 
 	@Override
 	public void insert(HomeComplainModel record) throws Exception {
-		hcmm.insert(record);
+		homeComplainModelMapper.insert(record);
 	}
 
 	@Override
 	public void insertSelective(HomeComplainModel record) throws Exception {
-		hcmm.insertSelective(record);
+		homeComplainModelMapper.insertSelective(record);
 	}
 
 	@Transactional(readOnly = true)
 	@Override
 	public HomeComplainModel getByNo(Integer complainNo) throws Exception {
-		return hcmm.selectByPrimaryKey(complainNo);
+		return homeComplainModelMapper.selectByPrimaryKey(complainNo);
 	}
 
 	@Transactional(readOnly = true)
 	@Override
 	public List<HomeComplainModel> getByAll() throws Exception {
-		return hcmm.selectByAll();
+		return homeComplainModelMapper.selectByAll();
 	}
 
 	@Override
 	public void updateByNoSelective(HomeComplainModel record) throws Exception {
-		hcmm.updateByPrimaryKey(record);
+		homeComplainModelMapper.updateByPrimaryKey(record);
 	}
 
 	@Override
 	public void updateByNo(HomeComplainModel record) throws Exception {
-		hcmm.updateByPrimaryKeySelective(record);
+		homeComplainModelMapper.updateByPrimaryKeySelective(record);
 	}
 
+
+	@Transactional(readOnly = true)
+	@Override
+	public List<HomeComplainModel> getListAllWithPages(int rows, int pages) throws Exception {
+		return homeComplainModelMapper.selectListAllWithPages(rows * (pages - 1), rows);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public int getTotalCount() throws Exception {
+		return homeComplainModelMapper.selectTotalCount();
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public int getPageCount(int rows) throws Exception {
+		int pageCount=0;
+		int count=homeComplainModelMapper.selectTotalCount();
+		if(count%rows==0) {
+			pageCount=count/rows;
+		}
+		else {
+			pageCount=(count/rows)+1;
+		}
+		return pageCount;
+	}
 }
