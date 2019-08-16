@@ -11,11 +11,11 @@
        	 <!-- form start -->
             <form id="AddForm" role="form" action="/house/addHouse" method="post">
               <div class="box-body">
+                <div class="col-md-6">
                 <div class="form-group">
                   <label for="exampleInputPassword1">小区编号</label>
                   <input type="text" class="form-control" name="neighbourhood.hoodNo"  placeholder="名称">
                 </div>
-                
                <div class="form-group">
                   <label for="exampleInputPassword1">供热编码</label>
                   <input type="text" class="form-control" name="heatingCode"  placeholder="名称">
@@ -37,14 +37,13 @@
                   <label for="exampleInputPassword1">建筑面积</label>
                   <input type="text" class="form-control" name="area"  placeholder="名称">
                 </div>
-                             <div class="form-group">
+                <div class="form-group">
                   <label for="exampleInputPassword1">地址</label>
                   <input type="text" class="form-control" name="address"  placeholder="名称">
                 </div>
-               <div class="form-group">
-                  <label for="exampleInputPassword1">邮编</label>
-                  <input type="text" class="form-control" name="postcode"  placeholder="名称">
                 </div>
+                <div class="col-md-6">
+
                 <div class="form-group">
                   <label for="exampleInputPassword1">联系人姓名</label>
                   <input type="text" class="form-control" name="contactName"  placeholder="名称">
@@ -73,9 +72,10 @@
                   <label for="exampleInputPassword1">实际供热面积</label>
                   <input type="text" class="form-control" name="heatingArea"  placeholder="名称">
                 </div>
+                </div>
              </div>
               <!-- /.box-body -->
-              <div class="box-footer">
+              <div class="box-footer" style = "padding-left: 34px;">
                 <input type="submit" class="btn btn-primary" value="提交" />
                 <input type="button" class="btn btn-primary" value="取消">
               </div>

@@ -13,6 +13,7 @@ mybatis:
 logging:
   level:
     com.neusoft.ht.login.mapper: debug
+    com.neusoft.ht.fee.mapper: debug
     
 http:
     encoding:
