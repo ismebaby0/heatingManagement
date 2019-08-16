@@ -25,13 +25,13 @@
 		from HT_complainType
 	</select>
 
-	<select id="selectListAllWithPages" resultMap="UserResultMap">
+	<select id="selectListAllWithPages" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
 		from HT_complainType
 		limit #{start},#{rows}
 	</select>
-	<select id="selectTotalCount">
+	<select id="selectTotalCount" resultType="int">
 		select IFNULL(count(1),0) from HT_complainType
 	</select>
 	<delete id="deleteByPrimaryKey"

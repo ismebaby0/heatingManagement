@@ -16,7 +16,7 @@ $(function(){
 	
 	//显示员工列表
 	$("table#ComplainTypeGrid").jqGrid({
-		url: '/complaintype/list',
+		url: '/complaintype/list/page',
 		datatype: "json",
 		colModel: [
 			{ label: '类型编号', name: 'typeNo', width: 75 },
