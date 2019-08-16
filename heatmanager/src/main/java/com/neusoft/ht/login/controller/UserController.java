@@ -31,7 +31,7 @@ public class UserController {
 	//取得分页列表
 	@RequestMapping("list/page")
 	public ResultMessage<AdminUserValue> getListWithPage(@RequestParam(required = false,defaultValue ="") String id,@RequestParam(required = false,defaultValue ="") String name,@RequestParam(required = false,defaultValue ="10") int rows,@RequestParam(required = false,defaultValue = "1") int page)throws Exception{
-		ResultMessage<AdminUserValue> result=new ResultMessage<AdminUserValue>("OK","取得部门列表分页模式成功");
+		ResultMessage<AdminUserValue> result=new ResultMessage<AdminUserValue>("OK","取得用户列表分页模式成功");
 		result.setCount(user.getTotalCount());
 		result.setPageCount(user.getPageCount(rows));
 		result.setList(user.getListAllWithPages(id,name,rows, page));
@@ -51,7 +51,7 @@ public class UserController {
 			user.create(adminUser);
 			
 		}
-		return new ResultMessage<AdminUserValue>("OK","增加员工成功");
+		return new ResultMessage<AdminUserValue>("OK","增加用户成功");
 	}
 	
 	
@@ -67,6 +67,13 @@ public class UserController {
 	  mult.add("Content-Type", contentType);
 	  ResponseEntity<byte[]> resultEntity=new ResponseEntity<byte[]>(bytes,mult,HttpStatus.ACCEPTED);
 	  return resultEntity;
+	  }
+	  
+	  @RequestMapping("/delete")
+	  public ResultMessage<AdminUserValue> delete(String id) throws Exception{
+		  user.delete(id);
+		  user1.delete(id);
+		  return new ResultMessage<AdminUserValue>("OK","删除用户成功");
 	  }
 	 
 	 

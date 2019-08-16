@@ -36,8 +36,10 @@ $(function(){
 		      records: "count", 
 		      repeatitems: true, 
 		      id: "iuser.uuserid"},
-		pager: "#EmployeeGridPager"
-		
+		pager: "#EmployeeGridPager",
+			onSelectRow:function(empid){
+				uuserid=empid;
+			}
 	});
 //	更新jQGrid的列表显示
 	function reloadEmployeeList()
@@ -53,7 +55,7 @@ $(function(){
 		reloadEmployeeList();
 	});
 	
-	//===========================增加员工处理================================================
+	//===========================增加用户处理================================================
 	$("a#EmployeeAddLink").off().on("click",function(){
 		$("div#EmployeeDialog").load("Admin/add.html",function(){
 			//取得部门列表，并填充部门下拉框
@@ -133,7 +135,101 @@ $(function(){
 		});
 		
 	});
+	//===========================删除用户处理================================================
+$("a#EmployeeDelteLink").off().on("click",function(event){
+					if(uuserid==null||uuserid==""){
+						BootstrapDialog.show({
+				            title: '员工操作信息',
+				            message:"请选择要查看的员工",
+				            buttons: [{
+				                label: '确定',
+				                action: function(dialog) {
+				                    dialog.close();
+				                }
+				            }]
+				        });
+					}
+					else{
+					BootstrapDialog.confirm('确认删除此部门么?', function(result){
+			            if(result) {
+			            	
+			                $.post("user/delete",{id:uuserid},function(result){
+			                	if(result.status=="OK"){
+			                		uuserid="";
+			                		reloadEmployeeList();//更新员工列表
+								}
+								BootstrapDialog.show({
+						            title: '部门操作信息',
+						            message:result.message
+						        });
+			              
+			            
+			        });
+			            }
+		
+	});
+					}
+});
+//===========================查看用户详情================================================
+$("a#EmployeeViewLink").off().on("click",function(){
+	if(uuserid==null||uuserid==""){
+		BootstrapDialog.show({
+            title: '员工操作信息',
+            message:"请选择要查看的员工",
+            buttons: [{
+                label: '确定',
+                action: function(dialog) {
+                    dialog.close();
+                }
+            }]
+        });
+	}
+	else{
+		$("div#EmployeeDialog").load("Admin/view.html",function(){
+/*			//取得指定的员工信息
+			$.getJSON(host+"/employee/get",{id:employeeId},function(em){
+				if(em){
+					$("span#employeeId").html(employeeId);
+					$("span#employeeName").html(em.name);
+					$("span#employeeSex").html(em.sex);
+					$("span#empage").html(em.age);
+					$("span#empsalary").html(em.salary);
+					$("span#empbirthday").html(em.birthday);
+					$("span#empjoindate").html(em.joinDate);
+					$("span#departmentName").html(em.department.name);
+					if(em.roles){
+						$.each(em.roles,function(index,roleModel){
+							$("span#emproles").append(roleModel.name+"  ");
+						});
+					}
+					if(em.photoFileName!=null&&em.photoFileName!=""){
+						$("span#empphoto").html("<img src='employee/downphoto?id="+employeeId+"' />");
+					}
+					else{
+						$("span#empphoto").html("无照片");
+					}
+					
+				}
+			});
+			*/
+			
+			$("div#EmployeeDialog").dialog({
+				title:"员工详细",
+				width:800
+			});
+			//点击取消按钮，管理弹出窗口
+			$("input[value='关闭']").off().on("click",function(){
+				$("div#EmployeeDialog").dialog("close");
+				$("div#EmployeeDialog").dialog("destroy")
+				$("div#EmployeeDialog").html("");
+			});
+			
+			
+		});
+	}
 	
 	
 	
+});
+
 });
