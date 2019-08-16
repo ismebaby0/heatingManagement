@@ -21,4 +21,12 @@ public interface IHeatingPriceService {
 	//修改一条
 	public void updateHeatingPrice(HtHeatingPriceModel record) throws Exception;
 
+	//全部个数
+	public int getCountAll() throws Exception;
+	
+	//查询页数
+	public int getCountPage(int rows) throws Exception;
+	
+	//分页查询
+	public List<HtHeatingPriceModel> selectAllWithPage(int row,int page) throws Exception;
 }

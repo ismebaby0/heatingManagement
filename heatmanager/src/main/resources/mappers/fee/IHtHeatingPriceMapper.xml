@@ -51,5 +51,14 @@
 			where HeatingYear=#{heatingYear}
 		</update>
 
-
+	<!-- 查询户型表的个数 -->
+	<!-- public int getCountByAll() throws Exception; -->
+	 <select id="getCountByAll" resultType = "int">
+	 	select IFNULL(count(HeatingYear),0) from HT_HeadtingPrice
+	 </select>
+	<!-- 分页查询 -->
+	<!-- public List<HtHeatingPriceModel> selectAllWithPage(@Param("start") int star,@Param("end") int end) throws Exception; -->
+	 <select id="selectAllWithPage" resultMap = "selectMap" >
+	 	select * from HT_HeadtingPrice limit #{start},#{end}
+	 </select>
 </mapper>
