@@ -24,5 +24,6 @@ public interface IUserMapper {
   //取得所有数据的个数
   public void createUserInfo(AdminUserValue user) throws Exception;
   public int getTotalCount() throws Exception;
+
 }
 

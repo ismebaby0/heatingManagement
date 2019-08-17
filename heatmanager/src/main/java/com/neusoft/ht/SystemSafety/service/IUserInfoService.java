@@ -18,4 +18,7 @@ public interface IUserInfoService {
 	 public List<UserInfo> getListWithFunction() throws Exception;
 	 
 	 public UserInfo getListWithId(String id) throws Exception;
+	 
+	 //取得关联的功能列表
+	 public UserInfo getListWithFunctionByid(String id) throws Exception;
 }

@@ -52,7 +52,7 @@
 	 select IFNULL(count(1),0) from HT_User
 	 </select>
 	 
-	<!-- 根据条件检索记录 -->
-	
+	<!-- 查询关联的功能 -->
+
 	</mapper>
 	

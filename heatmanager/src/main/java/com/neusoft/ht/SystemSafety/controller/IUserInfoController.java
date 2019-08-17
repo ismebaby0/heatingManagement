@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.neusoft.ht.SystemSafety.mapper.IuseInfoMapper;
 import com.neusoft.ht.SystemSafety.model.UserInfo;
 import com.neusoft.ht.SystemSafety.service.IUserInfoService;
+import com.neusoft.ht.message.ResultMessage;
 
 @RestController
 @RequestMapping("/userinfo")
@@ -24,5 +25,11 @@ public List<UserInfo> getListWithFunction() throws Exception{
 @RequestMapping("/add")
 public void addList() throws Exception{
 	
+}
+
+@RequestMapping("/functionList")
+public UserInfo functionList(String id) throws Exception{
+	
+	return userinfo.getListWithFunctionByid(id);
 }
 }

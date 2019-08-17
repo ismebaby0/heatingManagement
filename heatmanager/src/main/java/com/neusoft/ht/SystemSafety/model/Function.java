@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.type.Alias;
 
+import com.neusoft.ht.login.model.AdminUserValue;
+
 import lombok.Data;
 
 /*
@@ -23,4 +25,5 @@ public class Function {
  
  private List<UserInfo> userInfos=null;
  
+ private AdminUserValue admin=null;
 }

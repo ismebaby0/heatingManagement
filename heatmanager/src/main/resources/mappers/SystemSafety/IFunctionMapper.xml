@@ -12,6 +12,11 @@
     <result property="levelNo" column="LevelNo" />
   </resultMap>
   
+   <!-- 关联功能属性的结果映射 -->
+   <resultMap id="FunctionResultMapWithUser" type="Function" extends="FunctionResultMap">
+    <association property="admin"  resultMap="com.neusoft.ht.login.mapper.IUserMapper.UserResultMap" />
+  </resultMap>
+  
 <insert id="create"  keyProperty="funNo"   keyColumn="FUNNO" useGeneratedKeys="true" flushCache="true" >
    insert into  SYSTEMFUNCTION (LevelNo,FUNNAME,FUNURL) values (#{levelNo},#{funName},#{funUrl})
   </insert>

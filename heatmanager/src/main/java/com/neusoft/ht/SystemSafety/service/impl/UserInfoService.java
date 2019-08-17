@@ -51,4 +51,10 @@ public class UserInfoService implements IUserInfoService {
 		return userinfo.selectListById(id);
 	}
 
+	@Override
+	public UserInfo getListWithFunctionByid(String id) throws Exception {
+		// TODO Auto-generated method stub
+		return userinfo.selectListWithFunctionById(id);
+	}
+
 }

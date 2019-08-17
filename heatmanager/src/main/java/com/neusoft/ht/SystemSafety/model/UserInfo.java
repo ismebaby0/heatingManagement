@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.type.Alias;
 
+import com.neusoft.ht.login.model.AdminUserValue;
+
 import lombok.Data;
 
 /*
@@ -30,4 +32,7 @@ public class UserInfo {
  private String mobile;
  
  private List<Function> functions=null;
+ 
+ private AdminUserValue admin=null;
+ 
 }

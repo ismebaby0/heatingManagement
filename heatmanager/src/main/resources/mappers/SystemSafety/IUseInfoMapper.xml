@@ -6,19 +6,25 @@
 
  <!-- 没有关联属性的结果映射 -->
   <resultMap id="UserResultMap" type="UserInfo" >
-  	<id property="uuserid" column="UUSERID" />
-  	<result property="upassword" column="UPASSWORD" />
-   <result property="uname" column="UNAME" />
+  	<result property="uuserid" column="UUSERID" />
+   <result property="sex" column="Sex" />
+   <result property="age" column="AGE" />
+   <result property="photo" column="PHOTO" />
+   <result property="photoFileName" column="PHOTOFileName" />
+   <result property="photoContentType" column="PhotoContentType" />
+   <result property="tel" column="Tel" />
+   <result property="mobile" column="Mobile" />
   </resultMap>
   
- <!-- 关联功能属性的结果映射 -->
-   <resultMap id="UserInfoResultMapWithFunction" type="UserInfo" extends="UserResultMap">
-    <collection property="functions" resultMap="com.neusoft.ht.SystemSafety.mapper.IFunctionMapper.FunctionResultMap"></collection>
-  </resultMap>
   
- 
+<resultMap id="selectListWithFunctionById" type="UserInfo" extends="UserResultMap">
+  <collection property="functions"  resultMap="com.neusoft.ht.SystemSafety.mapper.IFunctionMapper.FunctionResultMap" />
+  </resultMap>
+ <resultMap id="UserInfoResultMapWithFunction" type="UserInfo"  extends="selectListWithFunctionById" >
+ <association property="admin"  resultMap="com.neusoft.ht.login.mapper.IUserMapper.UserResultMap" />
+ </resultMap>
  <insert id="create">
-   insert into HT_UserInfo values (#{uuserid},#{sex},#{age},#{photo},#{photoFileName},#{photoContentType},#{mobile},#{photoContentType})
+   insert into HT_UserInfo values (#{uuserid},#{sex},#{age},#{photo},#{photoFileName},#{photoContentType},#{tel},#{mobile})
  </insert>
  
   <update id="update">
@@ -39,11 +45,15 @@
  
 
  <select id="selectWithFunction" resultMap="UserInfoResultMapWithFunction">
- 
     select a.*, c.* from HT_UserInfo a  left outer join   HT_FunctionUser b on a.UUSERID=b.UUserID
    left outer join HT_Function c on b.FunNo=c.FUNNO 
 </select>
  
+ <!-- 查询关联的功能 -->
+	<select id="selectListWithFunctionById" resultMap="UserInfoResultMapWithFunction">
+	 select a.*,b.*,d.* from HT_UserInfo a left outer join HT_User b  on a.UUSERID=b.UUSERID left outer join  HT_FunctionUser c
+	 on b.UUSERID=c.UUserID left outer join HT_Function d on c.FunNo=d.FUNNO where a.UUSERID=#{id}
+	 </select>
 
 </mapper>
 

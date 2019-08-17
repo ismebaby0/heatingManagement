@@ -1,7 +1,7 @@
 /**
  * 
  */
-
+var host="http://localhost:8080/";
 $(function(){
 	
 	//点击左面功能菜单处理

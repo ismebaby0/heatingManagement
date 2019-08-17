@@ -186,32 +186,30 @@ $("a#EmployeeViewLink").off().on("click",function(){
 	}
 	else{
 		$("div#EmployeeDialog").load("Admin/view.html",function(){
-/*			//取得指定的员工信息
-			$.getJSON(host+"/employee/get",{id:employeeId},function(em){
+			//取得指定的员工信息
+			$.getJSON("userinfo/functionList",{id:uuserid},function(em){
 				if(em){
-					$("span#employeeId").html(employeeId);
-					$("span#employeeName").html(em.name);
+					$("span#employeeId").html(uuserid);
+					$("span#employeeName").html(em.admin.uname);
 					$("span#employeeSex").html(em.sex);
 					$("span#empage").html(em.age);
-					$("span#empsalary").html(em.salary);
-					$("span#empbirthday").html(em.birthday);
-					$("span#empjoindate").html(em.joinDate);
-					$("span#departmentName").html(em.department.name);
-					if(em.roles){
-						$.each(em.roles,function(index,roleModel){
-							$("span#emproles").append(roleModel.name+"  ");
+					$("span#empmobile").html(em.mobile);
+					$("span#empphone").html(em.phone);
+					if(em.functionss){
+						$.each(em.functions,function(index,Function){
+							$("span#empfunctions").append(Function.funName+"  ");
 						});
 					}
-					if(em.photoFileName!=null&&em.photoFileName!=""){
-						$("span#empphoto").html("<img src='employee/downphoto?id="+employeeId+"' />");
+/*					if(em.photoFileName!=null&&em.photoFileName!=""){
+						$("span#empphoto").html("<img src='user/image' class='img-thumbnail' alt='Cinque Terre' width='200'");
 					}
 					else{
-						$("span#empphoto").html("无照片");
-					}
+						$("span#empphoto").html("<img src='user/image' class='img-thumbnail' alt='Cinque Terre' width='200'");
+					}*/
 					
 				}
 			});
-			*/
+			
 			
 			$("div#EmployeeDialog").dialog({
 				title:"员工详细",
