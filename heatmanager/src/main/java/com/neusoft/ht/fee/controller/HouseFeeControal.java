@@ -9,6 +9,13 @@ import com.neusoft.ht.fee.model.HouseFeeModel;
 import com.neusoft.ht.fee.service.IHouseFeeService;
 import com.neusoft.ht.message.ResultMessage;
 
+/**
+ * 
+ *
+ * @Description:
+ * @author 林康荣
+ * @date 2019年8月18日
+ */
 @RequestMapping("/houseFee")
 @RestController
 public class HouseFeeControal {
@@ -57,7 +64,8 @@ public class HouseFeeControal {
 	}
 
 	@RequestMapping("/getall/page")
-	public ResultMessage<HouseFeeModel> getAllWithPage(@RequestParam(required = false, defaultValue = "3") int rows, @RequestParam(required = false, defaultValue = "1") int page) throws Exception {
+	public ResultMessage<HouseFeeModel> getAllWithPage(@RequestParam(required = false, defaultValue = "3") int rows,
+			@RequestParam(required = false, defaultValue = "1") int page) throws Exception {
 		ResultMessage<HouseFeeModel> result = new ResultMessage<>("ok", "添加成功");
 		result.setList(service.selectAllWithPage(rows, page));
 		result.setCount(service.getCountAll());

@@ -9,6 +9,13 @@ import com.neusoft.ht.fee.mapper.IHouseFeeMapper;
 import com.neusoft.ht.fee.model.HouseFeeModel;
 import com.neusoft.ht.fee.service.IHouseFeeService;
 
+/**
+ * 
+ *
+ * @Description:
+ * @author 林康荣
+ * @date 2019年8月18日
+ */
 @Service
 public class HouseFeeServiceImpl implements IHouseFeeService {
 

@@ -9,6 +9,13 @@ import com.neusoft.ht.fee.mapper.IHtHeatingPriceMapper;
 import com.neusoft.ht.fee.model.HtHeatingPriceModel;
 import com.neusoft.ht.fee.service.IHeatingPriceService;
 
+/**
+ * 
+ *
+ * @Description:
+ * @author 林康荣
+ * @date 2019年8月18日
+ */
 @Service(value = "HeatingPriceService")
 public class HeatingPriceServiceImpl implements IHeatingPriceService {
 	@Autowired
@@ -39,7 +46,7 @@ public class HeatingPriceServiceImpl implements IHeatingPriceService {
 		hhp_mapper.updateByPrimaryKey(record);
 	}
 
-	//查询全部户型个数
+	// 查询全部户型个数
 	@Override
 	public int getCountAll() throws Exception {
 		return hhp_mapper.getCountByAll();
@@ -47,13 +54,12 @@ public class HeatingPriceServiceImpl implements IHeatingPriceService {
 
 	@Override
 	public int getCountPage(int rows) throws Exception {
-		int pageCount=0;
-		int count=this.getCountAll();
-		if(count%rows==0) {
-			pageCount=count/rows;
-		}
-		else {
-			pageCount=count/rows+1;
+		int pageCount = 0;
+		int count = this.getCountAll();
+		if (count % rows == 0) {
+			pageCount = count / rows;
+		} else {
+			pageCount = count / rows + 1;
 		}
 		return pageCount;
 	}
@@ -61,7 +67,7 @@ public class HeatingPriceServiceImpl implements IHeatingPriceService {
 	// 分页查寻
 	@Override
 	public List<HtHeatingPriceModel> selectAllWithPage(int row, int page) throws Exception {
-		return hhp_mapper.selectAllWithPage(row*(page-1),page*row);
+		return hhp_mapper.selectAllWithPage(row * (page - 1), page * row);
 	}
 
 }
