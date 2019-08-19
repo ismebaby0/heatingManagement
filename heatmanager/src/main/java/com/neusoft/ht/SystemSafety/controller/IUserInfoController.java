@@ -6,6 +6,7 @@ import org.apache.logging.log4j.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.neusoft.ht.SystemSafety.mapper.IuseInfoMapper;
 import com.neusoft.ht.SystemSafety.model.UserInfo;
@@ -39,5 +40,11 @@ public UserInfo functionList(String id) throws Exception{
 public ResultMessage<AdminUserValue> grant(String id,int[] no) throws Exception{
 	userinfo.createWithFunction(id, no);
 	return new ResultMessage<AdminUserValue>("ok","授权成功");
+}
+
+@RequestMapping("/photoChange")
+public ResultMessage<AdminUserValue> modifyPhoto(String id,MultipartFile photo)throws Exception{
+  userinfo.modifyPhtoto(id, photo.getBytes(), photo.getContentType(), photo.getOriginalFilename());
+  return new ResultMessage<AdminUserValue>("ok","修改头像成功");
 }
 }

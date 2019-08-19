@@ -66,4 +66,10 @@ public class UserInfoService implements IUserInfoService {
 		userinfo.createWithFunctionById(id, no);
 	}
 
+	@Override
+	public void modifyPhtoto(String id, byte[] photo, String contentType, String photoName) throws Exception {
+		// TODO Auto-generated method stub
+		userinfo.modifyPhoto(id, photo, contentType, photoName);
+	}
+
 }
