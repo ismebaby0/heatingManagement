@@ -5,6 +5,7 @@
  */
 
 $(function(){
+	var complainNo=0;
 	// 设置系统页面标题
 	$("span#mainpagetille").html("住宅投诉管理");
 	// 设置日期的格式和选择
@@ -50,7 +51,10 @@ $(function(){
 		      records: "count", 
 		      repeatitems: true, 
 		      id: "complainNo"},
-		pager: "#homeComplainTypePager"
+		pager: "#homeComplainTypePager",
+		onSelectRow:function(no){
+			complainNo=no;
+		}
 		
 	});
 	
@@ -93,6 +97,43 @@ $(function(){
 		});
 	});
 	
+
+
+	//===========================删除住宅投诉处理================================================
+	$("#homeComplainDel").off().on("click",function(event){
+						if(complainNo===0||complainNo===""){
+							BootstrapDialog.show({
+					            title: '住宅投诉记录作信息',
+					            message:"请选择要查看的住宅投诉记录",
+					            buttons: [{
+					                label: '确定',
+					                action: function(dialog) {
+					                    dialog.close();
+					                }
+					            }]
+					        });
+						}
+						else{
+						BootstrapDialog.confirm('确认删除此住宅投诉记录么?', function(result){
+				            if(result) {
+				            	
+				                $.post("/homecomplain/delete",{no:complainNo},function(result){
+				                	if(result.status==="OK"){
+				                		complainNo="";
+				    					$("table#homeComplainTypeGrid").trigger("reloadGrid");
+									}
+									BootstrapDialog.show({
+							            title: '住宅投诉记录信息',
+							            message:result.message
+							        });
+				              
+				            
+				        });
+				            }
+			
+		});
+						}
+	});
 
 	
 	

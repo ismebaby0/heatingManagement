@@ -102,7 +102,7 @@ $(function(){
 						if(complainNo===0||complainNo===""){
 							BootstrapDialog.show({
 					            title: '公建投诉记录作信息',
-					            message:"请选择要查看的员工",
+					            message:"请选择要查看的公建投诉记录",
 					            buttons: [{
 					                label: '确定',
 					                action: function(dialog) {
