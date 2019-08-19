@@ -30,6 +30,7 @@ public class NeighbourhoodController {
 	@RequestMapping("/add")
 	public ResultMessage<Neighbourhood> add(Neighbourhood nbh) throws Exception {
 		service.add(nbh);
+		System.out.println(nbh);
 		return new ResultMessage<>("ok", "添加成功");
 	}
 	@RequestMapping("/delete")
@@ -57,11 +58,14 @@ public class NeighbourhoodController {
 	}
 	
 	@RequestMapping("getall")
-	public ResultMessage<Neighbourhood> getAllWithPage(@RequestParam(required = false,defaultValue ="3") int row,@RequestParam(required = false,defaultValue = "1") int page) throws Exception{
+	public ResultMessage<Neighbourhood> getAllWithPage(@RequestParam(required = false,defaultValue ="3") int rows,@RequestParam(required = false,defaultValue = "1") int page) throws Exception{
 		ResultMessage<Neighbourhood> message = new ResultMessage<>("ok", "查询成功");
-		message.setList(service.selectAllWithPage(row, page));
+		message.setList(service.selectAllWithPage(rows, page));
 		message.setPage(page);
-		message.setRows(row);
+		message.setRows(rows);
+		System.out.println(rows);
+		message.setCount(service.getCountAll());
+		message.setPageCount(service.getCountPage(rows));
 		return message;
 	}
 }

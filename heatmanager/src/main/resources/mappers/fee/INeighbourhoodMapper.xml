@@ -9,7 +9,7 @@
     </resultMap>
 
 	 <insert id = "insert">
-	 	insert into HT_Neighbourhood (hoodName,address)values(#{hoodName},#{address})
+	 	insert into HT_Neighbourhood (hoodName,address) values(#{hoodName},#{address})
 	 </insert>
 	 <delete id = "deleteByPrimaryKey">
 	 	delete from HT_Neighbourhood where hoodNo = #{hoodNo}

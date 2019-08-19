@@ -78,6 +78,7 @@ public class HouseTypeController {
 		result.setCount(service.getCountAll());
 		result.setPage(page);
 		result.setRows(rows);
+		System.out.println(rows);
 		result.setPageCount(service.getCountPage(rows));
 		return result;
 	}
