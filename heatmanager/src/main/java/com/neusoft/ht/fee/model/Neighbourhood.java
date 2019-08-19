@@ -1,9 +1,11 @@
 package com.neusoft.ht.fee.model;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 @Data
-public class Neighbourhood {
+public class Neighbourhood implements Serializable{
 	private int hoodNo = 0;
 	private String hoodName = null;
 	private String address = null;
