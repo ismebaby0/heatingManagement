@@ -54,6 +54,12 @@
 	 select a.*,b.*,d.* from HT_UserInfo a left outer join HT_User b  on a.UUSERID=b.UUSERID left outer join  HT_FunctionUser c
 	 on b.UUSERID=c.UUserID left outer join HT_Function d on c.FunNo=d.FUNNO where a.UUSERID=#{id}
 	 </select>
-
+ <!-- 绑定功能 -->
+   <insert id="createWithFunctionById">
+     insert into HT_FunctionUser values (FunNo,UUserID)
+    <foreach  item="no" collection="funno"   separator="," >
+       (#{id},#{no})
+    </foreach>
+   </insert>
 </mapper>
 

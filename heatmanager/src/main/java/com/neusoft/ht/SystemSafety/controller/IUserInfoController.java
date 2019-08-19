@@ -2,6 +2,7 @@ package com.neusoft.ht.SystemSafety.controller;
 
 import java.util.List;
 
+import org.apache.logging.log4j.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.neusoft.ht.SystemSafety.mapper.IuseInfoMapper;
 import com.neusoft.ht.SystemSafety.model.UserInfo;
 import com.neusoft.ht.SystemSafety.service.IUserInfoService;
+import com.neusoft.ht.login.model.AdminUserValue;
 import com.neusoft.ht.message.ResultMessage;
 
 @RestController
@@ -31,5 +33,11 @@ public void addList() throws Exception{
 public UserInfo functionList(String id) throws Exception{
 	
 	return userinfo.getListWithFunctionByid(id);
+}
+
+@RequestMapping("/grant")
+public ResultMessage<AdminUserValue> grant(String id,int[] no) throws Exception{
+	userinfo.createWithFunction(id, no);
+	return new ResultMessage<AdminUserValue>("ok","授权成功");
 }
 }

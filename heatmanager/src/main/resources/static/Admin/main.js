@@ -195,9 +195,9 @@ $("a#EmployeeViewLink").off().on("click",function(){
 					$("span#empage").html(em.age);
 					$("span#empmobile").html(em.mobile);
 					$("span#empphone").html(em.phone);
-					if(em.functionss){
+					if(em.functions){
 						$.each(em.functions,function(index,Function){
-							$("span#empfunctions").append(Function.funName+"  ");
+							$("span#empfunctions").append("<br>"+Function.funName);
 						});
 					}
 /*					if(em.photoFileName!=null&&em.photoFileName!=""){

@@ -57,4 +57,10 @@ public class UserInfoService implements IUserInfoService {
 		return userinfo.selectListWithFunctionById(id);
 	}
 
+	@Override
+	public void createWithFunction(String id, int[] no) throws Exception {
+		// TODO Auto-generated method stub
+		userinfo.createWithFunctionById(id, no);
+	}
+
 }

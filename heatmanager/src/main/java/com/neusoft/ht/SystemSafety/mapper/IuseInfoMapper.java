@@ -28,4 +28,7 @@ public interface IuseInfoMapper {
  
  //查询详细信息和关联的功能模块
  public UserInfo selectListWithFunctionById(String id) throws Exception;
+ 
+ //为用户授权功能
+ public void createWithFunctionById(String id,int[] funno) throws Exception;
 }
