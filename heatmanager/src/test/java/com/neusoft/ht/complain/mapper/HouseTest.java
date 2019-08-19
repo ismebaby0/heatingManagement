@@ -36,7 +36,7 @@ public class HouseTest {
 	}
 	@Test
 	public void selectTest() {
-		System.out.println(houseComplainModelMapper.selectByPrimaryKey(1).getHouse().getHouseNo());
+		System.out.println(houseComplainModelMapper.selectByPrimaryKey(1).getHouse());
 		houseComplainModelMapper.selectByAll().forEach(e->{System.out.print(e.getHouse().getName()+",");});
 		System.out.println();
 	}
