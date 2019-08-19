@@ -6,7 +6,9 @@ package com.neusoft.ht.fee.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
+import com.neusoft.ht.fee.model.HouseFeeModel;
 import com.neusoft.ht.fee.model.Neighbourhood;
 
 /**
@@ -29,4 +31,9 @@ public interface INeighbourhoodMapper {
 	public Neighbourhood selectByPrimaryKey(int hoodNo)  throws Exception;
 	//查看所有记录
 	public List<Neighbourhood> selectByAll() throws Exception;
+	
+	//查询小区表数据的个数
+	public int getCountByAll() throws Exception;
+	//分页查询
+	public List<Neighbourhood> selectAllWithPage(@Param("start") int star,@Param("end") int end) throws Exception;
 }
