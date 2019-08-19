@@ -134,7 +134,70 @@ $(function(){
 	});
 
 	
-	
+		
+	//修改按钮	//点击修改按钮事件处理
+	$("#houseComplainMod").off().on("click",function(event){
+		if(complainNo===0||complainNo===""){
+			BootstrapDialog.show({
+	            title: '操作信息',
+	            message:"请选择要修改数据"
+	        });
+		}
+		else {
+			$("div#houseComplainTypeDialogArea").load("complain/housecomplain/mod.html",function(){
+				$.getJSON("/housecomplain/get",{no:complainNo},function(data){	//{}中是请求参数，data是后端返回的结果
+					//alert(data.status);
+					//alert(data.model.typeName);
+					if(data.status==="OK"){
+						//$("#modForm input").each((k, v) =>console.log(v.name+v.value));
+						//$("#modForm input").each((k, v) =>{let nameJsonValue=eval("data.model."+v.name);if(nameJsonValue!==null){v.value=nameJsonValue}}); //遍历表单设置值
+						$("#modForm input").each((k, v) => {//遍历表单设置值
+							let nameJsonValue = eval("data.model." + v.name);
+							if (nameJsonValue !== null) {
+								v.value = nameJsonValue;
+							}
+						}); 
+						$("input[name='complainNo']").attr("readonly","readonly");//设置主键为不可编辑状态
+					}
+				});
+				
+				$("div#houseComplainTypeDialogArea" ).dialog({
+					title:"公建投诉修改",
+					width:600
+				});
+				//拦截表单提交
+				$("form#modForm").ajaxForm(function(result){
+					if(result.status==="OK"){
+						complainNo="";
+						$("input[name='typeNo']").removeAttr("readonly");	//去除只读
+						$("table#houseComplainTypeGrid").trigger("reloadGrid");
+					}
+					//alert(result.message);
+					//BootstrapDialog.alert(result.message);
+					BootstrapDialog.show({
+			            title: '操作结果信息',
+			            message:result.message
+			        });
+					$("div#DepartmentDialogArea" ).dialog( "close" );
+					$("div#DepartmentDialogArea" ).dialog( "destroy" );
+					$("div#DepartmentDialogArea").html("");
+					
+				});
+				
+				
+				//点击取消按钮处理
+				$("input[value='取消']").on("click",function(){
+					$( "div#DepartmentDialogArea" ).dialog( "close" );
+					$( "div#DepartmentDialogArea" ).dialog( "destroy" );
+					$("div#DepartmentDialogArea").html("");
+				});
+			});
+			
+		}
+		
+		
+	});
+
 	
 	
 	
