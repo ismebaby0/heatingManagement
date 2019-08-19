@@ -16,7 +16,7 @@ import com.neusoft.ht.complain.service.IPublicHouseComplainModelService;
  */
 @Service
 @Transactional(rollbackFor = { Exception.class, Error.class })
-public class PublicHouseComplainModelServie implements IPublicHouseComplainModelService {
+public class PublicHouseComplainModelService implements IPublicHouseComplainModelService {
 
 	@Autowired
 	private IPublicHouseComplainModelMapper publicHouseMapper;
