@@ -11,7 +11,7 @@ $(function(){
 	
 	// 显示住宅投诉列表
 	$("table#homeComplainTypeGrid").jqGrid({
-		url: '/homecomplain/list',
+		url: '/homecomplain/list/page',
 		datatype: "json",
 		colModel: [
 			{ label: '投诉序号', name: 'complainNo', width: 5 },

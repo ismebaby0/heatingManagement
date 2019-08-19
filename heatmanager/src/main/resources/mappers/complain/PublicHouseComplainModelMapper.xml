@@ -98,7 +98,7 @@
 	</select>
 	<select id="selectTotalCount" resultType="int">
 		select
-		IFNULL(count(1),0) from HT_complainType
+		IFNULL(count(1),0) from HT_PublicHousecomplain
 	</select>
 	<delete id="deleteByPrimaryKey"
 		parameterType="java.lang.Integer">

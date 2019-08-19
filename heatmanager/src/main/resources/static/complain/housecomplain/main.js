@@ -5,13 +5,14 @@
  */
 
 $(function(){
+	var complainNo=0;
 	// 设置系统页面标题
 	$("span#mainpagetille").html("公建投诉管理");
 	// 设置日期的格式和选择
 	
 	// 显示公建投诉列表
 	$("table#houseComplainTypeGrid").jqGrid({
-		url: '/housecomplain/list',
+		url: '/housecomplain/list/page',
 		datatype: "json",
 		colModel: [
 			{ label: '投诉序号', name: 'complainNo', width: 5 },
@@ -50,7 +51,10 @@ $(function(){
 		      records: "count", 
 		      repeatitems: true, 
 		      id: "complainNo"},
-		pager: "#houseComplainTypePager"
+		pager: "#houseComplainTypePager",
+		onSelectRow:function(no){
+			complainNo=no;
+		}
 		
 	});
 	//修改$('#addForm [name="house.houseNo"]')[0].value=
@@ -93,7 +97,41 @@ $(function(){
 			});
 		});
 	});
-	
+	//===========================删除公建投诉处理================================================
+	$("#houseComplainDel").off().on("click",function(event){
+						if(complainNo===0||complainNo===""){
+							BootstrapDialog.show({
+					            title: '公建投诉记录作信息',
+					            message:"请选择要查看的员工",
+					            buttons: [{
+					                label: '确定',
+					                action: function(dialog) {
+					                    dialog.close();
+					                }
+					            }]
+					        });
+						}
+						else{
+						BootstrapDialog.confirm('确认删除此公建投诉记录么?', function(result){
+				            if(result) {
+				            	
+				                $.post("/housecomplain/delete",{no:complainNo},function(result){
+				                	if(result.status==="OK"){
+				                		complainNo="";
+				    					$("table#houseComplainTypeGrid").trigger("reloadGrid");
+									}
+									BootstrapDialog.show({
+							            title: '公建投诉记录信息',
+							            message:result.message
+							        });
+				              
+				            
+				        });
+				            }
+			
+		});
+						}
+	});
 
 	
 	
