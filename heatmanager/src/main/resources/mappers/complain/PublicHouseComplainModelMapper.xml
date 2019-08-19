@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper
-	namespace="com.neusoft.ht.complain.mapper.IHomeComplainModelMapper">
+	namespace="com.neusoft.ht.complain.mapper.IPublicHouseComplainModelMapper">
 	<cache></cache>
 	<resultMap id="BaseResultMap"
-		type="com.neusoft.ht.complain.model.HomeComplainModel">
+		type="com.neusoft.ht.complain.model.PublicHouseComplainModel">
 		<id column="ComplainNo" property="complainNo" jdbcType="INTEGER" />
 		<result column="ComplainTitle" property="complainTitle"
 			jdbcType="VARCHAR" />
@@ -30,7 +30,7 @@
 			jdbcType="VARCHAR" />
 		<result column="FeedBackDate" property="feedBackDate"
 			jdbcType="DATE" />
-		<result column="HomeComment" property="homeComment"
+		<result column="HouseComment" property="houseComment"
 			jdbcType="VARCHAR" />
 		<result column="AssuranceDate" property="assuranceDate"
 			jdbcType="DATE" />
@@ -42,12 +42,18 @@
 			jdbcType="VARCHAR" />
 	</resultMap>
 	<resultMap id="BaseResultMapWithComplainType"
-		type="com.neusoft.ht.complain.model.HomeComplainModel"
+		type="com.neusoft.ht.complain.model.PublicHouseComplainModel"
 		extends="BaseResultMap">
-		<association property="home"
-			resultMap="com.neusoft.ht.fee.mapper.IHomeMapper.resultOfHome" />
+		<association property="house"
+			resultMap="com.neusoft.ht.fee.mapper.IHtHouseMapper.selectMap" />
 		<association property="complainType"
 			resultMap="com.neusoft.ht.complain.mapper.IComplainTypeMapper.BaseResultMap" />
+	</resultMap>
+	<resultMap id="BaseResultMapWithALl"
+		type="com.neusoft.ht.complain.model.PublicHouseComplainModel"
+		extends="BaseResultMap">
+		<result property="house.houseNo" column="HouseNo"/>
+		<result property="complainType.typeNo" column="TYPENO"/>
 	</resultMap>
 	<sql id="Base_Column_List">
 		ComplainNo, ComplainTitle, ComplainContent, RequestContent,
@@ -55,16 +61,15 @@
 		ContactPerson, Tel, Mobile, Mail, QQ, ServiceStartDate,
 		ServiceEndDate, ServiceContent,
 		ServicePerson, FeedBackDate,
-		HomeComment, AssuranceDate, AssuranceFee,
+		HouseComment, AssuranceDate, AssuranceFee,
 		AssurancePayDate,
 		ComplainStatus
 	</sql>
-	<!-- HomeNo, TYPENO, -->
-	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+	<!-- HouseNo, TYPENO, -->
+	<select id="selectByPrimaryKey" resultMap="BaseResultMapWithALl"
 		parameterType="java.lang.Integer">
-		select
-		<include refid="Base_Column_List" />
-		from HT_Homecomplain
+		select *
+		from HT_PublicHousecomplain
 		where ComplainNo = #{complainNo,jdbcType=INTEGER}
 	</select>
 
@@ -72,53 +77,53 @@
 		resultMap="BaseResultMapWithComplainType">
 		select Homecomplain.*,Home.*,ComplainType.*
 		from
-		HT_Homecomplain Homecomplain
+		HT_PublicHousecomplain Homecomplain
 		left join HT_complainType ComplainType on
 		ComplainType.TYPENO =
 		Homecomplain.TYPENO
-		left join HT_HOME Home on
-		Home.HomeNo = Homecomplain.HomeNo
+		left join HT_publichouse Home on
+		Home.HouseNo = Homecomplain.HouseNo
 	</select>
 	<select id="selectListAllWithPages"
 		resultMap="BaseResultMapWithComplainType">
 		select Homecomplain.*,Home.*,ComplainType.*
 		from
-		HT_Homecomplain Homecomplain
+		HT_PublicHousecomplain Homecomplain
 		left join HT_complainType ComplainType on
 		ComplainType.TYPENO =
 		Homecomplain.TYPENO
-		left join HT_HOME Home on
-		Home.HomeNo = Homecomplain.HomeNo
+		left join HT_publichouse Home on
+		Home.HouseNo = Homecomplain.HouseNo
 		limit #{start},#{rows}
 	</select>
 	<select id="selectTotalCount" resultType="int">
 		select
-		IFNULL(count(1),0) from HT_Homecomplain
+		IFNULL(count(1),0) from HT_PublicHousecomplain
 	</select>
 	<delete id="deleteByPrimaryKey"
 		parameterType="java.lang.Integer">
-		delete from HT_Homecomplain
+		delete from HT_PublicHousecomplain
 		where ComplainNo =
 		#{complainNo,jdbcType=INTEGER}
 	</delete>
-	<!-- HomeNo, TYPENO, -->
+	<!-- HouseNo, TYPENO, -->
 	<insert id="insert"
-		parameterType="com.neusoft.ht.complain.model.HomeComplainModel">
-		insert into HT_Homecomplain (ComplainNo,
-		HOMENO,TYPENO,
+		parameterType="com.neusoft.ht.complain.model.PublicHouseComplainModel">
+		insert into HT_PublicHousecomplain (ComplainNo,
+		HouseNo,TYPENO,
 		ComplainTitle, ComplainContent, RequestContent,
 		ComplainDate,
 		ContactPerson, Tel,
 		Mobile, Mail, QQ, ServiceStartDate,
 		ServiceEndDate,
 		ServiceContent, ServicePerson,
-		FeedBackDate, HomeComment,
+		FeedBackDate, HouseComment,
 		AssuranceDate,
 		AssuranceFee, AssurancePayDate, ComplainStatus
 		)
 		values
 		(#{complainNo,jdbcType=INTEGER},
-		#{home.homeNo,jdbcType=INTEGER},
+		#{house.houseNo,jdbcType=INTEGER},
 		#{complainType.typeNo,jdbcType=INTEGER},
 		#{complainTitle,jdbcType=VARCHAR},
 		#{complainContent,jdbcType=VARCHAR},
@@ -130,20 +135,20 @@
 		#{serviceEndDate,jdbcType=DATE}, #{serviceContent,jdbcType=VARCHAR},
 		#{servicePerson,jdbcType=VARCHAR},
 		#{feedBackDate,jdbcType=DATE},
-		#{homeComment,jdbcType=VARCHAR}, #{assuranceDate,jdbcType=DATE},
+		#{houseComment,jdbcType=VARCHAR}, #{assuranceDate,jdbcType=DATE},
 		#{assuranceFee,jdbcType=DECIMAL}, #{assurancePayDate,jdbcType=DATE},
 		#{complainStatus,jdbcType=VARCHAR}
 		)
 	</insert>
 	<insert id="insertSelective"
-		parameterType="com.neusoft.ht.complain.model.HomeComplainModel">
-		insert into HT_Homecomplain
+		parameterType="com.neusoft.ht.complain.model.PublicHouseComplainModel">
+		insert into HT_PublicHousecomplain
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="complainNo != null">
 				ComplainNo,
 			</if>
-			<if test="home != null">
-				HomeNo,
+			<if test="house != null">
+				HouseNo,
 			</if>
 			<if test="complainType != null">
 				TYPENO,
@@ -190,8 +195,8 @@
 			<if test="feedBackDate != null">
 				FeedBackDate,
 			</if>
-			<if test="homeComment != null">
-				HomeComment,
+			<if test="houseComment != null">
+				HouseComment,
 			</if>
 			<if test="assuranceDate != null">
 				AssuranceDate,
@@ -210,8 +215,8 @@
 			<if test="complainNo != null">
 				#{complainNo,jdbcType=INTEGER},
 			</if>
-			<if test="home != null">
-				#{home.homeNo,jdbcType=INTEGER},
+			<if test="house != null">
+				#{house.houseNo,jdbcType=INTEGER},
 			</if>
 			<if test="complainType != null">
 				#{complainType.typeNo,jdbcType=INTEGER},
@@ -258,8 +263,8 @@
 			<if test="feedBackDate != null">
 				#{feedBackDate,jdbcType=DATE},
 			</if>
-			<if test="homeComment != null">
-				#{homeComment,jdbcType=VARCHAR},
+			<if test="houseComment != null">
+				#{houseComment,jdbcType=VARCHAR},
 			</if>
 			<if test="assuranceDate != null">
 				#{assuranceDate,jdbcType=DATE},
@@ -276,10 +281,10 @@
 		</trim>
 	</insert>
 	<update id="updateByPrimaryKeySelective"
-		parameterType="com.neusoft.ht.complain.model.HomeComplainModel">
-		update HT_Homecomplain
+		parameterType="com.neusoft.ht.complain.model.PublicHouseComplainModel">
+		update HT_PublicHousecomplain
 		<set>
-			<if test="home != null"> HomeNo = #{home.homeNo,jdbcType=INTEGER},
+			<if test="house != null"> HouseNo = #{house.houseNo,jdbcType=INTEGER},
 			</if>
 			<if test="complainType != null"> TYPENO =
 				#{complainType.typeNo,jdbcType=INTEGER},
@@ -326,8 +331,8 @@
 			<if test="feedBackDate != null">
 				FeedBackDate = #{feedBackDate,jdbcType=DATE},
 			</if>
-			<if test="homeComment != null">
-				HomeComment = #{homeComment,jdbcType=VARCHAR},
+			<if test="houseComment != null">
+				HouseComment = #{houseComment,jdbcType=VARCHAR},
 			</if>
 			<if test="assuranceDate != null">
 				AssuranceDate = #{assuranceDate,jdbcType=DATE},
@@ -345,10 +350,10 @@
 		where ComplainNo = #{complainNo,jdbcType=INTEGER}
 	</update>
 	<update id="updateByPrimaryKey"
-		parameterType="com.neusoft.ht.complain.model.HomeComplainModel">
-		update HT_Homecomplain
-		set HomeNo =
-		#{home.homeNo,jdbcType=INTEGER},
+		parameterType="com.neusoft.ht.complain.model.PublicHouseComplainModel">
+		update HT_PublicHousecomplain
+		set HouseNo =
+		#{house.houseNo,jdbcType=INTEGER},
 		TYPENO= #{complainType.typeNo,jdbcType=INTEGER},
 		ComplainTitle =
 		#{complainTitle,jdbcType=VARCHAR},
@@ -374,8 +379,8 @@
 		#{servicePerson,jdbcType=VARCHAR},
 		FeedBackDate =
 		#{feedBackDate,jdbcType=DATE},
-		HomeComment =
-		#{homeComment,jdbcType=VARCHAR},
+		HouseComment =
+		#{houseComment,jdbcType=VARCHAR},
 		AssuranceDate =
 		#{assuranceDate,jdbcType=DATE},
 		AssuranceFee =

@@ -1,5 +1,5 @@
 /**
- * 住宅投诉管理前端主管理JS 模块：complain 业务对象:所有住宅投诉
+ * 公建投诉管理前端主管理JS 模块：complain 业务对象:所有公建投诉
  *  作者:方俊坤
  * 
  */
@@ -7,16 +7,16 @@
 $(function(){
 	var complainNo=0;
 	// 设置系统页面标题
-	$("span#mainpagetille").html("住宅投诉管理");
+	$("span#mainpagetille").html("公建投诉管理");
 	// 设置日期的格式和选择
 	
-	// 显示住宅投诉列表
-	$("table#homeComplainTypeGrid").jqGrid({
-		url: '/homecomplain/list/page',
+	// 显示公建投诉列表
+	$("table#houseComplainTypeGrid").jqGrid({
+		url: '/housecomplain/list/page',
 		datatype: "json",
 		colModel: [
 			{ label: '投诉序号', name: 'complainNo', width: 5 },
-			{ label: '居民编号', name: 'home.homeNo', width: 5 },
+			{ label: '公建序号', name: 'house.houseNo', width: 5 },
 			{ label: '投诉类型编号', name: 'complainType.typeNo', width: 5 },
 			{ label: '投诉标题', name: 'complainTitle', width: 5 },
 			{ label: '投诉内容', name: 'complainContent', width: 5 },
@@ -32,7 +32,7 @@ $(function(){
 			{ label: '维修人', name: 'serviceContent', width: 5 },
 			{ label: '回访时间', name: 'servicePerson', width: 5 },
 			{ label: '客户意见', name: 'feedBackDate', width: 5 },
-			{ label: '客户意见', name: 'homeComment', width: 5 },
+			{ label: '客户意见', name: 'houseComment', width: 5 },
 			{ label: '保险出险时间', name: 'assuranceDate', width: 5 },
 			{ label: '保险金额', name: 'assuranceFee', width: 5 },
 			{ label: '保险理赔时间', name: 'assurancePayDate', width: 5 },
@@ -51,21 +51,22 @@ $(function(){
 		      records: "count", 
 		      repeatitems: true, 
 		      id: "complainNo"},
-		pager: "#homeComplainTypePager",
+		pager: "#houseComplainTypePager",
 		onSelectRow:function(no){
 			complainNo=no;
 		}
 		
 	});
+	//修改$('#addForm [name="house.houseNo"]')[0].value=
 	
 	// 点击增加链接处理
-	$("button#homeComplainAdd").off().on("click",function(event){
-//		if($("div#homeComplainTypeDialogArea").text()!=="")
+	$("button#houseComplainAdd").off().on("click",function(event){
+//		if($("div#houseComplainTypeDialogArea").text()!=="")
 //			return;
-		$("div#homeComplainTypeDialogArea").off().load("complain/homecomplain/add.html",function(){
-			$.getJSON("home/getAllHome",function(data){
+		$("div#houseComplainTypeDialogArea").off().load("complain/housecomplain/add.html",function(){
+			$.getJSON("house/getAll",function(data){
 				var datalisthtml="";
-				data.list.forEach(e=>datalisthtml +="<option value='"+e.homeNo+"'>"+e.homeName+"</option>"); 
+				data.list.forEach(e=>datalisthtml +="<option value='"+e.houseNo+"'>"+e.name+"</option>"); 
 				$("datalist#homeNoList").append(datalisthtml);
 			});
 
@@ -74,37 +75,34 @@ $(function(){
 				data.list.forEach(e=>datalisthtml +="<option value='"+e.typeNo+"'>"+e.typeName+"</option>"); 
 				$("datalist#typeNoList").append(datalisthtml);
 			});
-			$("div#homeComplainTypeDialogArea").dialog({
-				title:"住宅投诉记录添加",
+			$("div#houseComplainTypeDialogArea").dialog({
+				title:"公建投诉记录添加",
 				width:600
 			});
 			$("form#addForm").ajaxForm(function(result){
-				$("div#homeComplainTypeDialogArea").dialog("close");
-				$("div#homeComplainTypeDialogArea").dialog("destroy");
-				$("div#homeComplainTypeDialogArea").html("");
+				$("div#houseComplainTypeDialogArea").dialog("close");
+				$("div#houseComplainTypeDialogArea").dialog("destroy");
+				$("div#houseComplainTypeDialogArea").html("");
 				if(result.status==="OK"){
 					alert(result.message);
-					$("table#homeComplainTypeGrid").trigger("reloadGrid");
+					$("table#houseComplainTypeGrid").trigger("reloadGrid");
 				}
 			})
 			
 			// 点击取消
 			$("input[value='取消']").on("click",function(event){
-				$("div#homeComplainTypeDialogArea").dialog("close");
-				$("div#homeComplainTypeDialogArea").dialog("destroy");
-				$("div#homeComplainTypeDialogArea").html("");
+				$("div#houseComplainTypeDialogArea").dialog("close");
+				$("div#houseComplainTypeDialogArea").dialog("destroy");
+				$("div#houseComplainTypeDialogArea").html("");
 			});
 		});
 	});
-	
-
-
-	//===========================删除住宅投诉处理================================================
-	$("#homeComplainDel").off().on("click",function(event){
+	//===========================删除公建投诉处理================================================
+	$("#houseComplainDel").off().on("click",function(event){
 						if(complainNo===0||complainNo===""){
 							BootstrapDialog.show({
-					            title: '住宅投诉记录作信息',
-					            message:"请选择要查看的住宅投诉记录",
+					            title: '公建投诉记录作信息',
+					            message:"请选择要查看的公建投诉记录",
 					            buttons: [{
 					                label: '确定',
 					                action: function(dialog) {
@@ -114,16 +112,16 @@ $(function(){
 					        });
 						}
 						else{
-						BootstrapDialog.confirm('确认删除此住宅投诉记录么?', function(result){
+						BootstrapDialog.confirm('确认删除此公建投诉记录么?', function(result){
 				            if(result) {
 				            	
-				                $.post("/homecomplain/delete",{no:complainNo},function(result){
+				                $.post("/housecomplain/delete",{no:complainNo},function(result){
 				                	if(result.status==="OK"){
 				                		complainNo="";
-				    					$("table#homeComplainTypeGrid").trigger("reloadGrid");
+				    					$("table#houseComplainTypeGrid").trigger("reloadGrid");
 									}
 									BootstrapDialog.show({
-							            title: '住宅投诉记录信息',
+							            title: '公建投诉记录信息',
 							            message:result.message
 							        });
 				              
