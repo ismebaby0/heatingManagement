@@ -10,12 +10,7 @@ package com.neusoft.ht.fee.model;
 import java.util.Date;
 
 import lombok.Data;
-/**
- * 
- * @Description
- * @author:刘培嘉
- * @date:2019年8月12日 下午15:17:29
- */
+
 
 @Data
 public class HomeFee {

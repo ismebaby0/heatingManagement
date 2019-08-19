@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.neusoft.ht.fee.model.HomeModel;
@@ -40,6 +41,19 @@ public class HomeController {
 	@RequestMapping("selectByNo")
 	public HomeModel selectByNo(int homeNo) throws Exception {
 		return service.selectByNo(homeNo);
+	}
+	
+	//分页
+	@RequestMapping("getall")
+	public ResultMessage<HomeModel> getAllWithPage(@RequestParam(required = false,defaultValue ="3") int rows,@RequestParam(required = false,defaultValue = "1") int page) throws Exception{
+		ResultMessage<HomeModel> message = new ResultMessage<>("ok", "查询成功");
+		message.setList(service.selectAllWithPage(rows, page));
+		message.setPage(page);
+		message.setRows(rows);
+		System.out.println(rows);
+		message.setCount(service.getCountAll());
+		message.setPageCount(service.getCountPage(rows));
+		return message;
 	}
 	
 
