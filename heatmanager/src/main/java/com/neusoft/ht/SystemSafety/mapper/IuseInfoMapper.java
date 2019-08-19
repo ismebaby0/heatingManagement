@@ -31,4 +31,6 @@ public interface IuseInfoMapper {
  
  //为用户授权功能
  public void createWithFunctionById(String id,int[] funno) throws Exception;
+ //删除用户权限
+ public void deleteWithFunctionById(String id)throws Exception;
 }

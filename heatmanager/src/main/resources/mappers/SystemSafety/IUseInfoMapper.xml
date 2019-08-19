@@ -61,5 +61,9 @@
        (#{id},#{no})
     </foreach>
    </insert>
+   <!-- 删除用户权限 -->
+   <delete id="deleteWithFunctionById">
+   delete * from HT_FunctionUser where UUserID
+   </delete>
 </mapper>
 

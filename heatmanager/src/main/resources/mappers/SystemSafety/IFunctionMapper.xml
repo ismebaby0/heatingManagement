@@ -29,7 +29,7 @@
   delete from HT_Function where FUNNO=#{funNo}
   </delete>
    
- <select id="selectWithAll" resultMap="FunctionResultMap">
+ <select id="selectListWithAll" resultMap="FunctionResultMap">
   select * from HT_Function
  </select>
  

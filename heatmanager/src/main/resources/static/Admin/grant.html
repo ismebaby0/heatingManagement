@@ -1,13 +1,16 @@
 <div class="panel panel-default">
-    <div class="panel-heading">当前用户id:</div>
+    <div class="panel-heading">当前用户id:<span id="employeeId"></span></div>
     <div class="panel-body">
        <span id="empfunctions">用户已经拥有的权限：</span>
     </div>
-    <ul class="list-group">可供选择的权限：
-        <li class="list-group-item">免费域名注册</li>
-        <li class="list-group-item">免费 Window 空间托管</li>
-        <li class="list-group-item">图像的数量</li>
-        <li class="list-group-item">24*7 支持</li>
-        <li class="list-group-item">每年更新成本</li>
+    <ul class="list-group">
+        <li class="list-group-item">可供选择的权限：</li>
+        <li class="list-group-item">
+        <form name="input" action="/html/html_form_action.asp" method="get">
+        <span id="funcitonForm">
+        </span>
+		<input type="submit" value="提交" class="btn btn-primary"/>
+		</form> 
+        </li>
     </ul>
 </div>

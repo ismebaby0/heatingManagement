@@ -28,4 +28,10 @@ public ResultMessage<Function> getListWithPages(@RequestParam(required = false,d
 	
 	return result;
 }
+
+@RequestMapping("list")
+public List<Function> getListWithAll() throws Exception{
+	List<Function> list=func.getListByAll();
+	return list;
+}
 }
