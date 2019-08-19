@@ -1,13 +1,12 @@
 package com.neusoft.ht.complain.model;
 
-import com.neusoft.ht.fee.model.HomeModel;
-import com.neusoft.ht.fee.model.HtHouseModel;
-
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.neusoft.ht.fee.model.HtHouseModel;
 
 /**
  * 公建投诉信息Model
