@@ -37,7 +37,7 @@ public class HouseTypeController {
 	
 	@RequestMapping("/getbyno")
 	public ResultMessage<HouseType> getByNo(int typeNo) throws Exception {
-		ResultMessage<HouseType> result = new ResultMessage<>();
+		ResultMessage<HouseType> result = new ResultMessage<>("ok","查询成功");
 		result.setModel(service.selectByNo(typeNo));
 		return result;
 	}
@@ -48,11 +48,13 @@ public class HouseTypeController {
 		return new ResultMessage<>("ok","删除成功");
 	}
 	
-	@RequestMapping("/update")
+	@RequestMapping("/modify")
 	public ResultMessage<HouseType> updateHouseType(HouseType ht) throws Exception {
 		if(ht.getTypeName().trim().length() > 0) {
 			service.updateHouseType(ht);
-			return new ResultMessage<>("ok","修改成功");
+			 ResultMessage<HouseType> resultMessage = new ResultMessage<>("ok","修改成功");
+			 resultMessage.setModel(ht);
+			 return resultMessage;
 		}else {
 			return new ResultMessage<>("faild", "失败");
 		}

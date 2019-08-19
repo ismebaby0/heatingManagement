@@ -7,9 +7,9 @@
  */
 
 $(function(){
-	var uuserid=null;
-	var upassword=null;
-	var uname=null;
+
+	var no = 0;
+	var name = null;
 	//设置系统页面标题
 	$("span#mainpagetille").html("用户管理");
 	//设置日期的格式和选择
@@ -35,8 +35,10 @@ $(function(){
 		      records: "count", 
 		      repeatitems: true, 
 		      id: "typeNo"},
-		pager: "#EmployeeGridPager"
-		
+		pager: "#EmployeeGridPager",
+		onSelectRow:function(data){
+			no = data ;
+		}
 	});
 	
 	//点击增加链接处理
@@ -66,6 +68,63 @@ $(function(){
 		});
 	});
 	
+	
+	//修改按钮	//点击修改按钮事件处理
+	$("button#modify").off().on("click",function(event){
+		if(no==0){
+			BootstrapDialog.show({
+	            title: '操作信息',
+	            message:"请选择要修改数据"
+	        });
+		}
+		else {
+			$("div#DepartmentDialogArea").load("fee/HouseType/modify.html",function(){
+				$.getJSON("/HouseType/getbyno",{typeNo:no},function(data){	//{}中是请求参数，data是后端返回的结果
+					//alert(data.status);
+					//alert(data.model.typeName);
+					if(data.status=="ok"){
+						
+						$("input[name='typeNo']").val(no);
+						$("input[name='typeNo']").attr("readonly","readonly");//设置主键为不可编辑状态
+						$("input[name='typeName']").val(data.model.typeName);
+					}
+				});
+				
+				$("div#DepartmentDialogArea" ).dialog({
+					title:"房子类型修改",
+					width:600
+				});
+				//拦截表单提交
+				$("form#DepartmentModifyForm").ajaxForm(function(result){
+					if(result.status=="ok"){
+						$("input[name='typeNo']").removeAttr("readonly");	//去除只读
+						$("table#EmployeeGrid").trigger("reloadGrid");
+					}
+					//alert(result.message);
+					//BootstrapDialog.alert(result.message);
+					BootstrapDialog.show({
+			            title: '操作结果信息',
+			            message:result.message
+			        });
+					$("div#DepartmentDialogArea" ).dialog( "close" );
+					$("div#DepartmentDialogArea" ).dialog( "destroy" );
+					$("div#DepartmentDialogArea").html("");
+					
+				});
+				
+				
+				//点击取消按钮处理
+				$("input[value='取消']").on("click",function(){
+					$( "div#DepartmentDialogArea" ).dialog( "close" );
+					$( "div#DepartmentDialogArea" ).dialog( "destroy" );
+					$("div#DepartmentDialogArea").html("");
+				});
+			});
+			
+		}
+		
+		
+	});
 
 	
 	
