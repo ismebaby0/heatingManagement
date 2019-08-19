@@ -4,9 +4,7 @@
  */
 
 $(function(){
-	var uuserid=null;
-	var upassword=null;
-	var uname=null;
+	var complainTypeNo=0;
 	// 设置系统页面标题
 	$("span#mainpagetille").html("投诉管理");
 	// 设置日期的格式和选择
@@ -32,7 +30,10 @@ $(function(){
 		      records: "count", 
 		      repeatitems: true, 
 		      id: "typeNo"},
-		pager: "#ComplainTypePager"
+		pager: "#ComplainTypePager",
+		onSelectRow:function(no){
+			complainTypeNo=no;
+		}
 		
 	});
 	
@@ -65,6 +66,43 @@ $(function(){
 	});
 	
 
+	//===========================删除投诉类型================================================
+	$("#complainTypeDel").off().on("click",function(event){
+						if(complainTypeNo===0||complainTypeNo===""){
+							BootstrapDialog.show({
+					            title: '投诉类型信息',
+					            message:"请选择要查看的投诉类型",
+					            buttons: [{
+					                label: '确定',
+					                action: function(dialog) {
+					                    dialog.close();
+					                }
+					            }]
+					        });
+						}
+						else{
+						BootstrapDialog.confirm('确认删除此投诉类型么?', function(result){
+				            if(result) {
+				            	
+				                $.post("/complaintype/delete",{no:complainTypeNo},function(result){
+				                	if(result.status==="OK"){
+				                		complainTypeNo="";
+				    					$("table#ComplainTypeGrid").trigger("reloadGrid");
+									}
+									BootstrapDialog.show({
+							            title: '投诉类型信息',
+							            message:result.message
+							        });
+				              
+				            
+				        });
+				            }
+			
+		});
+						}
+	});
+
+	
 	
 	
 	
