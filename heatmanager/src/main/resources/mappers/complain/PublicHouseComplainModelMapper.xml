@@ -45,9 +45,15 @@
 		type="com.neusoft.ht.complain.model.PublicHouseComplainModel"
 		extends="BaseResultMap">
 		<association property="house"
-			resultMap="com.neusoft.ht.fee.mapper.IHomeMapper.resultOfHome" />
+			resultMap="com.neusoft.ht.fee.mapper.IHtHouseMapper.selectMap" />
 		<association property="complainType"
 			resultMap="com.neusoft.ht.complain.mapper.IComplainTypeMapper.BaseResultMap" />
+	</resultMap>
+	<resultMap id="BaseResultMapWithALl"
+		type="com.neusoft.ht.complain.model.PublicHouseComplainModel"
+		extends="BaseResultMap">
+		<result property="house.houseNo" column="HouseNo"/>
+		<result property="complainType.typeNo" column="TYPENO"/>
 	</resultMap>
 	<sql id="Base_Column_List">
 		ComplainNo, ComplainTitle, ComplainContent, RequestContent,
@@ -60,10 +66,9 @@
 		ComplainStatus
 	</sql>
 	<!-- HouseNo, TYPENO, -->
-	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+	<select id="selectByPrimaryKey" resultMap="BaseResultMapWithALl"
 		parameterType="java.lang.Integer">
-		select
-		<include refid="Base_Column_List" />
+		select *
 		from HT_PublicHousecomplain
 		where ComplainNo = #{complainNo,jdbcType=INTEGER}
 	</select>
@@ -93,7 +98,7 @@
 	</select>
 	<select id="selectTotalCount" resultType="int">
 		select
-		IFNULL(count(1),0) from HT_complainType
+		IFNULL(count(1),0) from HT_PublicHousecomplain
 	</select>
 	<delete id="deleteByPrimaryKey"
 		parameterType="java.lang.Integer">
