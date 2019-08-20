@@ -95,13 +95,49 @@ $(function(){
 							        });
 				              
 				            
-				        });
-				            }
-			
-		});
+					        });
+					            }
+				
+							});
 						}
 	});
 
+	//----complainTypeUpd 更新
+	$("#complainTypeUpd").off().on("click",function(event){
+
+		if(complainTypeNo===0||complainTypeNo.trim().length===0){
+			BootstrapDialog.show({
+	            title: '投诉类型信息',
+	            message:"请选择要查看的投诉类型",
+	            buttons: [{
+	                label: '确定',
+	                action: function(dialog) {
+	                    dialog.close();
+	                }
+	            }]
+	        });
+		}
+		else{
+//			BootstrapDialog.confirm('确认gxing此投诉类型么?', function(result){
+//	            if(result) {
+//	            	
+//	                $.post("/complaintype/delete",{no:complainTypeNo},function(result){
+//	                	if(result.status==="OK"){
+//	                		complainTypeNo="";
+//	    					$("table#ComplainTypeGrid").trigger("reloadGrid");
+//						}
+//						BootstrapDialog.show({
+//				            title: '投诉类型信息',
+//				            message:result.message
+//				        });
+//	              
+//	            
+//		        });
+//		            }
+//	
+//				});
+		}
+	}
 	
 	
 	

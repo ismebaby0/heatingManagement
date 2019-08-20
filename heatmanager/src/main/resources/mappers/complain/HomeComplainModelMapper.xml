@@ -49,6 +49,12 @@
 		<association property="complainType"
 			resultMap="com.neusoft.ht.complain.mapper.IComplainTypeMapper.BaseResultMap" />
 	</resultMap>
+	<resultMap id="BaseResultMapWithALl"
+		type="com.neusoft.ht.complain.model.HomeComplainModel"
+		extends="BaseResultMap">
+		<result property="home.homeNo" column="homeNo"/>
+		<result property="complainType.typeNo" column="TYPENO"/>
+	</resultMap>
 	<sql id="Base_Column_List">
 		ComplainNo, ComplainTitle, ComplainContent, RequestContent,
 		ComplainDate,
@@ -60,10 +66,9 @@
 		ComplainStatus
 	</sql>
 	<!-- HomeNo, TYPENO, -->
-	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+	<select id="selectByPrimaryKey" resultMap="BaseResultMapWithALl"
 		parameterType="java.lang.Integer">
-		select
-		<include refid="Base_Column_List" />
+		select *
 		from HT_Homecomplain
 		where ComplainNo = #{complainNo,jdbcType=INTEGER}
 	</select>
