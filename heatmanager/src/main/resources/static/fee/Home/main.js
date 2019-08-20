@@ -14,19 +14,19 @@ $(function(){
 		colModel: [
 			{ label: '居民序号', name: 'homeNo', width: 75 },
 			{ label: '供热编码', name: 'heatingCode', width: 75 },
-			{ label: '姓名',     name: 'Name', width: 75 },
-			{ label: '楼号',     name: 'BuildingCODE', width: 75 },
-			{ label: '单元',     name: 'DepartmentCode', width: 75 },
-			{ label: '楼层',     name: 'FloorCode', width: 75 },
-			{ label: '房屋编号', name: 'HouseCode', width: 75 },
-			{ label: '建筑面积', name: 'Area', width: 75 },
-			{ label: '朝向',     name: 'Direction', width: 75 },
-			{ label: '电话',     name: 'Tel', width: 75 },
-			{ label: '手机',     name: 'Mobile', width: 75 },
-			{ label: '邮箱',     name: 'Mail', width: 75 },
-			{ label: 'QQ',       name: 'QQ', width: 75 },
-			{ label: '供热状态', name: 'HeatingStatus', width: 75 },
-			{ label: '实际供热状态', name: 'HeatingArea', width: 75 },
+			{ label: '姓名',     name: 'homeName', width: 75 },
+			{ label: '楼号',     name: 'buildingCode', width: 75 },
+			{ label: '单元',     name: 'departmentCode', width: 75 },
+			{ label: '楼层',     name: 'floorCode', width: 75 },
+			{ label: '房屋编号', name: 'houseCode', width: 75 },
+			{ label: '建筑面积', name: 'homeArea', width: 75 },
+			{ label: '朝向',     name: 'direction', width: 75 },
+			{ label: '电话',     name: 'tel', width: 75 },
+			{ label: '手机',     name: 'mobile', width: 75 },
+			{ label: '邮箱',     name: 'mail', width: 75 },
+			{ label: 'QQ',       name: 'qq', width: 75 },
+			{ label: '供热状态', name: 'heatingStatus', width: 75 },
+			{ label: '实际供热面积', name: 'heatingArea', width: 75 },
 		],	
 		
 		
@@ -44,14 +44,14 @@ $(function(){
 		      repeatitems: true, 
 		      id: "homeNo"},
 		pager: "#EmployeeGridPager",
-		onSelectRow:function(data){
+		onSelectRow :function(data){
 			no = data ;
 		}
 	});
 	
 	//点击增加链接处理
 	$("button#add").off().on("click",function(event){
-		$("div#DepartmentDialogArea").load("fee/Neighbourhood/add.html",function(){
+		$("div#DepartmentDialogArea").load("fee/home/add.html",function(){
 			$("div#DepartmentDialogArea").dialog({
 				title:"添加房子类型",
 				width:500
@@ -86,16 +86,30 @@ $(function(){
 	        });
 		}
 		else {
-			$("div#DepartmentDialogArea").load("fee/Neighbourhood/modify.html",function(){
-				$.getJSON("/Neighbourhood/getbyno",{hoodNo:no},function(data){	//{}中是请求参数，data是后端返回的结果
+			$("div#DepartmentDialogArea").load("fee/Home/modify.html",function(){
+				$.getJSON("/home/getone/withrelation",{homeNo:no},function(data){	//{}中是请求参数，data是后端返回的结果
 					//alert(data.status);
 					//alert(data.model.typeName);
 					if(data.status=="ok"){
 						
-						$("input[name='hoodNo']").val(no);
-						$("input[name='typeNo']").attr("readonly","readonly");//设置主键为不可编辑状态
-						$("input[name='hoodName']").val(data.model.hoodName);
-						$("input[name='address']").val(data.model.address);
+						$("input[name='homeNo']").val(no);
+						$("input[name='homeNo']").attr("readonly","readonly");//设置主键为不可编辑状态
+						$("input[name='houseTypeNo.typeNo']").val(data.model.houseTypeNo.typeNo);
+						$("input[name='hoodNo.hoodNo']").val(data.model.hoodNo.hoodNo);
+						$("input[name='heatingCode']").val(data.model.heatingCode);
+						$("input[name='homeName']").val(data.model.homeName);
+						$("input[name='buildingCode']").val(data.model.buildingCode);
+						$("input[name='departmentCode']").val(data.model.departmentCode);
+						$("input[name='floorCode']").val(data.model.floorCode);
+						$("input[name='houseCode']").val(data.model.houseCode);
+						$("input[name='homeArea']").val(data.model.homeArea);
+						$("input[name='direction']").val(data.model.direction);
+						$("input[name='tel']").val(data.model.tel);
+						$("input[name='mobile']").val(data.model.mobile);
+						$("input[name='mail']").val(data.model.mail);
+						$("input[name='qq']").val(data.model.qq);
+						$("input[name='heatingStatus']").val(data.model.heatingStatus);
+						$("input[name='heatingArea']").val(data.model.heatingArea);
 					}
 				});
 				
@@ -154,7 +168,7 @@ $(function(){
 		BootstrapDialog.confirm('确认删除这条数据?', function(result){
             if(result) {
             	
-                $.post("/Neighbourhood/delete",{hoodNo:no},function(result){
+                $.post("/home/delete",{homeNo:no},function(result){
                 	if(result.status=="ok"){
                 		$("table#EmployeeGrid").trigger("reloadGrid");
 					}

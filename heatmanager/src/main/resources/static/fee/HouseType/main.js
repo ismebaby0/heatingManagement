@@ -144,7 +144,7 @@ $(function(){
 		BootstrapDialog.confirm('确认删除这条数据?', function(result){
             if(result) {
             	
-                $.post("/HouseType/delete",{hoodNo:no},function(result){
+                $.post("/home/delete",{homeNo:no},function(result){
                 	if(result.status=="ok"){
                 		$("table#EmployeeGrid").trigger("reloadGrid");
 					}

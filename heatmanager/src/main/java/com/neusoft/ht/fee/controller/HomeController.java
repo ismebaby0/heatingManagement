@@ -18,29 +18,35 @@ public class HomeController {
 	@Autowired
 	IHomeService service = null;
 	
-	@RequestMapping("/getAllHome")
-	public ResultMessage<HomeModel> getAll() throws Exception{
-		List<HomeModel> list = service.selectAll();
-		ResultMessage<HomeModel> result = new ResultMessage<>();
-		result.setList(list);
-		return result;
-	}
+	
 	
 	@RequestMapping("/add")
-	public void add(HomeModel home) throws Exception {
+	public ResultMessage<HomeModel> add(HomeModel home) throws Exception {
 		service.add(home);
+		return new ResultMessage<HomeModel>("ok","添加成功");
+		
 	}
 	@RequestMapping("/delete")
-	public void delete(int homeNo)	throws Exception{
+	public ResultMessage<HomeModel> delete(int homeNo)	throws Exception{
 		service.delete(homeNo);
+		return new ResultMessage<HomeModel>("ok","删除成功");
 	}
-	@RequestMapping("/update")
-	public void update(HomeModel home) throws Exception{
+	@RequestMapping("/modify")
+	public ResultMessage<HomeModel> update(HomeModel home) throws Exception{
 		service.update(home);
+		return new ResultMessage<HomeModel>("ok","修改成功");
 	}
-	@RequestMapping("selectByNo")
-	public HomeModel selectByNo(int homeNo) throws Exception {
-		return service.selectByNo(homeNo);
+	@RequestMapping("getbyno")
+	public ResultMessage<HomeModel> selectByNo(int homeNo) throws Exception {
+		ResultMessage<HomeModel> result = new ResultMessage<HomeModel>("ok","查询成功");
+		result.setModel(service.selectByNo(homeNo));
+		return result;
+	}
+	@RequestMapping("getone/withrelation")
+	public ResultMessage<HomeModel> getOneWithRelation(int homeNo) throws Exception{
+		ResultMessage<HomeModel> result = new ResultMessage<>("ok", "关联查询成功");
+		result.setModel(service.getOneWithRelation(homeNo));
+		return result;
 	}
 	
 	//分页

@@ -2,52 +2,50 @@
 <div class="row">
     <div class="col-xs-12">
       <div class="box-body">
-        <!-- 修改-->
-       	    <form id="DepartmentModifyForm" role="form" action="/home/modify" method="post">
-              
+        <!-- 修改部门 -->
+       	    <form id="DepartmentModifyForm" role="form" action="house/modify" method="post">
+               <div class="col-md-6">
                 <div class="form-group">
-                  <label>居民序号</label>
-                  <input type="text" class="form-control" name="homeNo"  placeholder="编号" readonly="readonly">
-                </div>
-                <div class="form-group">
-                  <label>户型编号</label>
-                  <input type="text" class="form-control" name="houseTypeNo.typeNo"  placeholder="名称">
+                  <label>公建序号</label>
+                  <input type="text" class="form-control" name="houseNo"  placeholder="序号"  readonly="readonly">
                 </div>
                 <div class="form-group">
                   <label>小区编号</label>
-                  <input type="text" class="form-control" name="hoodNo.hoodNo"  placeholder="名称">
+                  <input type="text" class="form-control" name="neighbourhood.hoodNo"  placeholder="名称">
                 </div>
                 <div class="form-group">
                   <label>供热编码</label>
                   <input type="text" class="form-control" name="heatingCode"  placeholder="名称">
                 </div>
                 <div class="form-group">
-                  <label>姓名</label>
-                  <input type="text" class="form-control" name="homeName"  placeholder="名称">
+                  <label>公建名称</label>
+                  <input type="text" class="form-control" name="name"  placeholder="名称">
+                </div>
+                <div class="form-group">
+                  <label>公建编号</label>
+                  <input type="text" class="form-control" name="houseCode"  placeholder="名称" >
                 </div>
                 <div class="form-group">
                   <label>楼号</label>
-                  <input type="text" class="form-control" name="buildingCode"  placeholder="名称">
-                </div>
-                <div class="form-group">
-                  <label>单元</label>
-                  <input type="text" class="form-control" name="departmentCode"  placeholder="名称">
-                </div>
-                <div class="form-group">
-                  <label>楼层</label>
-                  <input type="text" class="form-control" name="floorCode"  placeholder="名称">
-                </div>
-                <div class="form-group">
-                  <label>房屋编号</label>
-                  <input type="text" class="form-control" name="houseCode"  placeholder="名称">
+                  <input type="text" class="form-control" name="building"  placeholder="名称">
                 </div>
                 <div class="form-group">
                   <label>建筑面积</label>
-                  <input type="text" class="form-control" name="homeArea"  placeholder="名称">
+                  <input type="text" class="form-control" name="area"  placeholder="名称">
                 </div>
                 <div class="form-group">
-                  <label>朝向</label>
-                  <input type="text" class="form-control" name="direction"  placeholder="名称">
+                  <label>地址</label>
+                  <input type="text" class="form-control" name="address"  placeholder="名称">
+                </div>
+                </div>
+                <div class="col-md-6">
+                <div class="form-group">
+                  <label>邮编</label>
+                  <input type="text" class="form-control" name="postcode"  placeholder="名称">
+                </div>
+                <div class="form-group">
+                  <label>联系人姓名</label>
+                  <input type="text" class="form-control" name="contactName"  placeholder="名称">
                 </div>
                 <div class="form-group">
                   <label>电话</label>
@@ -58,25 +56,23 @@
                   <input type="text" class="form-control" name="mobile"  placeholder="名称">
                 </div>
                 <div class="form-group">
-                  <label>邮箱</label>
+                  <label>Mail</label>
                   <input type="text" class="form-control" name="mail"  placeholder="名称">
                 </div>
-                 <div class="form-group">
+                <div class="form-group">
                   <label>QQ</label>
                   <input type="text" class="form-control" name="qq"  placeholder="名称">
                 </div>
-                 <div class="form-group">
+                <div class="form-group">
                   <label>供热状态</label>
                   <input type="text" class="form-control" name="heatingStatus"  placeholder="名称">
                 </div>
-                 <div class="form-group">
+                <div class="form-group">
                   <label>实际供热面积</label>
                   <input type="text" class="form-control" name="heatingArea"  placeholder="名称">
+                </div>
                </div>
-                
-              
-               
-               <div class="form-group">
+               <div class="form-group" style = "padding-left: 15px;">
                  <input type="submit" class="btn btn-primary" value="提交" />
                  <input type="button" class="btn btn-primary" value="取消">
                  <input type="hidden" name="no" readonly  />

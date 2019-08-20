@@ -80,8 +80,9 @@ $(function(){
 					if(data.status=="ok"){
 						
 						$("input[name='hoodNo']").val(no);
-						$("input[name='typeNo']").attr("readonly","readonly");//设置主键为不可编辑状态
+						$("input[name='hoodNo']").attr("readonly","readonly");//设置主键为不可编辑状态
 						$("input[name='hoodName']").val(data.model.hoodName);
+						
 						$("input[name='address']").val(data.model.address);
 					}
 				});

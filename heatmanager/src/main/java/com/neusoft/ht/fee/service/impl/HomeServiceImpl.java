@@ -17,10 +17,10 @@ public class HomeServiceImpl implements IHomeService{
 
 	@Autowired
 	private IHomeMapper mapper = null;
+	
 	@Override
-	public List<HomeModel> selectAll() throws Exception {
-		List<HomeModel> list = mapper.selectByAll();
-		return list;
+	public HomeModel getOneWithRelation(int homeNo) throws Exception {
+		return mapper.getOneWithRelation(homeNo);
 	}
 	@Override
 	public void add(HomeModel home) throws Exception {

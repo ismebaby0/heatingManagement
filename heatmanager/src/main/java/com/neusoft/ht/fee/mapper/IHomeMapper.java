@@ -22,8 +22,8 @@ public interface IHomeMapper {
 	// 查看一条记录
 	public HomeModel selectByPrimaryKey(int homeNo) throws Exception;
 
-	// 查看所有记录
-	public List <HomeModel> selectByAll() throws Exception;
+	//关联查询一条记录
+	public HomeModel getOneWithRelation(int homeNo) throws Exception;
 	
 	//查询小区表数据的个数
 	public int getCountByAll() throws Exception;
