@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.neusoft.ht.fee.model.Neighbourhood;
 import com.neusoft.ht.fee.service.INeighbourhoodService;
+import com.neusoft.ht.message.ResultMessage;
 
 
 /**
@@ -19,31 +21,51 @@ import com.neusoft.ht.fee.service.INeighbourhoodService;
  */
 
 @RestController
-@RequestMapping("/Neighbood")
+@RequestMapping("/Neighbourhood")
 public class NeighbourhoodController {
 	
 	@Autowired
 	private INeighbourhoodService service= null;
 	
 	@RequestMapping("/add")
-	public void add(Neighbourhood nbh) throws Exception {
+	public ResultMessage<Neighbourhood> add(Neighbourhood nbh) throws Exception {
 		service.add(nbh);
+		System.out.println(nbh);
+		return new ResultMessage<>("ok", "添加成功");
 	}
 	@RequestMapping("/delete")
-	public void delete(int nbh)	throws Exception{
-		service.delete(nbh);
+	public ResultMessage<Neighbourhood> delete(int hoodNo)	throws Exception{
+		service.delete(hoodNo);
+		return new ResultMessage<>("ok", "删除成功");
 	}
-	@RequestMapping("/update")
-	public void update(Neighbourhood nbh) throws Exception{
+	@RequestMapping("/modify")
+	public ResultMessage<Neighbourhood> update(Neighbourhood nbh) throws Exception{
 		service.update(nbh);
+		return new ResultMessage<>("ok", "更新成功");
 	}
-	@RequestMapping("selectByNo")
-	public Neighbourhood selectByNo(int hoodNo) throws Exception {
-		return service.selectByNo(hoodNo);
+	@RequestMapping("getbyno")
+	public ResultMessage<Neighbourhood> selectByNo(int hoodNo) throws Exception {
+		ResultMessage<Neighbourhood> message = new ResultMessage<>("ok", "查询成功");
+		message.setModel(service.selectByNo(hoodNo));
+		return message;
 	}
 	
 	@RequestMapping("/list")
-	public List<Neighbourhood> selectByAll() throws Exception{
-		return service.selectByAll();
+	public ResultMessage<Neighbourhood> selectByAll() throws Exception{
+		ResultMessage<Neighbourhood> message = new ResultMessage<>("ok", "查询成功");
+		message.setList(service.selectByAll());
+		return message;
+	}
+	
+	@RequestMapping("getall")
+	public ResultMessage<Neighbourhood> getAllWithPage(@RequestParam(required = false,defaultValue ="3") int rows,@RequestParam(required = false,defaultValue = "1") int page) throws Exception{
+		ResultMessage<Neighbourhood> message = new ResultMessage<>("ok", "查询成功");
+		message.setList(service.selectAllWithPage(rows, page));
+		message.setPage(page);
+		message.setRows(rows);
+		System.out.println(rows);
+		message.setCount(service.getCountAll());
+		message.setPageCount(service.getCountPage(rows));
+		return message;
 	}
 }

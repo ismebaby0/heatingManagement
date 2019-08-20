@@ -247,6 +247,7 @@ $("a#EmployeeGrantLink").off().on("click",function(){
 		$("div#EmployeeDialog").load("Admin/grant.html",function(){
 			//取得指定的用户信息
 			$("span#employeeId").html(uuserid);
+			$("input#userid").val(uuserid);
 			$.getJSON("userinfo/functionList",{id:uuserid},function(em){
 				if(em.functions){
 					$.each(em.functions,function(index,Function){
@@ -259,14 +260,36 @@ $("a#EmployeeGrantLink").off().on("click",function(){
             	if(em){
 					$.each(em,function(index,Function){
 				
-						$("span#funcitonForm").append("<li class='list-group-item'>"+"["+Function.funName+"]:"+"<input type='checkbox' name='no' value='"+Function.funNo+"' checked='checked'/> "+"</li>");
+						$("span#funcitonForm").append("["+Function.funName+"]:"+"<input type='checkbox' name='no' value='"+Function.funNo+"' /> ");
 					});
 				}
             });
-			
+			//默认选中已有功能
+            //处理提交的数据
+            
+            
+            //显示弹窗
 			$("div#EmployeeDialog").dialog({
 				title:"用户详细",
 				width:800
+			});
+			
+			//处理提交的数据
+			$("form#EmployeeGrantForm").ajaxForm(function(result){
+				if(result.status=="OK"){
+					uuserid="";
+					reloadEmployeeList();//更新用户列表
+				}
+				//alert(result.message);
+				//BootstrapDialog.alert(result.message);
+				BootstrapDialog.show({
+		            title: '部门操作信息',
+		            message:result.message
+		        });
+				$("div#EmployeeDialog").dialog("close");
+				$("div#EmployeeDialog").dialog("destroy")
+				$("div#EmployeeDialog").html("");
+				
 			});
 			//点击取消按钮，管理弹出窗口
 			$("input[value='关闭']").off().on("click",function(){

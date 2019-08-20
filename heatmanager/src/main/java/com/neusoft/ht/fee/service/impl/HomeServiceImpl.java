@@ -42,5 +42,29 @@ public class HomeServiceImpl implements IHomeService{
 		// TODO Auto-generated method stub
 		return mapper.selectByPrimaryKey(homeNo);
 	}
+	@Override
+	public int getCountAll() throws Exception {
+		return mapper.getCountByAll();
+	}
+
+
+	@Override
+	public int getCountPage(int rows) throws Exception {
+		int pageCount = 0 ;
+		int count = this.getCountAll();
+		if(count%rows == 0) {
+			pageCount = count/rows;
+		}else {
+			pageCount = count/rows+1;
+		}
+		return pageCount;
+	}
+
+
+	@Override
+	public List<HomeModel> selectAllWithPage(int row, int page) throws Exception {
+		List<HomeModel> list = mapper.selectAllWithPage(row*(page-1), page*row);
+		return list;
+	}
 
 }

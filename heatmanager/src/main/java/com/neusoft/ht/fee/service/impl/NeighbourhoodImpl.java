@@ -47,4 +47,30 @@ public class NeighbourhoodImpl  implements INeighbourhoodService {
 		return mapper.selectByPrimaryKey(hoodNo);
 	}
 
+
+	@Override
+	public int getCountAll() throws Exception {
+		return mapper.getCountByAll();
+	}
+
+
+	@Override
+	public int getCountPage(int rows) throws Exception {
+		int pageCount = 0 ;
+		int count = this.getCountAll();
+		if(count%rows == 0) {
+			pageCount = count/rows;
+		}else {
+			pageCount = count/rows+1;
+		}
+		return pageCount;
+	}
+
+
+	@Override
+	public List<Neighbourhood> selectAllWithPage(int row, int page) throws Exception {
+		List<Neighbourhood> list = mapper.selectAllWithPage(row*(page-1), page*row);
+		return list;
+	}
+
 }

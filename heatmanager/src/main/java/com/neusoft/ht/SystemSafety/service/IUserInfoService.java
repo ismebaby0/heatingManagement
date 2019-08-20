@@ -23,4 +23,6 @@ public interface IUserInfoService {
 	 public UserInfo getListWithFunctionByid(String id) throws Exception;
 	 //为用户授权
 	 public void createWithFunction(String id,int[] no) throws Exception;
+	 //修改用户头像
+	 public void modifyPhtoto(String id,byte[]photo,String contentType,String photoName)throws Exception;
 }

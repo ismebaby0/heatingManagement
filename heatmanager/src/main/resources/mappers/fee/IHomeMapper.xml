@@ -30,11 +30,11 @@
 		<association property="houseTypeNo" resultMap="com.neusoft.ht.fee.mapper.IHouseTypeMapper.selectHouseType"></association>
 	</resultMap>
 	<insert id="insert">
-		insert into Ht_Home values(#{homeNo},#{heatingCode},#{houseTypeNo.typeNo},#{hoodNo.hoodNo},#{homeName},#{buildingCode},#{departmentCode},
+		insert into HT_Home values(#{homeNo},#{heatingCode},#{houseTypeNo.typeNo},#{hoodNo.hoodNo},#{homeName},#{buildingCode},#{departmentCode},
 		#{floorCode},#{houseCode},#{homeArea},#{direction},#{tel},#{mobile},#{mail},#{qq},#{heatingStatus},#{heatingArea})
 	</insert>
 	<delete id="deleteByPrimaryKey">
-		delete from Ht_Home where home = #{homeNo}
+		delete from HT_Home where home = #{homeNo}
 	</delete>
 	<update id="updateByPrimaryKey">
 		update Ht_Home set homeNo=#{homeNo},heatingCode=#{heatingCode},houseTypeNo=#{houseTypeNo.typeNo},hoodNo=#{hoodNo.hoodNo},homeName=#{homeName},
@@ -43,10 +43,19 @@
 		mail=#{mail},qq=#{qq},heatingStatus=#{heatingStatus},heatingArea=#{heatingArea}
 	</update>
 	<select id="selectByPrimaryKey" resultMap = "resultOfHome">
-		select * from Ht_HOME where homeNo = #{homeNo}
+		select * from HT_HOME where homeNo = #{homeNo}
 	</select>
 	<select id="selectByAll" resultMap = "resultOfHomeWithRelation">
 		select *from HT_HOME home left join HT_Neighbourhood hood on home.hoodNo = hood.hoodNo left join HT_HOUSETYPE house on home.housetypeno = house.typeNo
 	</select>
+	<!-- 分页 -->
+	<select id="getCountByAll" resultType="int">
+		select count(homeNo) from HT_HOME
+	</select>
+	
+	<select id="selectAllWithPage" resultMap="resultOfHome">
+		select * from HT_HOME limit #{start},#{end}
+	</select>
+	
 
 </mapper>

@@ -5,24 +5,36 @@
 	<resultMap id="selectNeibourhood" type="com.neusoft.ht.fee.model.Neighbourhood" >
   		<id property="hoodNo" column="hoodno" />
   		<result property = "hoodName" column = "hoodName"></result>
-  		<result property = "address" column = "Address" />
+  		<result property = "address" column = "address" />
     </resultMap>
 
 	 <insert id = "insert">
-	 	insert into HT_HOUSETYPE values(#{hoodNo},#{hoodName},#{Address})
+	 	insert into HT_Neighbourhood (hoodName,address) values(#{hoodName},#{address})
 	 </insert>
 	 <delete id = "deleteByPrimaryKey">
-	 	delete from HT_HOUSETYPE where typeNo = #{hoodNo}
+	 	delete from HT_Neighbourhood where hoodNo = #{hoodNo}
 	 </delete>
 	 <update id = "updateByPrimaryKey">
-	 	update HT_HOUSETYPE set typeNo = #{hoodNo},#{hoodName},#{Address}
+	 	update HT_Neighbourhood set hoodName = #{hoodName}, address = #{address} where hoodNo = #{hoodNo}
 	 </update>
-	 <select id="selectByPrimarykey" resultMap="selectNeibourhood">
+	 <select id="selectByPrimaryKey" resultMap="selectNeibourhood">
 	 	select * from HT_Neighbourhood where hoodNo = #{hoodNo}
 	 </select>	
 	 <select id = "selectByAll" resultMap="selectNeibourhood">
 	 	select * from HT_Neighbourhood
 	 </select> 
-
+	 
+	 <!-- 
+	 public int getCountByAll() throws Exception;
+	//分页查询
+	public List<HouseFeeModel> selectAllWithPage(@Param("start") int star,@Param("end") int end) throws Exception;
+	  -->
+	<select id="getCountByAll" resultType="int">
+		select count(hoodNo) from HT_Neighbourhood
+	</select>
+	
+	<select id="selectAllWithPage" resultMap="selectNeibourhood">
+		select * from HT_Neighbourhood limit #{start},#{end}
+	</select>
 </mapper>
 

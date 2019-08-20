@@ -1,27 +1,35 @@
-/**
- * 用户前端主管理JS
- * 模块：login
- * 业务对象:所有用户
- * 作者:马佳国
- * 
- */
+
 
 $(function(){
-
 	var no = 0;
-	var name = null;
+
 	//设置系统页面标题
-	$("span#mainpagetille").html("用户管理");
+	$("span#mainpagetille").html("小区管理");
 	//设置日期的格式和选择
 	
 	//显示员工列表
 	$("table#EmployeeGrid").jqGrid({
-		url: '/HouseType/getall/page',
+		url: '/home/getall',
 		datatype: "json",
 		colModel: [
-			{ label: '户型编号', name: 'typeNo', width: 75 },
-			{ label: '户型名', name: 'typeName', width: 90 },
-			],
+			{ label: '居民序号', name: 'homeNo', width: 75 },
+			{ label: '供热编码', name: 'heatingCode', width: 75 },
+			{ label: '姓名',     name: 'Name', width: 75 },
+			{ label: '楼号',     name: 'BuildingCODE', width: 75 },
+			{ label: '单元',     name: 'DepartmentCode', width: 75 },
+			{ label: '楼层',     name: 'FloorCode', width: 75 },
+			{ label: '房屋编号', name: 'HouseCode', width: 75 },
+			{ label: '建筑面积', name: 'Area', width: 75 },
+			{ label: '朝向',     name: 'Direction', width: 75 },
+			{ label: '电话',     name: 'Tel', width: 75 },
+			{ label: '手机',     name: 'Mobile', width: 75 },
+			{ label: '邮箱',     name: 'Mail', width: 75 },
+			{ label: 'QQ',       name: 'QQ', width: 75 },
+			{ label: '供热状态', name: 'HeatingStatus', width: 75 },
+			{ label: '实际供热状态', name: 'HeatingArea', width: 75 },
+		],	
+		
+		
 		styleUI : 'Bootstrap',
 		viewrecords: true, 
 		autowidth: true,
@@ -34,7 +42,7 @@ $(function(){
 		      total: "pageCount", 
 		      records: "count", 
 		      repeatitems: true, 
-		      id: "typeNo"},
+		      id: "homeNo"},
 		pager: "#EmployeeGridPager",
 		onSelectRow:function(data){
 			no = data ;
@@ -43,7 +51,7 @@ $(function(){
 	
 	//点击增加链接处理
 	$("button#add").off().on("click",function(event){
-		$("div#DepartmentDialogArea").load("fee/HouseType/add.html",function(){
+		$("div#DepartmentDialogArea").load("fee/Neighbourhood/add.html",function(){
 			$("div#DepartmentDialogArea").dialog({
 				title:"添加房子类型",
 				width:500
@@ -69,7 +77,7 @@ $(function(){
 	});
 	
 	
-	//点击修改按钮事件处理
+	//修改按钮	//点击修改按钮事件处理
 	$("button#modify").off().on("click",function(event){
 		if(no==0){
 			BootstrapDialog.show({
@@ -78,20 +86,21 @@ $(function(){
 	        });
 		}
 		else {
-			$("div#DepartmentDialogArea").load("fee/HouseType/modify.html",function(){
-				$.getJSON("/HouseType/getbyno",{typeNo:no},function(data){	//{}中是请求参数，data是后端返回的结果
+			$("div#DepartmentDialogArea").load("fee/Neighbourhood/modify.html",function(){
+				$.getJSON("/Neighbourhood/getbyno",{hoodNo:no},function(data){	//{}中是请求参数，data是后端返回的结果
 					//alert(data.status);
 					//alert(data.model.typeName);
 					if(data.status=="ok"){
 						
-						$("input[name='typeNo']").val(no);
+						$("input[name='hoodNo']").val(no);
 						$("input[name='typeNo']").attr("readonly","readonly");//设置主键为不可编辑状态
-						$("input[name='typeName']").val(data.model.typeName);
+						$("input[name='hoodName']").val(data.model.hoodName);
+						$("input[name='address']").val(data.model.address);
 					}
 				});
 				
 				$("div#DepartmentDialogArea" ).dialog({
-					title:"房子类型修改",
+					title:"小区信息修改",
 					width:600
 				});
 				//拦截表单提交
@@ -126,12 +135,13 @@ $(function(){
 		
 	});
 
-	//==============================删除=========
+	
+//==============================删除================
 	$("button#delete").off().on("click",function(event){
 		if(no==0){
 			BootstrapDialog.show({
 	            title: '用户操作信息',
-	            message:"请选择要操作的用户",
+	            message:"请选择要操作的数据",
 	            buttons: [{
 	                label: '确定',
 	                action: function(dialog) {
@@ -144,12 +154,12 @@ $(function(){
 		BootstrapDialog.confirm('确认删除这条数据?', function(result){
             if(result) {
             	
-                $.post("/HouseType/delete",{hoodNo:no},function(result){
+                $.post("/Neighbourhood/delete",{hoodNo:no},function(result){
                 	if(result.status=="ok"){
                 		$("table#EmployeeGrid").trigger("reloadGrid");
 					}
 					BootstrapDialog.show({
-			            title: '部门操作信息',
+			            title: '操作结果',
 			            message:result.message
 			        });
               

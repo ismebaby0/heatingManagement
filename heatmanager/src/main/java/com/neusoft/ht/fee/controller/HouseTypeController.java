@@ -42,7 +42,7 @@ public class HouseTypeController {
 		return result;
 	}
 	
-	@RequestMapping("/deletebyno")
+	@RequestMapping("/delete")
 	public ResultMessage<HouseType> deleteByNo(int typeNo) throws Exception {
 		service.deleteHouseType(typeNo);
 		return new ResultMessage<>("ok","删除成功");
@@ -78,6 +78,7 @@ public class HouseTypeController {
 		result.setCount(service.getCountAll());
 		result.setPage(page);
 		result.setRows(rows);
+		System.out.println(rows);
 		result.setPageCount(service.getCountPage(rows));
 		return result;
 	}

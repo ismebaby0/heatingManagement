@@ -56,14 +56,17 @@
 	 </select>
  <!-- 绑定功能 -->
    <insert id="createWithFunctionById">
-     insert into HT_FunctionUser values (FunNo,UUserID)
+     insert into HT_FunctionUser (FunNo,UUserID) values
     <foreach  item="no" collection="funno"   separator="," >
-       (#{id},#{no})
+       (#{no},#{id})
     </foreach>
    </insert>
    <!-- 删除用户权限 -->
    <delete id="deleteWithFunctionById">
-   delete * from HT_FunctionUser where UUserID
+   delete from HT_FunctionUser where UUserID=#{id}
    </delete>
+   <insert id="modifyPhoto">
+   update HT_UserInfo set PHOTO=#{photo},PHOTOFileName=#{photoName},PhotoContentType=#{contentType} where UUSERID=#{uuserid}
+   </insert>
 </mapper>
 

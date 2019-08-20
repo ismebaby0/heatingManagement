@@ -33,4 +33,6 @@ public interface IuseInfoMapper {
  public void createWithFunctionById(String id,int[] funno) throws Exception;
  //删除用户权限
  public void deleteWithFunctionById(String id)throws Exception;
+ //修改用户头像
+ public void modifyPhoto(String id,byte[]photo,String contentType,String photoName) throws Exception;
 }
