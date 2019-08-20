@@ -258,17 +258,20 @@ $("a#EmployeeGrantLink").off().on("click",function(){
 			//取得功能列表
             $.getJSON("function/list",function(em){
             	if(em){
+            		$.each(em,function(index,Function){
+            			$("span#funcitonForm").append("["+Function.funName+"]:"+"<input type='checkbox'  name='no' value='"+Function.funNo+"' /> ");
+            		});
+            		
             		$.getJSON("userinfo/functionList",{id:uuserid},function(em1){
-            		$.each(em1.functions,function(index,Function1){
-					$.each(em,function(index,Function){
-				        if(Function.funNo==Function1.funNo)
-				        {$("span#funcitonForm").append("["+Function.funName+"]:"+"<input type='checkbox' check='checked' name='no' value='"+Function.funNo+"' /> ");}
-				        else
-				        {$("span#funcitonForm").append("["+Function.funName+"]:"+"<input type='checkbox'  name='no' value='"+Function.funNo+"' /> ");}
-					});
+            			if(em1){
+            				$.each(em1.functions,function(index,Function1){
+            					$("span#funcitonForm input[type='checkbox'][value='"+Function1.funNo+"']").attr("checked","true");
+				       
+            				});
+            			}
             		});
-            		});
-				}
+            		
+            	}
             });
 			//默认选中已有功能
             //处理提交的数据
