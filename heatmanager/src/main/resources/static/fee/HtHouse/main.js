@@ -7,15 +7,12 @@
  */
 
 $(function(){
-	var uuserid=null;
-	var upassword=null;
-	var uname=null;
+	var no = 0;
 	//设置系统页面标题
 	$("span#mainpagetille").html("用户管理");
 	//设置日期的格式和选择
 	
 	//显示员工列表
-
 	$("table#EmployeeGrid").jqGrid({
 		url: '/house/getAll/page',
 		datatype: "json",
@@ -50,8 +47,10 @@ $(function(){
 		      records: "count", 
 		      repeatitems: true, 
 		      id: "houseNo"},
-		pager: "#EmployeeGridPager"
-		
+		pager: "#EmployeeGridPager",
+		onSelectRow:function(data){
+			no = data ;
+		}
 	});
 	
 	//点击增加链接处理
@@ -83,6 +82,111 @@ $(function(){
 
 	
 	
+	//点击修改按钮事件处理
+	$("button#modify").off().on("click",function(event){
+		if(no==0){
+			BootstrapDialog.show({
+	            title: '操作信息',
+	            message:"请选择要修改数据"
+	        });
+		}
+		else {
+			$("div#DepartmentDialogArea").load("fee/HtHouse/modify.html",function(){
+				$.getJSON("/house/getByNo",{houseNo:no},function(data){	//{}中是请求参数，data是后端返回的结果
+					//alert(data.status);
+					//alert(data.model.typeName);
+					if(data.status=="ok"){
+						
+						$("input[name='houseNo']").val(no);
+						$("input[name='houseNo']").attr("readonly","readonly");//设置主键为不可编辑状态
+						$("input[name='neighbourhood.hoodNo']").val(data.model.neighbourhood.hoodNo);
+						$("input[name='heatingCode']").val(data.model.heatingCode);
+						$("input[name='name']").val(data.model.name);
+						$("input[name='houseCode']").val(data.model.houseCode);
+						$("input[name='building']").val(data.model.building);
+						$("input[name='area']").val(data.model.area);
+						$("input[name='address']").val(data.model.address);
+						$("input[name='postcode']").val(data.model.postcode);
+						$("input[name='contactName']").val(data.model.contactName);
+						$("input[name='tel']").val(data.model.tel);
+						$("input[name='mobile']").val(data.model.mobile);
+						$("input[name='mail']").val(data.model.mail);
+						$("input[name='qq']").val(data.model.qq);
+						$("input[name='heatingStatus']").val(data.model.heatingStatus);
+						$("input[name='heatingArea']").val(data.model.heatingArea);
+					}
+				});
+				
+				$("div#DepartmentDialogArea" ).dialog({
+					title:"公建参数修改",
+					width:600
+				});
+				//拦截表单提交
+				$("form#DepartmentModifyForm").ajaxForm(function(result){
+					if(result.status=="ok"){
+						$("input[name='houseNo']").removeAttr("readonly");	//去除只读
+						$("table#EmployeeGrid").trigger("reloadGrid");
+					}
+					//alert(result.message);
+					//BootstrapDialog.alert(result.message);
+					BootstrapDialog.show({
+			            title: '操作结果信息',
+			            message:result.message
+			        });
+					$("div#DepartmentDialogArea" ).dialog( "close" );
+					$("div#DepartmentDialogArea" ).dialog( "destroy" );
+					$("div#DepartmentDialogArea").html("");
+					
+				});
+				
+				
+				//点击取消按钮处理
+				$("input[value='取消']").on("click",function(){
+					$( "div#DepartmentDialogArea" ).dialog( "close" );
+					$( "div#DepartmentDialogArea" ).dialog( "destroy" );
+					$("div#DepartmentDialogArea").html("");
+				});
+			});
+			
+		}
+		
+		
+	});
+
+	//==============================删除=========
+	$("button#delete").off().on("click",function(event){
+		if(no==0){
+			BootstrapDialog.show({
+	            title: '用户操作信息',
+	            message:"请选择要操作的用户",
+	            buttons: [{
+	                label: '确定',
+	                action: function(dialog) {
+	                    dialog.close();
+	                }
+	            }]
+	        });
+		}
+		else{
+		BootstrapDialog.confirm('确认删除这条数据?', function(result){
+            if(result) {
+            	
+                $.post("/house/delete",{houseNo:no},function(result){
+                	if(result.status=="ok"){
+                		$("table#EmployeeGrid").trigger("reloadGrid");
+					}
+					BootstrapDialog.show({
+			            title: '部门操作信息',
+			            message:result.message
+			        });
+              
+            
+        });
+            }
+
+});
+		}
+});
 	
 	
 	

@@ -1,0 +1,47 @@
+<!-- Main row -->
+<div class="row">
+    <div class="col-xs-12">
+      <div class="box-body">
+        <!-- 修改部门 -->
+       	    <form id="DepartmentModifyForm" role="form" action="heatingPrice/modify" method="post">
+                <div class="form-group">
+                  <label>供热年份</label>
+                  <input type="text" class="form-control" name="heatingYear"  placeholder="年份"  >
+                </div>
+                <div class="form-group">
+                  <label>居民价格</label>
+                  <input type="text" class="form-control" name="homePrice"  placeholder="名称">
+                </div>
+                <div class="form-group">
+                  <label>公建价格</label>
+                  <input type="text" class="form-control" name="publicHousePrice"  placeholder="名称">
+                </div>
+                <div class="form-group">
+                  <label> 供热天数</label>
+                  <input type="text" class="form-control" name="heatingdays"  placeholder="名称">
+                </div>
+                <div class="form-group">
+                  <label>备注</label>
+                  <input type="text" class="form-control" name="heatingMemo"  placeholder="名称" >
+                </div>
+                <div class="form-group">
+                  <label>文件名</label>
+                  <input type="text" class="form-control" name="priceFileName"  placeholder="名称">
+                </div>
+                <div class="form-group">
+                  <label>文件类型</label>
+                  <input type="text" class="form-control" name="priceFileContentType"  placeholder="名称">
+                </div>
+                
+               <div class="form-group">
+                 <input type="submit" class="btn btn-primary" value="提交" />
+                 <input type="button" class="btn btn-primary" value="取消">
+                 <input type="hidden" name="no" readonly  />
+               </div>
+            </form>
+      </div>
+      <!-- /.box-body -->
+    </div>
+    
+    
+ </div>

@@ -79,9 +79,7 @@ $(function(){
 				width:600
 			});
 			$("form#addForm").ajaxForm(function(result){
-				$("div#homeComplainTypeDialogArea").dialog("close");
-				$("div#homeComplainTypeDialogArea").dialog("destroy");
-				$("div#homeComplainTypeDialogArea").html("");
+				$("div#homeComplainTypeDialogArea" ).dialog( "close" ).dialog( "destroy" ).html("");
 				if(result.status==="OK"){
 					alert(result.message);
 					$("table#homeComplainTypeGrid").trigger("reloadGrid");
@@ -90,9 +88,7 @@ $(function(){
 			
 			// 点击取消
 			$("input[value='取消']").on("click",function(event){
-				$("div#homeComplainTypeDialogArea").dialog("close");
-				$("div#homeComplainTypeDialogArea").dialog("destroy");
-				$("div#homeComplainTypeDialogArea").html("");
+				$("div#homeComplainTypeDialogArea" ).dialog( "close" ).dialog( "destroy" ).html("");
 			});
 		});
 	});
@@ -101,7 +97,7 @@ $(function(){
 
 	//===========================删除住宅投诉处理================================================
 	$("#homeComplainDel").off().on("click",function(event){
-						if(complainNo===0||complainNo===""){
+						if(complainNo===0||complainNo.trim().length===0){
 							BootstrapDialog.show({
 					            title: '住宅投诉记录作信息',
 					            message:"请选择要查看的住宅投诉记录",
@@ -136,7 +132,70 @@ $(function(){
 	});
 
 	
-	
+	//修改按钮	//点击修改按钮事件处理
+	$("#homeComplainMod").off().on("click",function(event){
+		if(complainNo===0||complainNo.trim().length===0){
+			BootstrapDialog.show({
+	            title: '操作信息',
+	            message:"请选择要修改数据"
+	        });
+		}
+		else {
+			$("div#homeComplainTypeDialogArea").load("complain/homecomplain/mod.html",function(){
+				$.getJSON("/homecomplain/get",{no:complainNo},function(data){	//{}中是请求参数，data是后端返回的结果
+					//alert(data.status);
+					//alert(data.model.typeName);
+					if(data.status==="OK"){
+						//$("#modForm input").each((k, v) =>console.log(v.name+v.value));
+						$("#modForm input").each((k, v) => {//遍历表单设置值
+							let nameJsonValue = null;
+							if(v.name.trim().length>0){
+								nameJsonValue = eval(`data.model.${v.name}`);
+								if (nameJsonValue !== null) {
+									if(v.type==="date"){
+										v.value= nameJsonValue.split('T')[0];
+									}else{
+										v.value = nameJsonValue;	
+									}
+								}
+							}
+						}); 
+						$("input[name='complainNo']").attr("readonly","readonly");//设置主键为不可编辑状态
+					}
+				});
+				
+				$("div#homeComplainTypeDialogArea" ).dialog({
+					title:"公建投诉修改",
+					width:600
+				});
+				//拦截表单提交
+				$("form#modForm").ajaxForm(function(result){
+					if(result.status==="OK"){
+						complainNo="";
+						$("input[name='complainNo']").removeAttr("readonly");	//去除只读
+						$("table#homeComplainTypeGrid").trigger("reloadGrid");
+					}
+					//alert(result.message);
+					//BootstrapDialog.alert(result.message);
+					BootstrapDialog.show({
+			            title: '操作结果信息',
+			            message:result.message
+			        });
+					$("div#homeComplainTypeDialogArea" ).dialog( "close" ).dialog( "destroy" ).html("");
+					
+				});
+				
+				
+				//点击取消按钮处理
+				$("input[value='取消']").on("click",function(){
+					$("div#homeComplainTypeDialogArea" ).dialog( "close" ).dialog( "destroy" ).html("");
+				});
+			});
+			
+		}
+		
+		
+	});
 	
 	
 	

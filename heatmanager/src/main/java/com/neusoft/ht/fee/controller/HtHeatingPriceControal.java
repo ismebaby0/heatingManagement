@@ -22,9 +22,9 @@ public class HtHeatingPriceControal {
 	@Autowired
 	private IHeatingPriceService hp_service = null;
 	
-	@RequestMapping("/getByOne")
+	@RequestMapping("/getByNo")
 	public ResultMessage<HtHeatingPriceModel> selectByHeatingYear(String heatingYear) throws Exception {
-		ResultMessage<HtHeatingPriceModel> result = new ResultMessage<>();
+		ResultMessage<HtHeatingPriceModel> result = new ResultMessage<>("ok","查询成功");
 		result.setModel(hp_service.selectByHeatingYear(heatingYear));
 		return result;
 	}
@@ -53,7 +53,7 @@ public class HtHeatingPriceControal {
 		return new ResultMessage<>("ok","删除成功");
 	}
 
-	@RequestMapping("/update")
+	@RequestMapping("/modify")
 	public ResultMessage<HtHeatingPriceModel> updateHeatingPrice(HtHeatingPriceModel record) throws Exception {
 		if(record.getHeatingYear().trim().length() > 0) {
 			hp_service.updateHeatingPrice(record);
