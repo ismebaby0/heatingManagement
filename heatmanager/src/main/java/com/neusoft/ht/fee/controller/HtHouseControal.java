@@ -33,18 +33,18 @@ public class HtHouseControal {
 	
 	@RequestMapping("/getByNo")
 	public ResultMessage<HtHouseModel> selectByNo(int houseNo) throws Exception {
-		ResultMessage<HtHouseModel> result = new ResultMessage<>();
+		ResultMessage<HtHouseModel> result = new ResultMessage<>("ok","查询成功");
 		result.setModel(houseService.selectByNo(houseNo));
 		return result;
 	}
 
-	@RequestMapping("/deletebyno")
+	@RequestMapping("/delete")
 	public ResultMessage<HtHouseModel> deleteHouseModel(int houseNo) throws Exception {
 		houseService.deleteHouseModel(houseNo);
 		return new ResultMessage<>("ok","删除成功");
 	}
 
-	@RequestMapping("/updateHouse")
+	@RequestMapping("/modify")
 	public ResultMessage<HtHouseModel> updateHouseModel(HtHouseModel record) throws Exception {
 		if(record.getName().trim().length() > 0) {
 			houseService.updateHouseModel(record);
