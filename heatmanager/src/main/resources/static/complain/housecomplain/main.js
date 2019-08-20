@@ -80,9 +80,7 @@ $(function(){
 				width:600
 			});
 			$("form#addForm").ajaxForm(function(result){
-				$("div#houseComplainTypeDialogArea").dialog("close");
-				$("div#houseComplainTypeDialogArea").dialog("destroy");
-				$("div#houseComplainTypeDialogArea").html("");
+				$("div#houseComplainTypeDialogArea" ).dialog( "close" ).dialog( "destroy" ).html("");
 				if(result.status==="OK"){
 					alert(result.message);
 					$("table#houseComplainTypeGrid").trigger("reloadGrid");
@@ -91,9 +89,7 @@ $(function(){
 			
 			// 点击取消
 			$("input[value='取消']").on("click",function(event){
-				$("div#houseComplainTypeDialogArea").dialog("close");
-				$("div#houseComplainTypeDialogArea").dialog("destroy");
-				$("div#houseComplainTypeDialogArea").html("");
+				$("div#houseComplainTypeDialogArea" ).dialog( "close" ).dialog( "destroy" ).html("");
 			});
 		});
 	});
@@ -137,7 +133,7 @@ $(function(){
 		
 	//修改按钮	//点击修改按钮事件处理
 	$("#houseComplainMod").off().on("click",function(event){
-		if(complainNo===0||complainNo===""){
+		if(complainNo===0||complainNo.trim().length===0){
 			BootstrapDialog.show({
 	            title: '操作信息',
 	            message:"请选择要修改数据"
@@ -150,11 +146,17 @@ $(function(){
 					//alert(data.model.typeName);
 					if(data.status==="OK"){
 						//$("#modForm input").each((k, v) =>console.log(v.name+v.value));
-						//$("#modForm input").each((k, v) =>{let nameJsonValue=eval("data.model."+v.name);if(nameJsonValue!==null){v.value=nameJsonValue}}); //遍历表单设置值
 						$("#modForm input").each((k, v) => {//遍历表单设置值
-							let nameJsonValue = eval("data.model." + v.name);
-							if (nameJsonValue !== null) {
-								v.value = nameJsonValue;
+							let nameJsonValue = null;
+							if(v.name.trim().length>0){
+								nameJsonValue = eval(`data.model.${v.name}`);
+								if (nameJsonValue !== null) {
+									if(v.type==="date"){
+										v.value= nameJsonValue.split('T')[0];
+									}else{
+										v.value = nameJsonValue;	
+									}
+								}
 							}
 						}); 
 						$("input[name='complainNo']").attr("readonly","readonly");//设置主键为不可编辑状态
@@ -178,18 +180,14 @@ $(function(){
 			            title: '操作结果信息',
 			            message:result.message
 			        });
-					$("div#DepartmentDialogArea" ).dialog( "close" );
-					$("div#DepartmentDialogArea" ).dialog( "destroy" );
-					$("div#DepartmentDialogArea").html("");
+					$("div#houseComplainTypeDialogArea" ).dialog( "close" ).dialog( "destroy" ).html("");
 					
 				});
 				
 				
 				//点击取消按钮处理
 				$("input[value='取消']").on("click",function(){
-					$( "div#DepartmentDialogArea" ).dialog( "close" );
-					$( "div#DepartmentDialogArea" ).dialog( "destroy" );
-					$("div#DepartmentDialogArea").html("");
+					$("div#houseComplainTypeDialogArea" ).dialog( "close" ).dialog( "destroy" ).html("");
 				});
 			});
 			

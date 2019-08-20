@@ -105,7 +105,7 @@ $(function(){
 	//----complainTypeUpd 更新
 	$("#complainTypeUpd").off().on("click",function(event){
 
-		if(complainTypeNo===0||complainTypeNo===""){
+		if(complainTypeNo===0||complainTypeNo.trim().length===0){
 			BootstrapDialog.show({
 	            title: '投诉类型信息',
 	            message:"请选择要查看的投诉类型",
