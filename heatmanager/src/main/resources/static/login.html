@@ -56,19 +56,22 @@
 						<h1 class="hero-title mt-0 is-revealing">供热缴费管理系统</h1>
 						<p class="hero-paragraph is-revealing">Our landing page template works on all devices, so you only have to set it up once, and get beautiful results forever.</p>
 						<div class="hero-form field field-grouped is-revealing">
-							<div class="control control-expanded">
-								用户名：<input class="input" type="email" name="email" placeholder="Your best email&hellip;">
-							</div>
-
-						</div>
-						
-						<div class="hero-form field field-grouped is-revealing">
-							<div class="control control-expanded">
-							  密码：<input class="input" type="email" name="email" placeholder="Your best email&hellip;">
-							</div>
 						
 						</div>
-					</div>
+						
+				            <form action="/login/validate" method="post">
+							<div class="control control-expanded">
+								<h6 class="hero-title mt-0 is-revealing" >账号：</h6><input class="input"  name="id" type="text" placeholder="user"/>
+							</div>
+				            
+							<div class="control control-expanded">
+							<h6 class="hero-title mt-0 is-revealing" >密码：</h6><input class="input"  name="password" type="password" placeholder="password"/>
+							</div>
+						
+						</div>
+						
+						
+				
 					<div class="hero-illustration">
 						<div class="hero-bg">
 							<svg width="720" height="635" xmlns="http://www.w3.org/2000/svg">
@@ -357,12 +360,13 @@
 										</svg>
 									</div>
 									<div class="control">
-										<a class="button button-primary button-block" href="#">登录</a>
+										<input type="submit" class="button button-primary button-block" value="登录"></input>
 									</div>
 								</div>
 								<p class="text-sm mb-0">A pseudo-Latin text used in web design, layout, and printing in place of things to emphasise design elements.</p>
 							</div>
 						</div>
+						</form>
 						<div class="feature">
 							<div class="feature-inner">
 								<div class="feature-header mb-16">
