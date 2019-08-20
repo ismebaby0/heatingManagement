@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.neusoft.ht.fee.mapper.IHomeFeeMapper">
+	<resultMap id="homeFeeMap"
+		type="com.neusoft.ht.fee.model.HomeFee">
+		<id column="FeeNo" property="feeNo" />
+		<result column="HeatArea" property="heatArea" />
+		<result column="AgreeFee" property="agreeFee" />
+		<result column="ActualFee" property="actualFee" />
+		<result column="DebtFee" property="debtFee" />
+		<result column="FeeStatus" property="feeStatus" />
+		<result column="Heatingdays" property="heatingdays" />
+		<result column="FeeDesc" property="feeDesc" />
+		<association property="HtHeatingPrice"
+			column="HeatingYear"
+			javaType="com.neusoft.ht.fee.model.HtHeatingPriceModel">
+			<id column="HeatingYear          " property="heatingYear         " />
+			<result column="HomePrice            "
+				property="homePrice           " />
+			<result column="PublicHousePrice     "
+				property="publicHousePrice    " />
+			<result column="Heatingdays          "
+				property="heatingdays         " />
+			<result column="HeatingMemo          "
+				property="heatingMemo         " />
+			<result column="PriceFileName        "
+				property="priceFileName       " />
+			<result column="PriceFileContentType "
+				property="priceFileContentType" />
+		</association>
+		<association property="home" column="HomeNo"
+			javaType="com.neusoft.ht.fee.model.HomeModel">
+			<id property="homeNo" column="HomeNo" />
+			<result property="heatingCode" column="HeatingCode" />
+			<result property="homeName" column="HomeName" />
+			<result property="buildingCode" column="BuildingCode" />
+			<result property="departmentCode" column="DepartmentCode" />
+			<result property="floorCode" column="FloorCode" />
+			<result property="houseCode" column="HouseCode" />
+			<result property="homeArea" column="HomeArea" />
+			<result property="direction" column="Direction" />
+			<result property="tel" column="Tel" />
+			<result property="mobile" column="Mobile" />
+			<result property="mail" column="Mail" />
+			<result property="qq" column="Qq" />
+			<result property="heatingStatus" column="HeatingStatus" />
+			<result property="heatingArea" column="HeatingArea" />
+		</association>
+	</resultMap>
+	<select id="selectByFeeNo" resultMap="homeFeeMap"
+		parameterType="Integer">
+		<!-- 具体的sql -->
+		select
+		FeeNo,
+		HomeNo,
+		HeatingYear,
+		HeatArea,
+		AgreeFee,
+		ActualFee,
+		DebtFee,
+		FeeStatus,
+		Heatingdays,
+		FeeDesc
+		FROM
+		HT_homeFee
+		WHERE
+		FeeNo = #{feeNo}
+	</select>
+	<insert id="insertHomeFee" useGeneratedKeys="true"
+		keyProperty="feeNo" keyColumn="FeeNo">
+		INSERT INTO
+		HT_homeFee
+		(
+		HomeNo,
+		HeatingYear,
+		HeatArea,
+		AgreeFee,
+		ActualFee,
+		DebtFee,
+		FeeStatus,
+		Heatingdays,
+		FeeDesc)
+		VALUE
+		(
+		#{home.homeNo},
+		#{HtHeatingPrice.heatingYear},
+		#{heatArea},
+		#{agreeFee},
+		#{actualFee},
+		#{debtFee},
+		#{feeStatus},
+		#{heatingdays},
+		#{feeDesc}
+		)
+	</insert>
+	<update id="updateByFeeNo"
+		parameterType="com.neusoft.ht.fee.mapper.IHomeFeeMapper">
+		update HT_homeFee
+		<set>
+			<if test="home.homeNo       != null">HomeNo=#{home.homeNo},</if>
+			<if test="HtHeatingPrice.heatingYear  != null">HeatingYear=#{HtHeatingPrice.heatingYear},</if>
+			<if test="heatArea     != null">HeatArea=#{heatArea},</if>
+			<if test="agreeFee     != null">AgreeFee=#{agreeFee},</if>
+			<if test="actualFee    != null">ActualFee=#{actualFee},</if>
+			<if test="debtFee      != null">DebtFee=#{debtFee},</if>
+			<if test="feeStatus    != null">FeeStatus=#{feeStatus},</if>
+			<if test="heatingdays  != null">Heatingdays=#{heatingdays},</if>
+			<if test="feeDesc       != null">FeeDesc=#{feeDesc}</if>
+		</set>
+		where FeeNo=#{feeNo}
+	</update>
+
+	<delete id="deleteByFeeNo">
+		<!-- 具体的sql -->
+		DELETE FROM
+		HT_homeFee
+		WHERE
+		FeeNo = #{feeNo}
+	</delete>
+</mapper>
