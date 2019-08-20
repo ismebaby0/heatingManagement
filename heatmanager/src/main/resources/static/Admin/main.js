@@ -248,20 +248,20 @@ $("a#EmployeeGrantLink").off().on("click",function(){
 			//取得指定的用户信息
 			$("span#employeeId").html(uuserid);
 			$("input#userid").val(uuserid);
-//     		$.getJSON("userinfo/functionList",{id:uuserid},function(em){
+    		/*$.getJSON("userinfo/functionList",{id:uuserid},function(em){
 				if(em.functions){
 					$.each(em.functions,function(index,Function){
 						$("span#empfunctions").append("["+Function.funName+"]"+"   ");
 					});
 				}
-			});
+			});*/
 			//取得功能列表
             $.getJSON("function/list",function(em){
             	if(em){
             		$.getJSON("userinfo/functionList",{id:uuserid},function(em1){
-            		$.each(em1.functions,function(index,function){
+            		$.each(em1.functions,function(index,Function1){
 					$.each(em,function(index,Function){
-				        if(Function.funNo==function.funNo)
+				        if(Function.funNo==Function1.funNo)
 				        {$("span#funcitonForm").append("["+Function.funName+"]:"+"<input type='checkbox' check='checked' name='no' value='"+Function.funNo+"' /> ");}
 				        else
 				        {$("span#funcitonForm").append("["+Function.funName+"]:"+"<input type='checkbox'  name='no' value='"+Function.funNo+"' /> ");}
