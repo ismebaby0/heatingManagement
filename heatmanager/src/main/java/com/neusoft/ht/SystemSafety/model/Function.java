@@ -25,5 +25,4 @@ public class Function {
  
  private List<UserInfo> userInfos=null;
  
- private AdminUserValue admin=null;
 }

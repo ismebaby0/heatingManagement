@@ -14,7 +14,7 @@ $(function(){
 	$("span#mainpagetille").html("用户管理");
 	//设置日期的格式和选择
 	
-	//显示员工列表
+	//显示用户列表
 	$("table#EmployeeGrid").jqGrid({
 		url: 'user/list/page',
 		datatype: "json",
@@ -62,7 +62,7 @@ $(function(){
 			
 			//取得角色列表，生成角色选择下拉框
 			
-			//验证员工提交数据
+			//验证用户提交数据
 			$("form#EmployeeAddForm").validate({
 				  rules: {
 					  "iuser.uuserid":{
@@ -105,7 +105,7 @@ $(function(){
 			//拦截增加提交表单
 			$("form#EmployeeAddForm").ajaxForm(function(result){
 				if(result.status=="OK"){
-					reloadEmployeeList();//更新员工列表
+					reloadEmployeeList();//更新用户列表
 				}
 				//alert(result.message);
 				//BootstrapDialog.alert(result.message);
@@ -121,7 +121,7 @@ $(function(){
 			
 			
 			$("div#EmployeeDialog").dialog({
-				title:"员工增加",
+				title:"用户增加",
 				width:950
 			});
 			//点击取消按钮，管理弹出窗口
@@ -139,8 +139,8 @@ $(function(){
 $("a#EmployeeDelteLink").off().on("click",function(event){
 					if(uuserid==null||uuserid==""){
 						BootstrapDialog.show({
-				            title: '员工操作信息',
-				            message:"请选择要查看的员工",
+				            title: '用户操作信息',
+				            message:"请选择要操作的用户",
 				            buttons: [{
 				                label: '确定',
 				                action: function(dialog) {
@@ -156,7 +156,7 @@ $("a#EmployeeDelteLink").off().on("click",function(event){
 			                $.post("user/delete",{id:uuserid},function(result){
 			                	if(result.status=="OK"){
 			                		uuserid="";
-			                		reloadEmployeeList();//更新员工列表
+			                		reloadEmployeeList();//更新用户列表
 								}
 								BootstrapDialog.show({
 						            title: '部门操作信息',
@@ -174,8 +174,8 @@ $("a#EmployeeDelteLink").off().on("click",function(event){
 $("a#EmployeeViewLink").off().on("click",function(){
 	if(uuserid==null||uuserid==""){
 		BootstrapDialog.show({
-            title: '员工操作信息',
-            message:"请选择要查看的员工",
+            title: '用户操作信息',
+            message:"请选择要操作的用户",
             buttons: [{
                 label: '确定',
                 action: function(dialog) {
@@ -186,7 +186,7 @@ $("a#EmployeeViewLink").off().on("click",function(){
 	}
 	else{
 		$("div#EmployeeDialog").load("Admin/view.html",function(){
-			//取得指定的员工信息
+			//取得指定的用户信息
 			$.getJSON("userinfo/functionList",{id:uuserid},function(em){
 				if(em){
 					$("span#employeeId").html(uuserid);
@@ -195,9 +195,9 @@ $("a#EmployeeViewLink").off().on("click",function(){
 					$("span#empage").html(em.age);
 					$("span#empmobile").html(em.mobile);
 					$("span#empphone").html(em.phone);
-					if(em.functionss){
+					if(em.functions){
 						$.each(em.functions,function(index,Function){
-							$("span#empfunctions").append(Function.funName+"  ");
+							$("span#empfunctions").append("<br>"+Function.funName);
 						});
 					}
 /*					if(em.photoFileName!=null&&em.photoFileName!=""){
@@ -212,7 +212,7 @@ $("a#EmployeeViewLink").off().on("click",function(){
 			
 			
 			$("div#EmployeeDialog").dialog({
-				title:"员工详细",
+				title:"用户详细",
 				width:800
 			});
 			//点击取消按钮，管理弹出窗口
@@ -229,5 +229,57 @@ $("a#EmployeeViewLink").off().on("click",function(){
 	
 	
 });
-
+//===========================给用户授权================================================
+$("a#EmployeeGrantLink").off().on("click",function(){
+	if(uuserid==null||uuserid==""){
+		BootstrapDialog.show({
+            title: '用户操作信息',
+            message:"请选择要操作的用户",
+            buttons: [{
+                label: '确定',
+                action: function(dialog) {
+                    dialog.close();
+                }
+            }]
+        });
+	}
+	else{
+		$("div#EmployeeDialog").load("Admin/grant.html",function(){
+			//取得指定的用户信息
+			$("span#employeeId").html(uuserid);
+			$.getJSON("userinfo/functionList",{id:uuserid},function(em){
+				if(em.functions){
+					$.each(em.functions,function(index,Function){
+						$("span#empfunctions").append("["+Function.funName+"]"+"   ");
+					});
+				}
+			});
+			//取得功能列表
+            $.getJSON("function/list",function(em){
+            	if(em){
+					$.each(em,function(index,Function){
+				
+						$("span#funcitonForm").append("<li class='list-group-item'>"+"["+Function.funName+"]:"+"<input type='checkbox' name='no' value='"+Function.funNo+"' checked='checked'/> "+"</li>");
+					});
+				}
+            });
+			
+			$("div#EmployeeDialog").dialog({
+				title:"用户详细",
+				width:800
+			});
+			//点击取消按钮，管理弹出窗口
+			$("input[value='关闭']").off().on("click",function(){
+				$("div#EmployeeDialog").dialog("close");
+				$("div#EmployeeDialog").dialog("destroy")
+				$("div#EmployeeDialog").html("");
+			});
+			
+			
+		});
+	}
+	
+	
+	
+});
 });

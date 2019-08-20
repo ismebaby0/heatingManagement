@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.neusoft.ht.SystemSafety.mapper.IuseInfoMapper;
 import com.neusoft.ht.SystemSafety.model.UserInfo;
 import com.neusoft.ht.SystemSafety.service.IUserInfoService;
 @Service("userInfo")
+@Transactional
 public class UserInfoService implements IUserInfoService {
     
 	@Autowired
@@ -55,6 +57,13 @@ public class UserInfoService implements IUserInfoService {
 	public UserInfo getListWithFunctionByid(String id) throws Exception {
 		// TODO Auto-generated method stub
 		return userinfo.selectListWithFunctionById(id);
+	}
+
+	@Override
+	public void createWithFunction(String id, int[] no) throws Exception {
+		// TODO Auto-generated method stub
+		userinfo.deleteWithFunctionById(id);
+		userinfo.createWithFunctionById(id, no);
 	}
 
 }

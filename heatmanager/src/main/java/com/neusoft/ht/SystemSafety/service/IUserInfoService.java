@@ -21,4 +21,6 @@ public interface IUserInfoService {
 	 
 	 //取得关联的功能列表
 	 public UserInfo getListWithFunctionByid(String id) throws Exception;
+	 //为用户授权
+	 public void createWithFunction(String id,int[] no) throws Exception;
 }
