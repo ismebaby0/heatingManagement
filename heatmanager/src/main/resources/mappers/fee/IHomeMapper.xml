@@ -30,23 +30,32 @@
 		<association property="houseTypeNo" resultMap="com.neusoft.ht.fee.mapper.IHouseTypeMapper.selectHouseType"></association>
 	</resultMap>
 	<insert id="insert">
-		insert into HT_Home values(#{homeNo},#{heatingCode},#{houseTypeNo.typeNo},#{hoodNo.hoodNo},#{homeName},#{buildingCode},#{departmentCode},
+		insert into HT_HOME values(#{homeNo},#{heatingCode},#{houseTypeNo.typeNo},#{hoodNo.hoodNo},#{homeName},#{buildingCode},#{departmentCode},
 		#{floorCode},#{houseCode},#{homeArea},#{direction},#{tel},#{mobile},#{mail},#{qq},#{heatingStatus},#{heatingArea})
 	</insert>
 	<delete id="deleteByPrimaryKey">
-		delete from HT_Home where home = #{homeNo}
+		delete from HT_HOME where homeNo = #{homeNo}
 	</delete>
 	<update id="updateByPrimaryKey">
-		update Ht_Home set homeNo=#{homeNo},heatingCode=#{heatingCode},houseTypeNo=#{houseTypeNo.typeNo},hoodNo=#{hoodNo.hoodNo},homeName=#{homeName},
+		update HT_HOME set heatingCode=#{heatingCode},houseTypeNo=#{houseTypeNo.typeNo},hoodNo=#{hoodNo.hoodNo},homeName=#{homeName},
 		buildingCode=#{buildingCode},departmentCode=#{departmentCode},
 		floorCode=#{floorCode},houseCode=#{houseCode},homeArea=#{homeArea},direction=#{direction},tel=#{tel},mobile=#{mobile},
 		mail=#{mail},qq=#{qq},heatingStatus=#{heatingStatus},heatingArea=#{heatingArea}
+		where homeNo=#{homeNo}
 	</update>
 	<select id="selectByPrimaryKey" resultMap = "resultOfHome">
 		select * from HT_HOME where homeNo = #{homeNo}
 	</select>
-	<select id="selectByAll" resultMap = "resultOfHomeWithRelation">
-		select *from HT_HOME home left join HT_Neighbourhood hood on home.hoodNo = hood.hoodNo left join HT_HOUSETYPE house on home.housetypeno = house.typeNo
+	
+	<!-- 关联查询一个 -->
+	<select id="getOneWithRelation" resultMap = "resultOfHomeWithRelation">
+		select *from HT_HOME home left join HT_Neighbourhood hood on home.hoodNo = hood.hoodNo left join HT_HOUSETYPE house on home.housetypeno = house.typeNo 
+		where  home.homeNo = #{homeNo}
+	</select>
+	
+	<!-- 关联查询全部 -->
+	<select id="getAllWithRelation" resultMap = "resultOfHomeWithRelation">
+		select *from HT_HOME home left join HT_Neighbourhood hood on home.hoodNo = hood.hoodNo left join HT_HOUSETYPE house on home.housetypeno = house.typeNo 
 	</select>
 	<!-- 分页 -->
 	<select id="getCountByAll" resultType="int">

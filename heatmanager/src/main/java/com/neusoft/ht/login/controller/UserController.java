@@ -59,9 +59,8 @@ public class UserController {
 	  @RequestMapping("/image") 
 	  public ResponseEntity<byte[]> getImage() throws Exception{ 
       UserInfo um=user1.getListWithId("799");
-      System.out.println(um);
       byte[] bytes=um.getPhoto();
-	  System.out.println("开始下载"); 
+
 	  String contentType=um.getPhotoContentType();
 	  MultiValueMap<String, String> mult=new LinkedMultiValueMap<String, String>();
 	  mult.add("Content-Type", contentType);

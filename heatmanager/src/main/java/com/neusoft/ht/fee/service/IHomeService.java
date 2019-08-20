@@ -11,7 +11,9 @@ public interface IHomeService {
 	public void delete(int homeNo) throws Exception;
 	public void update(HomeModel home) throws Exception;
 	public HomeModel selectByNo(int homeNo) throws Exception;
-	public List<HomeModel> selectAll() throws Exception;
+	
+	//关联查询一条数据
+	public HomeModel getOneWithRelation(int homeNo) throws Exception;
 	
 	//全部个数
 	public int getCountAll() throws Exception;
@@ -21,4 +23,6 @@ public interface IHomeService {
 	
 	//分页查询
 	public List<HomeModel> selectAllWithPage(int row,int page) throws Exception;
+	
+	
 }
