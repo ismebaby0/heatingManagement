@@ -39,7 +39,7 @@ $(function(){
 	
 	// 点击增加链接处理
 	$("button#add").off().on("click",function(event){
-//		if($("div#homeComplainTypeDialogArea").text()!=="")
+//		if($("div#ComplainTypeDialogArea").text()!=="")
 //			return;
 		$("div#ComplainTypeDialogArea").off().load("complain/ComplainType/add.html",function(){
 			$("div#ComplainTypeDialogArea").dialog({
@@ -47,9 +47,7 @@ $(function(){
 				width:600
 			});
 			$("form#addForm").ajaxForm(function(result){
-				$("div#ComplainTypeDialogArea").dialog("close");
-				$("div#ComplainTypeDialogArea").dialog("destroy");
-				$("div#ComplainTypeDialogArea").html("");
+				$("div#ComplainTypeDialogArea" ).dialog( "close" ).dialog( "destroy" ).html("");
 				if(result.status==="OK"){
 					alert(result.message);
 					$("table#ComplainTypeGrid").trigger("reloadGrid");
@@ -58,9 +56,7 @@ $(function(){
 			
 			// 点击取消
 			$("input[value='取消']").on("click",function(event){
-				$("div#ComplainTypeDialogArea").dialog("close");
-				$("div#ComplainTypeDialogArea").dialog("destroy");
-				$("div#ComplainTypeDialogArea").html("");
+				$("div#ComplainTypeDialogArea" ).dialog( "close" ).dialog( "destroy" ).html("");
 			});
 		});
 	});
@@ -68,7 +64,7 @@ $(function(){
 
 	//===========================删除投诉类型================================================
 	$("#complainTypeDel").off().on("click",function(event){
-						if(complainTypeNo===0||complainTypeNo===""){
+						if(complainTypeNo===0||complainTypeNo.trim().length===0){
 							BootstrapDialog.show({
 					            title: '投诉类型信息',
 					            message:"请选择要查看的投诉类型",
@@ -103,41 +99,70 @@ $(function(){
 	});
 
 	//----complainTypeUpd 更新
-	$("#complainTypeUpd").off().on("click",function(event){
-
+	$("#complainTypeMod").off().on("click",function(event){
 		if(complainTypeNo===0||complainTypeNo.trim().length===0){
 			BootstrapDialog.show({
-	            title: '投诉类型信息',
-	            message:"请选择要查看的投诉类型",
-	            buttons: [{
-	                label: '确定',
-	                action: function(dialog) {
-	                    dialog.close();
-	                }
-	            }]
+	            title: '操作信息',
+	            message:"请选择要修改数据"
 	        });
 		}
-		else{
-//			BootstrapDialog.confirm('确认gxing此投诉类型么?', function(result){
-//	            if(result) {
-//	            	
-//	                $.post("/complaintype/delete",{no:complainTypeNo},function(result){
-//	                	if(result.status==="OK"){
-//	                		complainTypeNo="";
-//	    					$("table#ComplainTypeGrid").trigger("reloadGrid");
-//						}
-//						BootstrapDialog.show({
-//				            title: '投诉类型信息',
-//				            message:result.message
-//				        });
-//	              
-//	            
-//		        });
-//		            }
-//	
-//				});
+		else {
+			$("div#ComplainTypeDialogArea").load("complain/complaintype/mod.html",function(){
+				$.getJSON("/complaintype/get",{no:complainTypeNo},function(data){	//{}中是请求参数，data是后端返回的结果
+					//alert(data.status);
+					//alert(data.model.typeName);
+					if(data.status==="OK"){
+						//$("#modForm input").each((k, v) =>console.log(v.name+v.value));
+						$("#modForm input").each((k, v) => {//遍历表单设置值
+							let nameJsonValue = null;
+							if(v.name.trim().length>0){
+								nameJsonValue = eval(`data.model.${v.name}`);
+								if (nameJsonValue !== null) {
+									if(v.type==="date"){
+										v.value= nameJsonValue.split('T')[0];
+									}else{
+										v.value = nameJsonValue;	
+									}
+								}
+							}
+						}); 
+						$("input[name='complainTypeNo']").attr("readonly","readonly");//设置主键为不可编辑状态
+					}
+				});
+				
+				$("div#ComplainTypeDialogArea" ).dialog({
+					title:"公建投诉修改",
+					width:600
+				});
+				//拦截表单提交
+				$("form#modForm").ajaxForm(function(result){
+					if(result.status==="OK"){
+						complainTypeNo="";
+						$("input[name='complainTypeNo']").removeAttr("readonly");	//去除只读
+						$("table#ComplainTypeGrid").trigger("reloadGrid");
+					}
+					//alert(result.message);
+					//BootstrapDialog.alert(result.message);
+					BootstrapDialog.show({
+			            title: '操作结果信息',
+			            message:result.message
+			        });
+					$("div#ComplainTypeDialogArea" ).dialog( "close" ).dialog( "destroy" ).html("");
+					
+				});
+				
+				
+				//点击取消按钮处理
+				$("input[value='取消']").on("click",function(){
+					$("div#ComplainTypeDialogArea" ).dialog( "close" ).dialog( "destroy" ).html("");
+				});
+			});
+			
 		}
-	}
+		
+		
+	});
+	
 	
 	
 	

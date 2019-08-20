@@ -172,7 +172,7 @@ $(function(){
 				$("form#modForm").ajaxForm(function(result){
 					if(result.status==="OK"){
 						complainNo="";
-						$("input[name='typeNo']").removeAttr("readonly");	//去除只读
+						$("input[name='complainNo']").removeAttr("readonly");	//去除只读
 						$("table#homeComplainTypeGrid").trigger("reloadGrid");
 					}
 					//alert(result.message);
