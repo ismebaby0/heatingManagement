@@ -45,9 +45,9 @@
 		<update id="updateByPrimaryKey">
 			update HT_HeadtingPrice
 			set
-			HomePrice=#{homePrice},PublicHousePrice=#{publicHousePrice},Heatingdays=#{Heatingdays},
-			HeatingMemo=#{HeatingMemo},<!-- PriceFile=#{PriceFile}, -->PriceFileName=#{PriceFileName},
-			PriceFileContentType=#{PriceFileContentType}
+			HomePrice=#{homePrice},PublicHousePrice=#{publicHousePrice},Heatingdays=#{heatingdays},
+			HeatingMemo=#{heatingMemo},<!-- PriceFile=#{PriceFile}, -->PriceFileName=#{priceFileName},
+			PriceFileContentType=#{priceFileContentType}
 			where HeatingYear=#{heatingYear}
 		</update>
 

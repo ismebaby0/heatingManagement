@@ -7,9 +7,7 @@
  */
 
 $(function(){
-	var uuserid=null;
-	var upassword=null;
-	var uname=null;
+	var no = null;
 	//设置系统页面标题
 	$("span#mainpagetille").html("热水价格管理");
 	//设置日期的格式和选择
@@ -41,8 +39,11 @@ $(function(){
 		      total: "pageCount", 
 		      records: "count", 
 		      repeatitems: true, 
-		      id: "houseNo"},
-		pager: "#EmployeeGridPager"
+		      id: "heatingYear"},
+		pager: "#EmployeeGridPager" ,
+		onSelectRow:function(data){
+			no = data ;
+		}
 		
 	});
 	
@@ -72,48 +73,112 @@ $(function(){
 		});
 	});
 	
+	//点击修改按钮事件处理
+	$("button#modify").off().on("click",function(event){
+		if(no==null){
+			BootstrapDialog.show({
+	            title: '操作信息',
+	            message:"请选择要修改数据"
+	        });
+		}
+		else {
+			$("div#DepartmentDialogArea").load("fee/HeatingPrice/modify.html",function(){
+				$.getJSON("/heatingPrice/getByNo",{heatingYear:no},function(data){	//{}中是请求参数，data是后端返回的结果
+					//alert(data.status);
+					//alert(data.model.typeName);
+					if(data.status=="ok"){
+						
+						$("input[name='heatingYear']").val(no);
+						$("input[name='heatingYear']").attr("readonly","readonly");//设置主键为不可编辑状态
+						$("input[name='heatingYear']").val(data.model.heatingYear);
+						$("input[name='homePrice']").val(data.model.homePrice);
+						$("input[name='publicHousePrice']").val(data.model.publicHousePrice);
+						$("input[name='heatingdays']").val(data.model.heatingdays);
+						$("input[name='heatingMemo']").val(data.model.heatingMemo);
+						$("input[name='priceFileName']").val(data.model.priceFileName);
+						$("input[name='priceFileContentType']").val(data.model.priceFileContentType);
+					}
+				});
+				
+				$("div#DepartmentDialogArea" ).dialog({
+					title:"修改热水信息",
+					width:600
+				});
+				//拦截表单提交
+				$("form#DepartmentModifyForm").ajaxForm(function(result){
+					if(result.status=="ok"){
+						$("input[name='heatingYear']").removeAttr("readonly");	//去除只读
+						$("table#EmployeeGrid").trigger("reloadGrid");
+					}
+					//alert(result.message);
+					//BootstrapDialog.alert(result.message);
+					BootstrapDialog.show({
+			            title: '操作结果信息',
+			            message:result.message
+			        });
+					$("div#DepartmentDialogArea" ).dialog( "close" );
+					$("div#DepartmentDialogArea" ).dialog( "destroy" );
+					$("div#DepartmentDialogArea").html("");
+					
+				});
+				
+				
+				//点击取消按钮处理
+				$("input[value='取消']").on("click",function(){
+					$( "div#DepartmentDialogArea" ).dialog( "close" );
+					$( "div#DepartmentDialogArea" ).dialog( "destroy" );
+					$("div#DepartmentDialogArea").html("");
+				});
+			});
+			
+		}
+		
+		
+	});
+	
+	
+	
+	
+	
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	//更新jQGrid的列表显示
-//	function reloadEmployeeList()
-//	{
-//		$("table#EmployeeGrid").jqGrid('setGridParam',{postData:{departmentNo:departmentNo,roleNo:roleNo,sex:sex,startJoinDate:startJoinDate,endJoinDate:endJoinDate}}).trigger("reloadGrid");
-//		
-//	}
-//	
-//	//点击检索事件处理
-//	$("a#EmployeeSearchButton").on("click",function(){
-//		departmentNo=$("select#DepartmentSelection").val();
-//		roleNo=$("select#RoleSelection").val();
-//		sex=$("input[name='empsex']:checked").val();
-//		
-//		startJoinDate=$("input#startJoinDate").val();
-//		endJoinDate=$("input#endJoinDate").val();
-//		if(startJoinDate==""){
-//			startJoinDate=null;
-//		}
-//		if(endJoinDate==""){
-//			endJoinDate=null;
-//		}
-//		reloadEmployeeList();
-//	});
-	
-	
-});
+	//==============================删除=========
+	$("button#delete").off().on("click",function(event){
+		if(no==null){
+			BootstrapDialog.show({
+	            title: '用户操作信息',
+	            message:"请选择要操作的用户",
+	            buttons: [{
+	                label: '确定',
+	                action: function(dialog) {
+	                    dialog.close();
+	                }
+	            }]
+	        });
+		}
+		else{
+		BootstrapDialog.confirm('确认删除这条数据?', function(result){
+            if(result) {
+            	
+                $.post("/heatingPrice/delete",{heatingYear:no},function(result){
+                	if(result.status=="ok"){
+                		$("table#EmployeeGrid").trigger("reloadGrid");
+					}
+					BootstrapDialog.show({
+			            title: '部门操作信息',
+			            message:result.message
+			        });
+		              
+		            
+                });
+                    }
+
+        });
+        		}
+        });
+        	
+        	
+        	
+
+        	
+        	
+        });
