@@ -1,29 +1,35 @@
-
+/**
+ * 用户前端主管理JS
+ * 模块：login
+ * 业务对象:所有用户
+ * 作者:马佳国
+ * 
+ */
 
 $(function(){
+
 	var no = 0;
-	var name = null;
-	var adr = null;
 	//设置系统页面标题
-	$("span#mainpagetille").html("小区管理");
+	$("span#mainpagetille").html("用户管理");
 	//设置日期的格式和选择
 	
 	//显示员工列表
 	$("table#EmployeeGrid").jqGrid({
-		url: '/homefee/getall/withpage',
+		url: '/HouseFeePayRecord/getall/page',
 		datatype: "json",
 		colModel: [
-			{ label: '缴费序号', name: 'feeNo', width: 75 },
-			{ label: '居民编号', name: 'homeNo.homeNo', width: 75 },
-			{ label: '年份', name: 'heatingYear.heatingYear', width: 75 },
-			{ label: '供热面积', name: 'heatArea', width: 90 },
-			{ label: '应缴费', name: 'agreeFee', width: 75},
-			{ label: '实缴费', name: 'actualFee', width: 75},
-			{ label: '欠缴费', name: 'debtFee', width: 75},
-			{ label: '缴费转态', name: 'feeStatus', width: 75},
-			{ label: '实际供热天数', name: 'heatingdays', width: 75},
-			{ label: '备注', name: 'feeDesc', width: 75},
-		],
+			{ label: '缴费序号', name: 'recordNo', width: 75 },
+			{ label: '公建供热序号', name: 'houseFee.feeNo', width: 90 },
+			{ label: '交款方式编号', name: 'paymentType.typeno', width: 75 },
+			{ label: '缴费日期', name: 'payDate', width: 90 },
+			{ label: '缴费金额', name: 'payAmount', width: 75 },
+			{ label: '缴费人', name: 'payPerson', width: 90 },
+			{ label: '支票编号', name: 'checkCode', width: 75 },
+			{ label: '发票编号', name: 'invoiceCode', width: 90 },
+			{ label: '缴费备注', name: 'payDesc', width: 75 },
+			{ label: '处理状态', name: 'recordStatus', width: 90 },
+			
+			],
 		styleUI : 'Bootstrap',
 		viewrecords: true, 
 		autowidth: true,
@@ -36,7 +42,7 @@ $(function(){
 		      total: "pageCount", 
 		      records: "count", 
 		      repeatitems: true, 
-		      id: "feeNo"},
+		      id: "recordNo"},
 		pager: "#EmployeeGridPager",
 		onSelectRow:function(data){
 			no = data ;
@@ -45,9 +51,9 @@ $(function(){
 	
 	//点击增加链接处理
 	$("button#add").off().on("click",function(event){
-		$("div#DepartmentDialogArea").load("fee/HomeFee/add.html",function(){
+		$("div#DepartmentDialogArea").load("fee/HouseFeePayRecord/add.html",function(){
 			$("div#DepartmentDialogArea").dialog({
-				title:"添加居民收费表数据",
+				title:"添加缴费记录",
 				width:500
 			});
 			$("form#AddForm").ajaxForm(function(result){
@@ -71,7 +77,7 @@ $(function(){
 	});
 	
 	
-	//修改按钮	//点击修改按钮事件处理
+	//点击修改按钮事件处理
 	$("button#modify").off().on("click",function(event){
 		if(no==0){
 			BootstrapDialog.show({
@@ -80,42 +86,42 @@ $(function(){
 	        });
 		}
 		else {
-			$("div#DepartmentDialogArea").load("fee/HomeFee/modify.html",function(){
-
-				$.getJSON("/homefee/getone/withrelation",{feeNo:no},function(data){	//{}中是请求参数，data是后端返回的结果
+			$("div#DepartmentDialogArea").load("fee/HouseFeePayRecord/modify.html",function(){
+				$.getJSON("/HouseFeePayRecord/getByNo",{recordNo:no},function(data){	//{}中是请求参数，data是后端返回的结果
 					//alert(data.status);
 					//alert(data.model.typeName);
 					if(data.status=="ok"){
 						
-						$("input[name='feeNo']").val(no);
-						$("input[name='feeNo']").attr("readonly","readonly");//设置主键为不可编辑状态
-						$("input[name='homeNo.homeNo']").val(data.model.homeNo.homeNo);
-						$("input[name='heatingYear.heatingYear']").val(data.model.heatingYear.heatingYear);
-						$("input[name='heatArea']").val(data.model.heatArea);
-						$("input[name='agreeFee']").val(data.model.agreeFee);
-						$("input[name='actualFee']").val(data.model.actualFee);
-						$("input[name='debtFee']").val(data.model.debtFee);
-						$("input[name='feeStatus']").val(data.model.feeStatus);
-						$("input[name='heatingdays']").val(data.model.heatingdays);
-						$("input[name='feeDesc']").val(data.model.feeDesc);
+						$("input[name='recordNo']").val(no);
+						$("input[name='recordNo']").attr("readonly","readonly");//设置主键为不可编辑状态
+						$("input[name='houseFee.feeNo']").val(data.model.houseFee.feeNo);
+						$("input[name='paymentType.typeno']").val(data.model.paymentType.typeno);
+						$("input[name='payDate']").val(data.model.payDate);
+						$("input[name='payAmount']").val(data.model.payAmount);
+						$("input[name='payPerson']").val(data.model.payPerson);
+						$("input[name='checkCode']").val(data.model.checkCode);
+						$("input[name='invoiceCode']").val(data.model.invoiceCode);
+						$("input[name='payDesc']").val(data.model.payDesc);
+						$("input[name='recordStatus']").val(data.model.recordStatus);
+						
 					}
 				});
 				
 				$("div#DepartmentDialogArea" ).dialog({
-					title:"小区信息修改",
+					title:"缴费记录修改",
 					width:600
 				});
 				//拦截表单提交
 				$("form#DepartmentModifyForm").ajaxForm(function(result){
 					if(result.status=="ok"){
-						$("input[name='typeNo']").removeAttr("readonly");	//去除只读
+						$("input[name='recordNo']").removeAttr("readonly");	//去除只读
 						$("table#EmployeeGrid").trigger("reloadGrid");
 					}
 					//alert(result.message);
 					//BootstrapDialog.alert(result.message);
 					BootstrapDialog.show({
 			            title: '操作结果信息',
-			            message:result.message,
+			            message:result.message
 			        });
 					$("div#DepartmentDialogArea" ).dialog( "close" );
 					$("div#DepartmentDialogArea" ).dialog( "destroy" );
@@ -137,13 +143,12 @@ $(function(){
 		
 	});
 
-	
-//==============================删除================
+	//==============================删除=========
 	$("button#delete").off().on("click",function(event){
 		if(no==0){
 			BootstrapDialog.show({
 	            title: '用户操作信息',
-	            message:"请选择要操作的数据",
+	            message:"请选择要操作的用户",
 	            buttons: [{
 	                label: '确定',
 	                action: function(dialog) {
@@ -155,12 +160,13 @@ $(function(){
 		else{
 		BootstrapDialog.confirm('确认删除这条数据?', function(result){
             if(result) {
-                $.post("/homefee/delete",{feeNo:no},function(result){
+            	
+                $.post("/HouseFeePayRecord/delete",{recordNo:no},function(result){
                 	if(result.status=="ok"){
                 		$("table#EmployeeGrid").trigger("reloadGrid");
 					}
 					BootstrapDialog.show({
-			            title: '操作结果',
+			            title: '部门操作信息',
 			            message:result.message
 			        });
               

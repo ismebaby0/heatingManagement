@@ -66,7 +66,7 @@
    delete from HT_FunctionUser where UUserID=#{id}
    </delete>
    <insert id="modifyPhoto">
-   update HT_UserInfo set PHOTO=#{photo},PHOTOFileName=#{photoName},PhotoContentType=#{contentType} where UUSERID=#{uuserid}
+   update HT_UserInfo set PHOTO=#{photo},PHOTOFileName=#{photoName},PhotoContentType=#{contentType} where UUSERID=#{id}
    </insert>
 </mapper>
 

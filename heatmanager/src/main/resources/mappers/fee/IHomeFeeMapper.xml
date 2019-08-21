@@ -4,6 +4,7 @@
 
 <mapper namespace="com.neusoft.ht.fee.mapper.IHomeFeeMapper">
 
+
 	<!-- 没有外键关联查询 -->
 	<resultMap type="com.neusoft.ht.fee.model.HomeFeeModel" id="resultOfHomeFee">
 		<id property="feeNo" column="feeNo"/>

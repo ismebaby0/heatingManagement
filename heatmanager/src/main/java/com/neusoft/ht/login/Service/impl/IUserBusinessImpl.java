@@ -66,7 +66,7 @@ public class IUserBusinessImpl implements IUserBusiness {
 		return userDao.selectById(id);
 	}
 
-
+    
 
 	@Override
 	@Transactional(readOnly = true)
@@ -103,9 +103,16 @@ public class IUserBusinessImpl implements IUserBusiness {
 
 
 
-
-
-
-
-
+	@Override
+	public boolean validate(String id, String passworod) throws Exception {
+		// TODO Auto-generated method stub
+		AdminUserValue um=userDao.selectById(id);
+		if(um!=null&&um.getUpassword().equals(passworod)) {
+			return true;
+		}
+		
+		else {
+			return false;
+		}
+	}
 }

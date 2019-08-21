@@ -32,7 +32,7 @@
 	 </select>
 	 
 	  <select id="selectById" resultMap="UserResultMap">
-	  select * from HT_User where UUSERID=#{iuser.uuserid}
+	  select * from HT_User where UUSERID=#{uuserid}
 	 </select>
 	 
 	 <select id="getListAllWithPages" resultMap="UserResultMap">
@@ -51,8 +51,7 @@
 	 <select id="getTotalCount" resultType="int">
 	 select IFNULL(count(1),0) from HT_User
 	 </select>
-	 
-	<!-- 查询关联的功能 -->
 
+   
 	</mapper>
 	

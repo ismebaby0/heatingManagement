@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package com.neusoft.ht.fee.service.impl;
 
 import java.util.List;
@@ -84,5 +82,4 @@ public class HomeFeeServiceImpl implements IHomeFeeService{
 	public HomeFeeModel getOneWithRelation(int feeNo) throws Exception {
 		return mapper.getOneWithRelation(feeNo);
 	}
-
 }

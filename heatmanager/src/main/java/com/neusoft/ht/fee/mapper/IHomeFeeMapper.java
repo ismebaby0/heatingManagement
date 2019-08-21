@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package com.neusoft.ht.fee.mapper;
 
 import java.util.List;

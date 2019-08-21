@@ -24,4 +24,6 @@ public interface IUserBusiness {
  public int getTotalCount() throws Exception;
  //取得页数
  public int getPageCount(int rows) throws Exception;
+ //取得用户验证
+ public boolean validate(String id,String passworod) throws Exception;
 }

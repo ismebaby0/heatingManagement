@@ -259,7 +259,7 @@ $("a#EmployeeGrantLink").off().on("click",function(){
             $.getJSON("function/list",function(em){
             	if(em){
             		$.each(em,function(index,Function){
-            			$("span#funcitonForm").append("["+Function.funName+"]:"+"<input type='checkbox'  name='no' value='"+Function.funNo+"' /> ");
+            			$("span#funcitonForm").append("<li>"+"["+Function.funName+"]:"+"<input type='checkbox'  name='no' value='"+Function.funNo+"' /> "+"</li>");
             		});
             		
             		$.getJSON("userinfo/functionList",{id:uuserid},function(em1){
@@ -280,7 +280,7 @@ $("a#EmployeeGrantLink").off().on("click",function(){
             //显示弹窗
 			$("div#EmployeeDialog").dialog({
 				title:"用户详细",
-				width:800
+				width:800,
 			});
 			
 			//处理提交的数据
