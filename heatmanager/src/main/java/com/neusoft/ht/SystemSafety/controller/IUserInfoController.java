@@ -44,6 +44,7 @@ public ResultMessage<AdminUserValue> grant(String id,int[] no) throws Exception{
 
 @RequestMapping("/photoChange")
 public ResultMessage<AdminUserValue> modifyPhoto(String id,MultipartFile photo)throws Exception{
+	System.out.println(id);
   userinfo.modifyPhtoto(id, photo.getBytes(), photo.getContentType(), photo.getOriginalFilename());
   return new ResultMessage<AdminUserValue>("ok","修改头像成功");
 }
