@@ -9,7 +9,7 @@ import java.util.Date;
 
 public class HomeFeePayRecord {
 	private Integer recordNo;
-	private HomeFee homeFeeNo;
+	private HomeFeeModel homeFeeNo;
 	private PaymentType paymentTypeNo;
 	private Date payDate;
 	private Float payAmount;
@@ -23,10 +23,10 @@ public class HomeFeePayRecord {
 	public void setRecordNo(Integer recordNo) {
 		this.recordNo = recordNo;
 	}
-	public HomeFee getHomeFeeNo() {
+	public HomeFeeModel getHomeFeeNo() {
 		return homeFeeNo;
 	}
-	public void setHomeFeeNo(HomeFee homeFeeNo) {
+	public void setHomeFeeNo(HomeFeeModel homeFeeNo) {
 		this.homeFeeNo = homeFeeNo;
 	}
 	public PaymentType getPaymentTypeNo() {

@@ -8,14 +8,14 @@ import lombok.Data;
 @Data
 public class HomeStopRecordModel {
 	private int recordNo = 0;
-	private HomeFee feeNo = null;
+	private HomeFeeModel feeNo = null;
 	private BigDecimal stopArea = null;
 	private Date stopDate = null;
 	private String stopReason = null;
 	private String stopPerson = null;
 	private String stopDesc = null;
 	private String stopStatus = null;
-	public HomeStopRecordModel(int recordNo, HomeFee feeNo, BigDecimal stopArea, Date stopDate, String stopReason,
+	public HomeStopRecordModel(int recordNo, HomeFeeModel feeNo, BigDecimal stopArea, Date stopDate, String stopReason,
 			String stopPerson, String stopDesc, String stopStatus) {
 		super();
 		this.recordNo = recordNo;
