@@ -2,6 +2,8 @@ package com.neusoft.ht.fee.mapper;
 
 
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.neusoft.ht.fee.model.HomeFee;
@@ -22,4 +24,8 @@ public interface IHomeFeeMapper {
 		HomeFee selectByFeeNo(int feeNo);
 
 		int insertHomeFee(HomeFee homeFee);
+		
+		
+
+		List<HomeFee> getAll();
 }

@@ -9,6 +9,8 @@ public interface IHomeFeeService {
 	public void delete(Integer feeNo) throws Exception;
 	public void update(HomeFee homeFee) throws Exception;
 	public HomeFee selectByNo(int feeNo) throws Exception;
+	
+	public List<HomeFee>getAll() throws Exception;
 
 
 }

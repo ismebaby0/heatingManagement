@@ -119,4 +119,7 @@
 		WHERE
 		FeeNo = #{feeNo}
 	</delete>
+	
+	<select id="getAll" resultMap = "homeFeeMap">
+		SELECT *FROM HT_homeFee homeFee  LEFT JOIN HT_HOME home ON homeFee.HomeNo = home.homeNo LEFT JOIN HT_HeadtingPrice HeadtingPrice ON homeFee.HomeNo = HeadtingPrice.HeatingYear	</select>
 </mapper>

@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.neusoft.ht.fee.model.HomeFee;
+import com.neusoft.ht.fee.model.HouseFeeModel;
 import com.neusoft.ht.fee.service.IHomeFeeService;
 import com.neusoft.ht.message.ResultMessage;
 
@@ -35,5 +36,12 @@ public class HomeFeeController {
 		result.setModel(service.selectByNo(homeNo));
 		return result;
 	}
+	@RequestMapping("/getall")
+	public ResultMessage<HomeFee> selectAllHeatingPrice() throws Exception {
+		ResultMessage<HomeFee> result = new ResultMessage<>();
+		result.setList(service.getAll());
+		return result;
+	}
 
+	
 }

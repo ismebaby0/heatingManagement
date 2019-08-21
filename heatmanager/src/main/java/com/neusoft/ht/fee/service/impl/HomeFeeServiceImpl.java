@@ -39,5 +39,11 @@ public class HomeFeeServiceImpl implements IHomeFeeService {
 		return mapper.selectByFeeNo(feeNo);
 	}
 
+	@Override
+	public List<HomeFee> getAll() throws Exception {
+		// TODO Auto-generated method stub
+		return mapper.getAll();
+	}
+
 
 }
