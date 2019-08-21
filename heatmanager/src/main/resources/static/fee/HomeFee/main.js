@@ -10,7 +10,7 @@ $(function(){
 	
 	//显示员工列表
 	$("table#EmployeeGrid").jqGrid({
-		url: '/HomeFee/getall',
+		url: '/homeFee/getall',
 		datatype: "json",
 		colModel: [
 			{ label: '缴费序号', name: 'feeNo', width: 75 },
@@ -20,8 +20,8 @@ $(function(){
 			{ label: '欠缴费', name: 'DebtFee', width: 75},
 			{ label: '缴费转态', name: 'FeeStatus', width: 75},
 			{ label: '实际供热天数', name: 'Heatingdays', width: 75},
-			{ label: '备注', name: 'FeeDesc', width: 75},
-		
+			{ label: '备注', name: 'FeeDesc', width: 75}
+	],
 		styleUI : 'Bootstrap',
 		viewrecords: true, 
 		autowidth: true,
@@ -43,7 +43,7 @@ $(function(){
 	
 	//点击增加链接处理
 	$("button#add").off().on("click",function(event){
-		$("div#DepartmentDialogArea").load("fee/Neighbourhood/add.html",function(){
+		$("div#DepartmentDialogArea").load("fee/HomeFee/add.html",function(){
 			$("div#DepartmentDialogArea").dialog({
 				title:"添加房子类型",
 				width:500
@@ -78,8 +78,8 @@ $(function(){
 	        });
 		}
 		else {
-			$("div#DepartmentDialogArea").load("fee/Neighbourhood/modify.html",function(){
-				$.getJSON("/Neighbourhood/getbyno",{hoodNo:no},function(data){	//{}中是请求参数，data是后端返回的结果
+			$("div#DepartmentDialogArea").load("fee/HomeFee/modify.html",function(){
+				$.getJSON("/HomeFee/getbyno",{hoodNo:no},function(data){	//{}中是请求参数，data是后端返回的结果
 					//alert(data.status);
 					//alert(data.model.typeName);
 					if(data.status=="ok"){
@@ -146,7 +146,7 @@ $(function(){
 		BootstrapDialog.confirm('确认删除这条数据?', function(result){
             if(result) {
             	
-                $.post("/Neighbourhood/delete",{hoodNo:no},function(result){
+                $.post("/HomeFee/delete",{hoodNo:no},function(result){
                 	if(result.status=="ok"){
                 		$("table#EmployeeGrid").trigger("reloadGrid");
 					}
