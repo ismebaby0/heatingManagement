@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Data;
 
 /**
@@ -21,6 +23,7 @@ public class HouseFeePayRecord implements Serializable {
 	//	交款方式编号
 	private PaymentType paymentType;
 	//	缴费日期
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date payDate;
 	//	缴费金额
 	private BigDecimal payAmount;
