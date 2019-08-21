@@ -57,8 +57,8 @@ public class UserController {
 	
 	
 	  @RequestMapping("/image") 
-	  public ResponseEntity<byte[]> getImage() throws Exception{ 
-      UserInfo um=user1.getListWithId("fff");
+	  public ResponseEntity<byte[]> getImage(String id) throws Exception{ 
+      UserInfo um=user1.getListWithId(id);
       byte[] bytes=um.getPhoto();
 
 	  String contentType=um.getPhotoContentType();
