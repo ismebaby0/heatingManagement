@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.neusoft.ht.fee.mapper.IPaymentTypeMapper">
+	<resultMap id="resultOfPaymentType" type="com.neusoft.ht.fee.model.PaymentType" >
+  		<id property="typeNo" column="typeNo" />
+  		<result property = "typeName" column = "typeName"></result>
+    </resultMap>
+
+	 <insert id = "insert">
+	 	insert into HT_PaymentType (typeName) values(#{typeName})
+	 </insert>
+	 <delete id = "deleteByPrimaryKey">
+	 	delete from HT_PaymentType where typeNo = #{typeNo}
+	 </delete>
+	 <update id = "updateByPrimaryKey">
+	 	update HT_PaymentType set  typeName = #{typeName} where typeNo = #{typeNo}
+	 </update>
+	 <select id="selectByPrimaryKey" resultMap="resultOfPaymentType">
+	 	select * from HT_PaymentType where typeNo = #{typeNo}
+	 </select>	
+	 <select id = "selectByAll" resultMap="resultOfPaymentType">
+	 	select * from HT_PaymentType
+	 </select> 
+	 
+	 <!-- 
+	 public int getCountByAll() throws Exception;
+	//分页查询
+	public List<HouseFeeModel> selectAllWithPage(@Param("start") int star,@Param("end") int end) throws Exception;
+	  -->
+	<select id="getCountByAll" resultType="int">
+		select count(typeNo) from HT_PaymentType
+	</select>
+	
+	<select id="selectAllWithPage" resultMap="resultOfPaymentType">
+		select * from HT_PaymentType limit #{start},#{end}
+	</select>
+</mapper>
+
