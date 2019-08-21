@@ -10,18 +10,20 @@ $(function(){
 	
 	//显示员工列表
 	$("table#EmployeeGrid").jqGrid({
-		url: '/homeFee/getall',
+		url: '/homefee/getall/withpage',
 		datatype: "json",
 		colModel: [
 			{ label: '缴费序号', name: 'feeNo', width: 75 },
-			{ label: '供热面积', name: 'hoodName', width: 90 },
+			{ label: '居民编号', name: 'homeNo.homeNo', width: 75 },
+			{ label: '年份', name: 'heatingYear.heatingYear', width: 75 },
+			{ label: '供热面积', name: 'heatArea', width: 90 },
 			{ label: '应缴费', name: 'agreeFee', width: 75},
 			{ label: '实缴费', name: 'actualFee', width: 75},
-			{ label: '欠缴费', name: 'DebtFee', width: 75},
-			{ label: '缴费转态', name: 'FeeStatus', width: 75},
-			{ label: '实际供热天数', name: 'Heatingdays', width: 75},
-			{ label: '备注', name: 'FeeDesc', width: 75}
-	],
+			{ label: '欠缴费', name: 'debtFee', width: 75},
+			{ label: '缴费转态', name: 'feeStatus', width: 75},
+			{ label: '实际供热天数', name: 'heatingdays', width: 75},
+			{ label: '备注', name: 'feeDesc', width: 75},
+		],
 		styleUI : 'Bootstrap',
 		viewrecords: true, 
 		autowidth: true,
@@ -45,7 +47,7 @@ $(function(){
 	$("button#add").off().on("click",function(event){
 		$("div#DepartmentDialogArea").load("fee/HomeFee/add.html",function(){
 			$("div#DepartmentDialogArea").dialog({
-				title:"添加房子类型",
+				title:"添加居民收费表数据",
 				width:500
 			});
 			$("form#AddForm").ajaxForm(function(result){
@@ -79,15 +81,23 @@ $(function(){
 		}
 		else {
 			$("div#DepartmentDialogArea").load("fee/HomeFee/modify.html",function(){
-				$.getJSON("/HomeFee/getbyno",{hoodNo:no},function(data){	//{}中是请求参数，data是后端返回的结果
+
+				$.getJSON("/homefee/getone/withrelation",{feeNo:no},function(data){	//{}中是请求参数，data是后端返回的结果
 					//alert(data.status);
 					//alert(data.model.typeName);
 					if(data.status=="ok"){
 						
-						$("input[name='hoodNo']").val(no);
-						$("input[name='typeNo']").attr("readonly","readonly");//设置主键为不可编辑状态
-						$("input[name='hoodName']").val(data.model.hoodName);
-						$("input[name='address']").val(data.model.address);
+						$("input[name='feeNo']").val(no);
+						$("input[name='feeNo']").attr("readonly","readonly");//设置主键为不可编辑状态
+						$("input[name='homeNo.homeNo']").val(data.model.homeNo.homeNo);
+						$("input[name='heatingYear.heatingYear']").val(data.model.heatingYear.heatingYear);
+						$("input[name='heatArea']").val(data.model.heatArea);
+						$("input[name='agreeFee']").val(data.model.agreeFee);
+						$("input[name='actualFee']").val(data.model.actualFee);
+						$("input[name='debtFee']").val(data.model.debtFee);
+						$("input[name='feeStatus']").val(data.model.feeStatus);
+						$("input[name='heatingdays']").val(data.model.heatingdays);
+						$("input[name='feeDesc']").val(data.model.feeDesc);
 					}
 				});
 				
@@ -105,7 +115,7 @@ $(function(){
 					//BootstrapDialog.alert(result.message);
 					BootstrapDialog.show({
 			            title: '操作结果信息',
-			            message:result.message
+			            message:result.message,
 			        });
 					$("div#DepartmentDialogArea" ).dialog( "close" );
 					$("div#DepartmentDialogArea" ).dialog( "destroy" );
@@ -145,8 +155,7 @@ $(function(){
 		else{
 		BootstrapDialog.confirm('确认删除这条数据?', function(result){
             if(result) {
-            	
-                $.post("/HomeFee/delete",{hoodNo:no},function(result){
+                $.post("/homefee/delete",{feeNo:no},function(result){
                 	if(result.status=="ok"){
                 		$("table#EmployeeGrid").trigger("reloadGrid");
 					}

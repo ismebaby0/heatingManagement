@@ -30,7 +30,6 @@ public class NeighbourhoodController {
 	@RequestMapping("/add")
 	public ResultMessage<Neighbourhood> add(Neighbourhood nbh) throws Exception {
 		service.add(nbh);
-		System.out.println(nbh);
 		return new ResultMessage<>("ok", "添加成功");
 	}
 	@RequestMapping("/delete")

@@ -6,10 +6,8 @@
 
 	<!-- 不添加外键关联查询 -->
 	<resultMap type="com.neusoft.ht.fee.model.HomeModel" id="resultOfHome">
-		<id property="" column=""/>
-		<result property="homeNo" column="homeNo" />
+		<id property="homeNo" column="homeNo"/>
 		<result property="heatingCode" column="heatingCode" />
-		
 		<result property="homeName" column="homeName" />
 		<result property="buildingCode" column="buildingCode" />
 		<result property="departmentCode" column="departmentCode" />

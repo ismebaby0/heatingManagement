@@ -20,6 +20,7 @@ $(function(){
 				});
 		 });
 	 });
+$(function(){
 	//点击左面功能菜单处理
 	$("ul#menu_nav li ul li a").on("click",function(event){
 		var url=$(this).attr("href");
