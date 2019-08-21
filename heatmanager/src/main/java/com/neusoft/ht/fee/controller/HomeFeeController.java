@@ -39,8 +39,6 @@ public class HomeFeeController {
 	@RequestMapping("/modify")
 	public ResultMessage<HomeFeeModel> update(HomeFeeModel homeFee) throws Exception{
 		service.update(homeFee);
-		System.out.println(homeFee);
-		System.out.println("修改");
 		return new ResultMessage<>("ok", "更新成功");
 	}
 	@RequestMapping("/getone")
