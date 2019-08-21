@@ -44,10 +44,13 @@ $(function(){
 		$("div#ComplainTypeDialogArea").off().load("complain/ComplainType/add.html",function(){
 			$("div#ComplainTypeDialogArea").dialog({
 				title:"类型名称",
-				width:600
+				width:600,
+				close: function (event, ui) {
+					$(this).find("form").remove();
+					$(this).dialog('destroy');
+				}
 			});
 			$("form#addForm").ajaxForm(function(result){
-				$("div#ComplainTypeDialogArea" ).dialog( "close" ).dialog( "destroy" ).html("");
 				if(result.status==="OK"){
 					alert(result.message);
 					$("table#ComplainTypeGrid").trigger("reloadGrid");
@@ -56,7 +59,7 @@ $(function(){
 			
 			// 点击取消
 			$("input[value='取消']").on("click",function(event){
-				$("div#ComplainTypeDialogArea" ).dialog( "close" ).dialog( "destroy" ).html("");
+				$("div#ComplainTypeDialogArea" ).dialog( "close" ).html("");
 			});
 		});
 	});
@@ -132,7 +135,11 @@ $(function(){
 				
 				$("div#ComplainTypeDialogArea" ).dialog({
 					title:"公建投诉修改",
-					width:600
+					width:600,
+					close: function (event, ui) {
+						$(this).find("form").remove();
+						$(this).dialog('destroy');
+					}
 				});
 				//拦截表单提交
 				$("form#modForm").ajaxForm(function(result){
@@ -147,14 +154,14 @@ $(function(){
 			            title: '操作结果信息',
 			            message:result.message
 			        });
-					$("div#ComplainTypeDialogArea" ).dialog( "close" ).dialog( "destroy" ).html("");
+					$("div#ComplainTypeDialogArea" ).dialog( "close" ).html("");
 					
 				});
 				
 				
 				//点击取消按钮处理
 				$("input[value='取消']").on("click",function(){
-					$("div#ComplainTypeDialogArea" ).dialog( "close" ).dialog( "destroy" ).html("");
+					$("div#ComplainTypeDialogArea" ).dialog( "close" ).html("");
 				});
 			});
 			

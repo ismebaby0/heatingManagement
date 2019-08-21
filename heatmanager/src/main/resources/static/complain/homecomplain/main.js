@@ -63,7 +63,7 @@ $(function(){
 //		if($("div#homeComplainTypeDialogArea").text()!=="")
 //			return;
 		$("div#homeComplainTypeDialogArea").off().load("complain/homecomplain/add.html",function(){
-			$.getJSON("home/getAllHome",function(data){
+			$.getJSON("home/getall?rows=99",function(data){
 				var datalisthtml="";
 				data.list.forEach(e=>datalisthtml +="<option value='"+e.homeNo+"'>"+e.homeName+"</option>"); 
 				$("datalist#homeNoList").append(datalisthtml);
@@ -76,10 +76,14 @@ $(function(){
 			});
 			$("div#homeComplainTypeDialogArea").dialog({
 				title:"住宅投诉记录添加",
-				width:600
+				width:600,
+				close: function (event, ui) {
+//					console.log(this); 
+					$(this).find("form").remove();
+					$(this).dialog('destroy');
+				}
 			});
 			$("form#addForm").ajaxForm(function(result){
-				$("div#homeComplainTypeDialogArea" ).dialog( "close" ).dialog( "destroy" ).html("");
 				if(result.status==="OK"){
 					alert(result.message);
 					$("table#homeComplainTypeGrid").trigger("reloadGrid");
@@ -88,7 +92,7 @@ $(function(){
 			
 			// 点击取消
 			$("input[value='取消']").on("click",function(event){
-				$("div#homeComplainTypeDialogArea" ).dialog( "close" ).dialog( "destroy" ).html("");
+				$("div#homeComplainTypeDialogArea" ).dialog( "close" ).html("");
 			});
 		});
 	});
@@ -166,7 +170,12 @@ $(function(){
 				
 				$("div#homeComplainTypeDialogArea" ).dialog({
 					title:"公建投诉修改",
-					width:600
+					width:600,
+				    close: function (event, ui) {
+//				    	console.log(this); 
+				    	$(this).find("form").remove();
+				    	$(this).dialog('destroy');
+				    }
 				});
 				//拦截表单提交
 				$("form#modForm").ajaxForm(function(result){
@@ -181,14 +190,14 @@ $(function(){
 			            title: '操作结果信息',
 			            message:result.message
 			        });
-					$("div#homeComplainTypeDialogArea" ).dialog( "close" ).dialog( "destroy" ).html("");
+					$("div#homeComplainTypeDialogArea" ).dialog( "close" ).html("");
 					
 				});
 				
 				
 				//点击取消按钮处理
 				$("input[value='取消']").on("click",function(){
-					$("div#homeComplainTypeDialogArea" ).dialog( "close" ).dialog( "destroy" ).html("");
+					$("div#homeComplainTypeDialogArea" ).dialog( "close" ).html("");
 				});
 			});
 			
