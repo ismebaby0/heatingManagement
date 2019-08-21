@@ -24,7 +24,7 @@
 		set
 		FeeNo=#{houseFee.feeNo},PaymentTypeNo=#{paymentType.typeno},PayAmount=#{payAmount},
 		PayDate=#{payDate},PayPerson=#{payPerson},CheckCode=#{checkCode},
-		InvoiceCode=#{invoiceCode},PayDesc=#{payDesc},RecordStatus=#{recordStatus})
+		InvoiceCode=#{invoiceCode},PayDesc=#{payDesc},RecordStatus=#{recordStatus}
 		where RecordNo=#{recordNo}
 	</update>
 
@@ -57,5 +57,16 @@
 		PayPerson,CheckCode,InvoiceCode,PayDesc,RecordStatus from
 		HT_PublicHouseFeePayRecord
 	</select>
+	<!-- 查询户型表的个数 -->
+	<!-- public int getCountByAll() throws Exception; -->
+	 <select id="getCountByAll" resultType = "int">
+	 	select IFNULL(count(RecordNo),0) from HT_PublicHouseFeePayRecord
+	 </select>
+	<!-- 分页查询 -->
+	<!-- public List<HouseFeePayRecord> selectAllWithPage(@Param("start") int star,@Param("end") int end) throws Exception; -->
+	 <select id="selectAllWithPage" resultMap = "selectMap" >
+	 	select * from HT_PublicHouseFeePayRecord limit #{start},#{end}
+	 </select>
+
 
 </mapper>
