@@ -3,6 +3,9 @@ package com.neusoft.ht.fee.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Data;
 
 /**
@@ -21,6 +24,7 @@ public class HouseFeeReturnRecord implements Serializable {
 	// 付款方式编号
 	private PaymentType paymentType;
 	// 退费日期
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date returnDate;
 	// 退费金额
 	private BigDecimal amount;
