@@ -156,7 +156,7 @@ $(function(){
 		BootstrapDialog.confirm('确认删除这条数据?', function(result){
             if(result) {
             	
-                $.post("/homefeerecord/delete",{typeNo:no},function(result){
+                $.post("/homefeerecord/delete",{no:no},function(result){
                 	if(result.status=="ok"){
                 		$("table#EmployeeGrid").trigger("reloadGrid");
 					}

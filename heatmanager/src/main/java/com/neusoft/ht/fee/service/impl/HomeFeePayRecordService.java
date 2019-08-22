@@ -37,9 +37,8 @@ public class HomeFeePayRecordService implements IHomeFeePayRecordService{
 	}
 
 	@Override
-	public void deleteByPrimaryKey(int payRecord) throws Exception {
-		// TODO Auto-generated method stub
-		
+	public void deleteByPrimaryKey(int no) throws Exception {
+		payRecord.deleteByPrimaryKey(no);
 	}
 
 	@Override
