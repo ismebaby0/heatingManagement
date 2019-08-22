@@ -8,7 +8,7 @@
 		insert into
 		HT_PublicHouseFeeReturnRecord(RecordNo,FeeNo,PaymentTypeNo,Amount,returnDate,
 		Person,CheckCode,InvoiceCode,RecordDesc,RecordStatus)
-		values(#{recordNo},#{houseFee.feeNo},#{paymentType.typeno},#{amount},#{returnDate},#{person},
+		values(#{recordNo},#{houseFee.feeNo},#{paymentType.typeNo},#{amount},#{returnDate},#{person},
 		#{checkCode},#{invoiceCode},#{recordDesc},#{recordStatus})
 	</insert>
 
@@ -21,7 +21,7 @@
 	<update id="updateByPrimaryKey">
 		update HT_PublicHouseFeeReturnRecord
 		set
-		FeeNo=#{houseFee.feeNo},PaymentTypeNo=#{paymentType.typeno},Amount=#{amount},
+		FeeNo=#{houseFee.feeNo},PaymentTypeNo=#{paymentType.typeNo},Amount=#{amount},
 		returnDate=#{returnDate},Person=#{person},CheckCode=#{checkCode},
 		InvoiceCode=#{invoiceCode},RecordDesc=#{recordDesc},RecordStatus=#{recordStatus})
 		where RecordNo=#{recordNo}
@@ -31,7 +31,7 @@
 		type="com.neusoft.ht.fee.model.HouseFeeReturnRecord" id="selectMap">
 		<id property="recordNo" column="RecordNo" />
 		<result property="houseFee.feeNo" column="FeeNo" />
-		<result property="paymentType.typeno" column="PaymentTypeNo" />
+		<result property="paymentType.typeNo" column="PaymentTypeNo" />
 		<result property="amount" column="Amount" />
 		<result property="returnDate" column="ReturnDate" />
 		<result property="person" column="Person" />

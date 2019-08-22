@@ -52,7 +52,11 @@ $(function(){
 		$("div#DepartmentDialogArea").load("fee/HeatingPrice/add.html",function(){
 			$("div#DepartmentDialogArea").dialog({
 				title:"添加热水年份",
-				width:600
+				width:600,
+				close: function (event, ui) {
+					$(this).find("form").remove();
+					$(this).dialog('destroy');
+				}
 			});
 			$("form#AddForm").ajaxForm(function(result){
 				$("div#DepartmentDialogArea").dialog("close");
@@ -66,9 +70,7 @@ $(function(){
 			
 			//点击取消
 			$("input[value='取消']").off().on("click",function(event){
-				$("div#DepartmentDialogArea").dialog("close");
-				$("div#DepartmentDialogArea").dialog("destroy");
-				$("div#DepartmentDialogArea").html("");
+				$("div#DepartmentDialogArea").dialog( "close" ).html("");
 			});
 		});
 	});
@@ -102,7 +104,11 @@ $(function(){
 				
 				$("div#DepartmentDialogArea" ).dialog({
 					title:"修改热水信息",
-					width:600
+					width:600,
+					close: function (event, ui) {
+						$(this).find("form").remove();
+						$(this).dialog('destroy');
+					}
 				});
 				//拦截表单提交
 				$("form#DepartmentModifyForm").ajaxForm(function(result){
@@ -116,18 +122,14 @@ $(function(){
 			            title: '操作结果信息',
 			            message:result.message
 			        });
-					$("div#DepartmentDialogArea" ).dialog( "close" );
-					$("div#DepartmentDialogArea" ).dialog( "destroy" );
-					$("div#DepartmentDialogArea").html("");
+					$("div#DepartmentDialogArea").dialog( "close" ).html("");
 					
 				});
 				
 				
 				//点击取消按钮处理
 				$("input[value='取消']").on("click",function(){
-					$( "div#DepartmentDialogArea" ).dialog( "close" );
-					$( "div#DepartmentDialogArea" ).dialog( "destroy" );
-					$("div#DepartmentDialogArea").html("");
+					$("div#DepartmentDialogArea").dialog( "close" ).html("");
 				});
 			});
 			
