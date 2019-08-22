@@ -33,7 +33,7 @@
 		from HT_HomeFeePayRecord
 		where RecordNo = #{recordNo}
 	</select>
-	<select id="selectListAllWithPages" resultMap="BaseResultMapWithALl">
+	<select id="selectAllWithPages" resultMap="BaseResultMapWithALl">
 		select *
 		from HT_HomeFeePayRecord
 		limit #{start},#{rows}

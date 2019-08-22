@@ -38,7 +38,7 @@ public class PaymentTypeServiceImpl implements IPaymentTypeService {
 	@Override
 	public List<PaymentType> selectByAll() throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return mapper.selectByAll();
 	}
 
 	@Override
