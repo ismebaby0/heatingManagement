@@ -8,7 +8,7 @@
 		insert into
 		HT_PublicHouseFeePayRecord(RecordNo,FeeNo,PaymentTypeNo,PayAmount,PayDate,
 		PayPerson,CheckCode,InvoiceCode,PayDesc,RecordStatus)
-		values(#{recordNo},#{houseFee.feeNo},#{paymentType.typeno},#{payAmount},#{payDate},#{payPerson},
+		values(#{recordNo},#{houseFee.feeNo},#{paymentType.typeNo},#{payAmount},#{payDate},#{payPerson},
 		#{checkCode},#{invoiceCode},#{payDesc},#{recordStatus})
 	</insert>
 
@@ -22,7 +22,7 @@
 	<update id="updateByPrimaryKey">
 		update HT_PublicHouseFeePayRecord
 		set
-		FeeNo=#{houseFee.feeNo},PaymentTypeNo=#{paymentType.typeno},PayAmount=#{payAmount},
+		FeeNo=#{houseFee.feeNo},PaymentTypeNo=#{paymentType.typeNo},PayAmount=#{payAmount},
 		PayDate=#{payDate},PayPerson=#{payPerson},CheckCode=#{checkCode},
 		InvoiceCode=#{invoiceCode},PayDesc=#{payDesc},RecordStatus=#{recordStatus}
 		where RecordNo=#{recordNo}
@@ -32,7 +32,7 @@
 		id="selectMap">
 		<id property="recordNo" column="RecordNo" />
 		<result property="houseFee.feeNo" column="FeeNo" />
-		<result property="paymentType.typeno" column="PaymentTypeNo" />
+		<result property="paymentType.typeNo" column="PaymentTypeNo" />
 		<result property="payAmount" column="PayAmount" />
 		<result property="payDate" column="PayDate" />
 		<result property="payPerson" column="PayPerson" />

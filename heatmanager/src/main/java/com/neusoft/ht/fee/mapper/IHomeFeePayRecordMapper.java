@@ -41,5 +41,4 @@ public interface IHomeFeePayRecordMapper {
 
 	// 关联分页查询
 	public List<HomeFeePayRecord> selectAllWithRelation(@Param("start") int star, @Param("rows") int rows) throws Exception;
-
 }

@@ -31,8 +31,8 @@ public class HomeFeePayRecordTest {
 	public void insert() throws Exception {
 //		homeFeePayRecordMapper.selectByAll().forEach(e->{System.out.print(e.getRecordNo()+",");});
 		HomeFeePayRecord homeFeePayRecord = new HomeFeePayRecord();
-		homeFeePayRecord.setPaymentTypeNo(paymentType.selectByPrimaryKey(2));
-		homeFeePayRecord.setHomeFeeNo(homefee.getByPrimaryKey(5));
+		homeFeePayRecord.setPaymentTypeNo(paymentType.selectByPrimaryKey(3));
+		homeFeePayRecord.setHomeFeeNo(homefee.getByPrimaryKey(6));
 		homeFeePayRecordMapper.insert(homeFeePayRecord);
 		System.out.println(homeFeePayRecordMapper.selectTotalCount());
 	}
@@ -43,5 +43,8 @@ public class HomeFeePayRecordTest {
 		homeFeePayRecord.setPayPerson("lz");
 		homeFeePayRecordMapper.updateByPrimaryKey(homeFeePayRecord);
 	}
-	
+	@Test
+	public void delete() throws Exception{
+		homeFeePayRecordMapper.deleteByPrimaryKey(3);
+	}
 }

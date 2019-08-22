@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class HomeFeePayRecord implements Serializable{
+
 	private Integer recordNo;
 	private HomeFeeModel homeFeeNo;
 	private PaymentType paymentTypeNo;

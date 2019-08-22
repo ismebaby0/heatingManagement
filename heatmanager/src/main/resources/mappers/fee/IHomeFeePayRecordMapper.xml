@@ -80,7 +80,6 @@
 			<if test="invoiceCode != null"> InvoiceCode = #{invoiceCode}, </if>
 			<if test="payDesc != null"> PayDesc = #{payDesc}, </if>
 			<if test="recordStatus != null"> RecordStatus = #{recordStatus}, </if>
-
 		</set>
 		where RecordNo=#{recordNo}
 	</update>
