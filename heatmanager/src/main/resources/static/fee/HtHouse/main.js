@@ -56,6 +56,13 @@ $(function(){
 	//点击增加链接处理
 	$("button#add").off().on("click",function(event){
 		$("div#DepartmentDialogArea").load("fee/HtHouse/add.html",function(){
+			
+			$.getJSON("Neighbourhood/list",function(data){
+				var datalisthtml="";
+				data.list.forEach(e=>datalisthtml +="<option value='"+e.hoodNo+"'>"+e.hoodName+"</option>"); 
+				$("datalist#homeFeeNoList").append(datalisthtml);
+			});
+			
 			$("div#DepartmentDialogArea").dialog({
 				title:"添加公共建筑",
 				width:600,
