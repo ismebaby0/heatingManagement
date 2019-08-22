@@ -13,7 +13,6 @@ $(function(){
 	//设置系统页面标题
 	$("span#mainpagetille").html("用户管理");
 	//设置日期的格式和选择
-	
 	//显示员工列表
 	$("table#EmployeeGrid").jqGrid({
 		url: '/HouseType/getall/page',
@@ -40,6 +39,23 @@ $(function(){
 			no = data ;
 		}
 	});
+	
+	//根据参数重新加载列表
+	function reloadList()
+	{
+		$("table#EmployeeGrid").jqGrid('setGridParam',{postData:{typeNo:no,typeName:name}}).trigger("reloadGrid");
+		
+	};
+	
+
+	
+	$("a#EmployeeSearchButton").off().on("click",function(event){
+		name = $("input#DepartmentSelectionName").val();
+		no = $("input#DepartmentSelectionNo").val();
+		reloadList();
+		name = null;
+		no = 0;
+	})
 	
 	//点击增加链接处理
 	$("button#add").off().on("click",function(event){

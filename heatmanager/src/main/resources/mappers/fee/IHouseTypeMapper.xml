@@ -11,20 +11,10 @@
   		select * from HT_HOUSETYPE
 	</select>
 	<select id = "selectByNo" resultMap = "selectHouseType">
- 		select*from HT_HOUSETYPE where typeNo = #{typeNo}
+ 		select*from HT_HOUSETYPE  where typeNo = #{typeNo}
 	</select>
 	
-	<!-- 
-	public void addHouseType(HouseType ht) ;
-	//删除户型表
-	public void deleteHouseType(HouseType ht);
-	//修改户型表
-	public void updateHouseType(HouseType ht);
-	//查询全部户型表
-	public List<HouseType>selectAllHouseType();
-	//根据查询
-	public HouseType selectByNo(int typeNo);
-	 -->
+	
 	 <insert id = "addHouseType" flushCache="true">
 	 	insert into HT_HOUSETYPE (typeName) values (#{typeName})
 	 </insert>
@@ -42,7 +32,16 @@
 	 
 	 <!-- 分页查询 -->
 	 <select id="selectAllWithPage" resultMap = "selectHouseType" >
-	 	select * from HT_HOUSETYPE limit #{start},#{end}
+	 	select * from HT_HOUSETYPE
+	 	<where>
+ 			<if test="typeNo != 0">
+ 				typeNo = #{typeNo}
+ 			</if>
+ 			<if test="typeName != null and typeName !=''">
+ 				and typeName = #{typeName}
+ 			</if>
+ 		</where> 
+	 	limit #{start},#{end}
 	 </select>
 
 </mapper>

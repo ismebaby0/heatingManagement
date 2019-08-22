@@ -39,6 +39,7 @@ public class HouseTypeController {
 	public ResultMessage<HouseType> getByNo(int typeNo) throws Exception {
 		ResultMessage<HouseType> result = new ResultMessage<>("ok","查询成功");
 		result.setModel(service.selectByNo(typeNo));
+		System.out.println(typeNo);
 		return result;
 	}
 	
@@ -72,9 +73,9 @@ public class HouseTypeController {
 	}
 	
 	@RequestMapping("/getall/page")
-	public ResultMessage<HouseType> getAllWithPage(@RequestParam(required = false,defaultValue ="3") int rows,@RequestParam(required = false,defaultValue = "1") int page) throws Exception{
+	public ResultMessage<HouseType> getAllWithPage(@RequestParam(required=false,defaultValue = "0") int typeNo,@RequestParam(required = false) String typeName,@RequestParam(required = false,defaultValue ="3") int rows,@RequestParam(required = false,defaultValue = "1") int page) throws Exception{
 		ResultMessage<HouseType> result = new ResultMessage<>("ok","添加成功");
-		result.setList(service.selectAllWithPage(rows, page));
+		result.setList(service.selectAllWithPage(typeNo,typeName,rows, page));
 		result.setCount(service.getCountAll());
 		result.setPage(page);
 		result.setRows(rows);

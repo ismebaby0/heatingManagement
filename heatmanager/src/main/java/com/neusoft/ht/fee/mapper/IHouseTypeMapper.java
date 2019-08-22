@@ -25,5 +25,5 @@ public interface IHouseTypeMapper {
 	//查询户型表的个数
 	public int getCountByAll() throws Exception;
 	//分页查询
-	public List<HouseType> selectAllWithPage(@Param("start") int star,@Param("end") int end) throws Exception;
+	public List<HouseType> selectAllWithPage(@Param("typeNo") int typeNo,@Param("typeName") String typeName,@Param("start") int star,@Param("end") int end) throws Exception;
 }

@@ -33,6 +33,6 @@ public interface IHouseTypeService {
 	public int getCountPage(int rows) throws Exception;
 	
 	//分页查询
-	public List<HouseType> selectAllWithPage(int row,int page) throws Exception;
+	public List<HouseType> selectAllWithPage(int typeNo,String typeName,int row,int page) throws Exception;
 
 }

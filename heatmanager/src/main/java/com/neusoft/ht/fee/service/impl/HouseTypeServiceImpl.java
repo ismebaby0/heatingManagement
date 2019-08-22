@@ -48,8 +48,8 @@ public class HouseTypeServiceImpl implements IHouseTypeService{
 	
 	//分页查寻
 	@Override
-	public List<HouseType> selectAllWithPage(int row,int page) throws Exception {
-		return mapper.selectAllWithPage(row*(page-1),page*row);
+	public List<HouseType> selectAllWithPage(int typeNo,String typeName,int row,int page) throws Exception {
+		return mapper.selectAllWithPage(typeNo,typeName,row*(page-1),page*row);
 	}
 	
 	//
