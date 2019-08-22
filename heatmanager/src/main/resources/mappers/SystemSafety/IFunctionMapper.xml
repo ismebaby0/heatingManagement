@@ -5,7 +5,7 @@
 <mapper namespace="com.neusoft.ht.SystemSafety.mapper.IFunctionMapper">
 
  <!-- 没有关联属性的结果映射 -->
-  <resultMap id="FunctionResultMap" type="Function" >
+  <resultMap id="FunctionResultMap" type="com.neusoft.ht.SystemSafety.model.Function" >
   	<id property="funNo" column="FUNNO" />
   	<result property="funName" column="FUNNAME" />
    <result property="funUrl" column="FUNURL" />
@@ -13,7 +13,7 @@
   </resultMap>
   
    <!-- 关联功能属性的结果映射 -->
-   <resultMap id="FunctionResultMapWithUser" type="Function" extends="FunctionResultMap">
+   <resultMap id="FunctionResultMapWithUser" type="com.neusoft.ht.SystemSafety.model.Function" extends="FunctionResultMap">
     <association property="admin"  resultMap="com.neusoft.ht.login.mapper.IUserMapper.UserResultMap" />
   </resultMap>
   
