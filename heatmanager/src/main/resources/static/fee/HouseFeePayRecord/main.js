@@ -20,7 +20,7 @@ $(function(){
 		colModel: [
 			{ label: '缴费序号', name: 'recordNo', width: 75 },
 			{ label: '公建供热序号', name: 'houseFee.feeNo', width: 90 },
-			{ label: '交款方式编号', name: 'paymentType.typeno', width: 75 },
+			{ label: '交款方式编号', name: 'paymentType.typeNo', width: 75 },
 			{ label: '缴费日期', name: 'payDate', width: 90 },
 			{ label: '缴费金额', name: 'payAmount', width: 75 },
 			{ label: '缴费人', name: 'payPerson', width: 90 },
@@ -97,7 +97,7 @@ $(function(){
 						$("input[name='recordNo']").val(no);
 						$("input[name='recordNo']").attr("readonly","readonly");//设置主键为不可编辑状态
 						$("input[name='houseFee.feeNo']").val(data.model.houseFee.feeNo);
-						$("input[name='paymentType.typeno']").val(data.model.paymentType.typeno);
+						$("input[name='paymentType.typeNo']").val(data.model.paymentType.typeNo);
 						$("input[name='payDate']").val(data.model.payDate);
 						$("input[name='payAmount']").val(data.model.payAmount);
 						$("input[name='payPerson']").val(data.model.payPerson);

@@ -4,6 +4,9 @@ spring:
     username: train2019gz
     password: train2019gzdHJhaW4yMDE5Z3o
     driver-class-name: com.mysql.cj.jdbc.Driver
+  jackson:
+    date-format: yyyy-MM-dd
+    time-zone: GMT+8
 
 mybatis:
   mapper-locations:

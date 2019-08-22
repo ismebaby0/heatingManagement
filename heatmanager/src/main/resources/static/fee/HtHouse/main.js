@@ -22,7 +22,7 @@ $(function(){
 			{ label: '供热编码', name: 'heatingCode', width: 55 },
 			{ label: '公建名称', name: 'name', width: 55 },
 			{ label: '公建编号', name: 'houseCode', width: 55 },
-			{ label: '楼号', name: 'building', width: 30 },
+			{ label: '楼号', name: 'building', width: 40 },
 			{ label: '建筑面积', name: 'area', width: 55 },
 			{ label: '地址', name: 'address', width: 90 },
 			{ label: '邮编', name: 'postcode', width: 55 },
