@@ -22,7 +22,7 @@ public class HomeFeePayRecordTest {
 	
 	@Test
 	public void selectByAll() throws Exception {
-		homeFeePayRecordMapper.selectByAll().forEach(e->{System.out.print(e.getPaymentTypeNo()+"\n"+e.getHomeFeeNo());});
+		homeFeePayRecordMapper.selectAllWithPages(0, 3).forEach(e->{System.out.print(e.getPaymentTypeNo()+"\n"+e.getHomeFeeNo());});
 		System.out.println();
 		System.out.println(homeFeePayRecordMapper.selectTotalCount());
 	}
@@ -32,7 +32,7 @@ public class HomeFeePayRecordTest {
 //		homeFeePayRecordMapper.selectByAll().forEach(e->{System.out.print(e.getRecordNo()+",");});
 		HomeFeePayRecord homeFeePayRecord = new HomeFeePayRecord();
 		homeFeePayRecord.setPaymentTypeNo(paymentType.selectByPrimaryKey(3));
-		homeFeePayRecord.setHomeFeeNo(homefee.getByPrimaryKey(6));
+		homeFeePayRecord.setHomeFeeNo(homefee.getByPrimaryKey(7));
 		homeFeePayRecordMapper.insert(homeFeePayRecord);
 		System.out.println(homeFeePayRecordMapper.selectTotalCount());
 	}

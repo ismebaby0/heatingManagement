@@ -70,13 +70,13 @@ public class HomeFeePayRecordService implements IHomeFeePayRecordService{
 	@Override
 	@Transactional(readOnly = true)
 	public List<HomeFeePayRecord> getAllWithPages(int row, int page) throws Exception {
-		return payRecord.selectAllWithPages(row, page);
+		return payRecord.selectAllWithPages(row * (page - 1),row);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public List<HomeFeePayRecord> getAllWithRelation(int row, int page) throws Exception {
-		return payRecord.selectAllWithRelation(row, page);
+		return payRecord.selectAllWithRelation(row * (page - 1), row);
 	}
 
 }
