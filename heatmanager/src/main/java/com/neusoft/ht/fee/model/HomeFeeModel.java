@@ -1,6 +1,7 @@
 package com.neusoft.ht.fee.model;
 
 
+import java.io.Serializable;
 /**
  * 
  * @Description
@@ -22,7 +23,7 @@ import lombok.Data;
  *
  */
 @Data
-public class HomeFeeModel {
+public class HomeFeeModel implements Serializable {
 	private int feeNo;
 	private HomeModel homeNo;	//外键，表home,对应属性homeNo
 	private HtHeatingPriceModel heatingYear;//外键，对应属性heatingYear

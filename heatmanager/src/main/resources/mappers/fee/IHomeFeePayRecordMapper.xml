@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.neusoft.ht.fee.mapper.IHomeFeePayRecordMapper">
+	<!-- 没有外键resultMap -->
+	<resultMap id="BaseResultMap"
+		type="com.neusoft.ht.fee.model.HomeFeePayRecord">
+		<id column="RecordNo" property="recordNo" />
+		<result column="PayAmount" property="payAmount" />
+		<result column="PayDate" property="payDate"/>
+		<result column="PayPerson" property="payPerson"/>
+		<result column="CheckCode" property="checkCode"/>
+		<result column="InvoiceCode" property="invoiceCode"/>
+		<result column="PayDesc" property="payDesc"/>
+		<result column="RecordStatus" property="recordStatus"/>
+	</resultMap>
+	<!-- 有外键的resultMap -->
+	<resultMap type="com.neusoft.ht.fee.model.HomeFeePayRecord" id="RelationResultMap" extends="BaseResultMap">
+		<association property="homeFeeNo" resultMap="com.neusoft.ht.fee.mapper.IHomeFeeMapper.resultOfHomeFeeWithRelation"></association>
+		<association property="paymentTypeNo" resultMap="com.neusoft.ht.fee.mapper.IPaymentTypeMapper.resultOfPaymentType"></association>
+	</resultMap>
+	<!-- 有外键的resultMap -->
+	<resultMap id="BaseResultMapWithALl"
+		type="com.neusoft.ht.fee.model.HomeFeePayRecord"
+		extends="BaseResultMap">
+		<result property="homeFeeNo.feeNo" column="FeeNo"/>
+		<result property="paymentTypeNo.typeNo" column="PaymentTypeNo"/>
+	</resultMap>
+	<cache />
+	
+	<select id="selectByPrimaryKey" resultMap="BaseResultMapWithALl">
+		select *
+		from HT_HomeFeePayRecord
+		where RecordNo = #{recordNo}
+	</select>
+	<select id="selectListAllWithPages" resultMap="BaseResultMapWithALl">
+		select *
+		from HT_HomeFeePayRecord
+		limit #{start},#{rows}
+	</select>
+	
+	<select id="selectByAll" resultMap="RelationResultMap">
+		select payRecord.*,homeFee.*,paymentType.*
+		from HT_HomeFeePayRecord payRecord left join HT_homeFee homeFee on payRecord.FeeNo=homeFee.FeeNo
+		left join HT_PaymentType paymentType on payRecord.PaymentTypeNo = paymentType.typeNo
+	</select>
+	<select id="selectAllWithRelation" resultMap="RelationResultMap">
+		select payRecord.*,homeFee.*,paymentType.*
+		from HT_HomeFeePayRecord payRecord left join HT_homeFee homeFee on payRecord.FeeNo=homeFee.FeeNo
+		left join HT_PaymentType paymentType on payRecord.PaymentTypeNo = paymentType.typeNo
+		limit #{start},#{rows}
+	</select>
+	
+	<select id="selectTotalCount" resultType="int">
+		select IFNULL(count(1),0) from HT_HomeFeePayRecord
+	</select>
+	
+	<delete id="deleteByPrimaryKey">
+		delete from HT_HomeFeePayRecord
+		where RecordNo=#{recordNo}
+	</delete>
+	<insert id="insert"
+		parameterType="com.neusoft.ht.fee.model.HomeFeePayRecord">
+		insert into HT_HomeFeePayRecord (FeeNo, PaymentTypeNo,
+			PayAmount,PayDate,PayPerson,CheckCode,
+			InvoiceCode,PayDesc,RecordStatus)
+		values (#{homeFeeNo.feeNo}, #{paymentTypeNo.typeNo}, #{payAmount}, #{payDate}, 
+		#{payPerson}, #{checkCode}, #{invoiceCode}, #{payDesc}, #{recordStatus})
+	</insert>
+	<update id="updateByPrimaryKey"
+		parameterType="com.neusoft.ht.fee.model.HomeFeePayRecord">
+		update HT_HomeFeePayRecord
+		<set>
+			<if test="homeFeeNo.feeNo != null"> FeeNo = #{homeFeeNo.feeNo}, </if>
+			<if test="paymentTypeNo.typeNo != null"> PaymentTypeNo = #{paymentTypeNo.typeNo}, </if>
+			<if test="payAmount != null"> PayAmount = #{payAmount}, </if>
+			<if test="payDate != null"> PayDate = #{payDate}, </if>
+			<if test="payPerson != null"> PayPerson = #{payPerson}, </if>
+			<if test="checkCode != null"> CheckCode = #{checkCode}, </if>
+			<if test="invoiceCode != null"> InvoiceCode = #{invoiceCode}, </if>
+			<if test="payDesc != null"> PayDesc = #{payDesc}, </if>
+			<if test="recordStatus != null"> RecordStatus = #{recordStatus}, </if>
+
+		</set>
+		where RecordNo=#{recordNo}
+	</update>
+</mapper>

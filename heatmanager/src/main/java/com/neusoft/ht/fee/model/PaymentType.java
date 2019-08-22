@@ -1,5 +1,7 @@
 package com.neusoft.ht.fee.model;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 /**
@@ -10,7 +12,7 @@ import lombok.Data;
  */
 
 @Data
-public class PaymentType {
+public class PaymentType  implements Serializable{
 	private int typeNo;
 	private String typeName;
 	@Override
