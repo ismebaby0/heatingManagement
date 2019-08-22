@@ -1,0 +1,61 @@
+<!-- Main row -->
+<div class="row">
+    <div class="col-xs-12">
+      <div class="box-body">
+        <!-- 淇敼閮ㄩ棬 -->
+       	    <form id="DepartmentModifyForm" role="form" action="/homefee/modify" method="post">
+
+              
+              <div class="form-group">
+                 <label>缴费序号</label>
+                 <input type="text" class="form-control" name="feeNo"  placeholder="缂栧彿" readonly="readonly">
+               </div>
+               <div class="form-group">
+                  <label >居民编号</label>
+                  <input type="text" class="form-control" name="homeNo.homeNo"  placeholder="鍚嶇О">
+                </div>
+                 <div class="form-group">
+                  <label >年份</label>
+                  <input type="text" class="form-control" name="heatingYear.heatingYear"  placeholder="鍚嶇О">
+                </div>
+                 <div class="form-group">
+                  <label >供热面积</label>
+                  <input type="text" class="form-control" name="heatArea"  placeholder="鍚嶇О">
+                </div>
+                 <div class="form-group">
+                  <label >应缴费</label>
+                  <input type="text" class="form-control" name="agreeFee"  placeholder="鍚嶇О">
+                </div>
+                 <div class="form-group">
+                  <label >实际缴费</label>
+                  <input type="text" class="form-control" name="actualFee"  placeholder="鍚嶇О">
+                </div>
+                 <div class="form-group">
+                  <label >欠费</label>
+                  <input type="text" class="form-control" name="debtFee"  placeholder="鍚嶇О">
+                </div>
+                 <div class="form-group">
+                  <label >缴费状态</label>
+                  <input type="text" class="form-control" name="feeStatus"  placeholder="鍚嶇О">
+                </div>
+                 <div class="form-group">
+                  <label >实际供热天数</label>
+                  <input type="text" class="form-control" name="heatingdays"  placeholder="鍚嶇О">
+                </div>
+             	<div class="form-group">
+                  <label >备注</label>
+                  <input type="text" class="form-control" name="feeDesc"  placeholder="鍚嶇О">
+                </div>
+               
+               <div class="form-group">
+                 <input type="submit" class="btn btn-primary" value="提交" />
+                 <input type="button" class="btn btn-primary" value="取消">
+                 <input type="hidden" name="no" readonly  />
+               </div>
+            </form>
+      </div>
+      <!-- /.box-body -->
+    </div>
+    
+    
+ </div>
