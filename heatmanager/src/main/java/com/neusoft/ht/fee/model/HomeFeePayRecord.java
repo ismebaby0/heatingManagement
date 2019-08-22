@@ -12,11 +12,11 @@ public class HomeFeePayRecord {
 	private HomeFeeModel homeFeeNo;
 	private PaymentType paymentTypeNo;
 	private Date payDate;
-	private Float payAmount;
+	private Float payAmount = 0f;
 	private String payPerson;
 	private String invoiceCode;
 	private String payDesc;
-	private String recordStatus;
+	private String recordStatus = "N";
 	public Integer getRecordNo() {
 		return recordNo;
 	}
