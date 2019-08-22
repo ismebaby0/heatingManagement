@@ -11,13 +11,15 @@
 				<div class="box-body">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label>居民供热序号</label> <input type="text" class="form-control"
+							<label>居民供热序号</label> <input list="homeFeeNoList" class="form-control"
 								name="homeFeeNo.feeNo" placeholder="居民供热序号">
 						</div>
+							<datalist id="homeFeeNoList"></datalist>
 						<div class="form-group">
-							<label>缴费方式编号</label> <input type="text" class="form-control"
+							<label>缴费方式编号</label> <input list="typeNoList" class="form-control"
 								name="paymentTypeNo.typeNo" placeholder="缴费方式编号">
 						</div>
+						<datalist id="typeNoList"></datalist>
 						<div class="form-group">
 							<label>缴费日期</label> <input type="date" class="form-control"
 								name="payDate" placeholder="缴费日期">

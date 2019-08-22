@@ -46,6 +46,18 @@ $(function(){
 	//点击增加链接处理
 	$("button#add").off().on("click",function(event){
 		$("div#DepartmentDialogArea").load("fee/homefeerecord/add.html",function(){
+			$.getJSON("homefee/getall/withpage?rows=99",function(data){
+				var datalisthtml="";
+				data.list.forEach(e=>datalisthtml +="<option value='"+e.feeNo+"'>"+e.feeStatus+"</option>"); 
+				$("datalist#homeFeeNoList").append(datalisthtml);
+			});
+
+			$.getJSON("paymenttype/list",function(data){
+				var datalisthtml="";
+				data.list.forEach(e=>datalisthtml +="<option value='"+e.typeNo+"'>"+e.typeName+"</option>"); 
+				$("datalist#typeNoList").append(datalisthtml);
+			});
+			
 			$("div#DepartmentDialogArea").dialog({
 				title:"添加类型",
 				width:500,
