@@ -23,7 +23,7 @@ $(function(){
 			{ label: '公建价格', name: 'publicHousePrice', width: 55 },
 			{ label: '供热天数', name: 'heatingdays', width: 55 },
 			{ label: '备注', name: 'heatingMemo', width: 55 },
-//			{ label: '价格文件', name: 'priceFile', width: 90 },
+//			{ label: '价格文件', name: 'priceFile', width: 55 },
 			{ label: '文件名', name: 'priceFileName', width: 55 },
 			{ label: '文件类型', name: 'priceFileContentType', width: 70 },
 			],
@@ -97,6 +97,7 @@ $(function(){
 						$("input[name='publicHousePrice']").val(data.model.publicHousePrice);
 						$("input[name='heatingdays']").val(data.model.heatingdays);
 						$("input[name='heatingMemo']").val(data.model.heatingMemo);
+//						$("input[name='priceFile']").val(data.model.priceFile);
 						$("input[name='priceFileName']").val(data.model.priceFileName);
 						$("input[name='priceFileContentType']").val(data.model.priceFileContentType);
 					}

@@ -9,13 +9,14 @@
 		<result property="publicHousePrice" column="PublicHousePrice"/>
 		<result property="heatingdays" column="Heatingdays"/>
 		<result property="heatingMemo" column="HeatingMemo"/>
+		<result property="priceFile" column="PriceFile"/>
 		<result property="priceFileName" column="PriceFileName"/>
 		<result property="priceFileContentType" column="PriceFileContentType"/>
 		</resultMap>
 		<!-- public List<HtHeatingPriceModel> selectByAll(); -->
 		<select id="selectByAll" resultMap="selectMap">
 			select HeatingYear,HomePrice,PublicHousePrice,Heatingdays,
-				HeatingMemo,PriceFileName,PriceFileContentType from HT_HeadtingPrice
+				HeatingMemo,PriceFile，PriceFileName,PriceFileContentType from HT_HeadtingPrice
 		</select>
 		
 		<!-- public HtHeatingPriceModel selectByPrimaryKey(String heatingYear); -->
@@ -32,7 +33,7 @@
 			HT_HeadtingPrice(HeatingYear,HomePrice,PublicHousePrice,Heatingdays,
 			HeatingMemo,PriceFile,PriceFileName,PriceFileContentType)
 			values(#{heatingYear},#{homePrice},#{publicHousePrice},#{heatingdays},
-			#{heatingMemo},null,#{priceFileName},#{priceFileContentType})
+			#{heatingMemo},#{priceFile},#{priceFileName},#{priceFileContentType})
 		</insert>
 
 		<!-- public void deleteByPrimaryKey(String heatingYear); -->
@@ -46,7 +47,7 @@
 			update HT_HeadtingPrice
 			set
 			HomePrice=#{homePrice},PublicHousePrice=#{publicHousePrice},Heatingdays=#{heatingdays},
-			HeatingMemo=#{heatingMemo},<!-- PriceFile=#{PriceFile}, -->PriceFileName=#{priceFileName},
+			HeatingMemo=#{heatingMemo},PriceFile=#{priceFile}, PriceFileName=#{priceFileName},
 			PriceFileContentType=#{priceFileContentType}
 			where HeatingYear=#{heatingYear}
 		</update>
